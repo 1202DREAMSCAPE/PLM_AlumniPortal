@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>@yield('title', 'My Dashboard')</title>
+        @vite('resources/css/app.css')
+        
+        <!-- Styles -->
+        <style>
+            /* ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:Figtree, sans-serif;font-feature-settings:normal}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;font-weight:inherit;line-height:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]{display:none}*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: }::-webkit-backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: }.relative{position:relative}.mx-auto{margin-left:auto;margin-right:auto}.mx-6{margin-left:1.5rem;margin-right:1.5rem}.ml-4{margin-left:1rem}.mt-16{margin-top:4rem}.mt-6{margin-top:1.5rem}.mt-4{margin-top:1rem}.-mt-px{margin-top:-1px}.mr-1{margin-right:0.25rem}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.h-16{height:4rem}.h-7{height:1.75rem}.h-6{height:1.5rem}.h-5{height:1.25rem}.min-h-screen{min-height:100vh}.w-auto{width:auto}.w-16{width:4rem}.w-7{width:1.75rem}.w-6{width:1.5rem}.w-5{width:1.25rem}.max-w-7xl{max-width:80rem}.shrink-0{flex-shrink:0}.scale-100{--tw-scale-x:1;--tw-scale-y:1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.items-center{align-items:center}.justify-center{justify-content:center}.gap-6{gap:1.5rem}.gap-4{gap:1rem}.self-center{align-self:center}.rounded-lg{border-radius:0.5rem}.rounded-full{border-radius:9999px}.bg-gray-100{--tw-bg-opacity:1;background-color:rgb(243 244 246 / var(--tw-bg-opacity))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity))}.bg-red-50{--tw-bg-opacity:1;background-color:rgb(254 242 242 / var(--tw-bg-opacity))}.bg-dots-darker{background-image:url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(0,0,0,0.07)'/%3E%3C/svg%3E")}.from-gray-700\/50{--tw-gradient-from:rgb(55 65 81 / 0.5);--tw-gradient-to:rgb(55 65 81 / 0);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-transparent{--tw-gradient-to:rgb(0 0 0 / 0);--tw-gradient-stops:var(--tw-gradient-from), transparent, var(--tw-gradient-to)}.bg-center{background-position:center}.stroke-red-500{stroke:#ef4444}.stroke-gray-400{stroke:#9ca3af}.p-6{padding:1.5rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.text-center{text-align:center}.text-right{text-align:right}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.font-semibold{font-weight:600}.leading-relaxed{line-height:1.625}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity))}.text-gray-900{--tw-text-opacity:1;color:rgb(17 24 39 / var(--tw-text-opacity))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity))}.underline{-webkit-text-decoration-line:underline;text-decoration-line:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-gray-500\/20{--tw-shadow-color:rgb(107 114 128 / 0.2);--tw-shadow:var(--tw-shadow-colored)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.selection\:bg-red-500 *::selection{--tw-bg-opacity:1;background-color:rgb(239 68 68 / var(--tw-bg-opacity))}.selection\:text-white *::selection{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.selection\:bg-red-500::selection{--tw-bg-opacity:1;background-color:rgb(239 68 68 / var(--tw-bg-opacity))}.selection\:text-white::selection{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.hover\:text-gray-900:hover{--tw-text-opacity:1;color:rgb(17 24 39 / var(--tw-text-opacity))}.hover\:text-gray-700:hover{--tw-text-opacity:1;color:rgb(55 65 81 / var(--tw-text-opacity))}.focus\:rounded-sm:focus{border-radius:0.125rem}.focus\:outline:focus{outline-style:solid}.focus\:outline-2:focus{outline-width:2px}.focus\:outline-red-500:focus{outline-color:#ef4444}.group:hover .group-hover\:stroke-gray-600{stroke:#4b5563}@media (prefers-reduced-motion: no-preference){.motion-safe\:hover\:scale-\[1\.01\]:hover{--tw-scale-x:1.01;--tw-scale-y:1.01;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}}@media (prefers-color-scheme: dark){.dark\:bg-gray-900{--tw-bg-opacity:1;background-color:rgb(17 24 39 / var(--tw-bg-opacity))}.dark\:bg-gray-800\/50{background-color:rgb(31 41 55 / 0.5)}.dark\:bg-red-800\/20{background-color:rgb(153 27 27 / 0.2)}.dark\:bg-dots-lighter{background-image:url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(255,255,255,0.07)'/%3E%3C/svg%3E")}.dark\:bg-gradient-to-bl{background-image:linear-gradient(to bottom left, var(--tw-gradient-stops))}.dark\:stroke-gray-600{stroke:#4b5563}.dark\:text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity))}.dark\:text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.dark\:shadow-none{--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.dark\:ring-1{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.dark\:ring-inset{--tw-ring-inset:inset}.dark\:ring-white\/5{--tw-ring-color:rgb(255 255 255 / 0.05)}.dark\:hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.group:hover .dark\:group-hover\:stroke-gray-400{stroke:#9ca3af}}@media (min-width: 640px){.sm\:fixed{position:fixed}.sm\:top-0{top:0px}.sm\:right-0{right:0px}.sm\:ml-0{margin-left:0px}.sm\:flex{display:flex}.sm\:items-center{align-items:center}.sm\:justify-center{justify-content:center}.sm\:justify-between{justify-content:space-between}.sm\:text-left{text-align:left}.sm\:text-right{text-align:right}}@media (min-width: 768px){.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}}@media (min-width: 1024px){.lg\:gap-8{gap:2rem}.lg\:p-8{padding:2rem}}
+        </style>
+
+
+    </head>
+    <body class="antialiased">
+        <div class="DashboardViewProfile" style="width: 1728px; height: 1819px; position: relative; background: white">
+            <div class="Line25" style="width: 342px; height: 0px; left: 66px; top: 1013px; position: absolute; opacity: 0.40; border: 1px #DF9F30 solid"></div>
+            <div class="Rectangle4263" style="width: 316px; height: 100px; left: 67px; top: 182px; position: absolute; background: #2D349A; border-radius: 4px"></div>
+            <div class="Rectangle4215" style="width: 317px; height: 811px; left: 66px; top: 242px; position: absolute; background: white; box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.25)"></div>
+            <div class="Logout" style="width: 318px; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; left: 90px; top: 996px; position: absolute; border-radius: 10px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
+              <div class="LoadListAltLight" style="width: 24px; height: 24px; position: relative">
+                <div class="Vector59" style="width: 19px; height: 0px; left: 2.50px; top: 4.50px; position: absolute; border-radius: 2px; border: 1px #222222 solid"></div>
+                <div class="Rectangle4144" style="width: 13px; height: 15px; left: 5.50px; top: 4.50px; position: absolute; border: 1px #222222 solid"></div>
+                <div class="Vector296" style="width: 0px; height: 5.50px; left: 12px; top: 8px; position: absolute; border-radius: 0.15px; border: 1px #222222 solid"></div>
+                <div class="Vector297" style="width: 5px; height: 2px; left: 9.50px; top: 7.50px; position: absolute; border-radius: 0.15px; border: 1px #222222 solid"></div>
+                <div class="Vector317" style="width: 4px; height: 4px; left: 14.50px; top: 15.50px; position: absolute; border-radius: 1px; border: 1px #222222 solid"></div>
+              </div>
+              <div class="DocumentRequest" style="color: #222222; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word">Document Request</div>
+            </div>
+            <div class="Logout" style="width: 318px; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; left: 90px; top: 956px; position: absolute; border-radius: 10px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
+              <div class="TicketAltLight" style="width: 24px; height: 24px; position: relative">
+                <div class="Vector335" style="width: 11px; height: 17px; left: 6.50px; top: 3.50px; position: absolute; border-radius: 0.80px; border: 1px #222222 solid"></div>
+                <div class="Vector336" style="width: 5px; height: 0px; left: 9.50px; top: 9.50px; position: absolute; border-radius: 0.80px; border: 1px #222222 solid"></div>
+                <div class="Vector337" style="width: 5px; height: 0px; left: 9.50px; top: 12px; position: absolute; border-radius: 0.80px; border: 1px #222222 solid"></div>
+                <div class="Vector338" style="width: 5px; height: 0px; left: 9.50px; top: 14.50px; position: absolute; border-radius: 0.80px; border: 1px #222222 solid"></div>
+              </div>
+              <div class="TransactionHistory" style="color: #222222; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word">Transaction History</div>
+            </div>
+            <div class="Line27" style="width: 318px; height: 1.10px; left: 66px; top: 430px; position: absolute; opacity: 0.40; border: 1px #2D349A solid"></div>
+            <div class="Logout" style="width: 318px; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; left: 90px; top: 918px; position: absolute; border-radius: 10px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
+              <div class="PrintLight" style="width: 24px; height: 24px; position: relative">
+                <div class="Rectangle4117" style="width: 17px; height: 7px; left: 3.50px; top: 6.50px; position: absolute; border: 1px #222222 solid"></div>
+                <div class="Vector57" style="width: 11px; height: 11px; left: 6.50px; top: 20.50px; position: absolute; transform: rotate(-90deg); transform-origin: 0 0; border: 1px #222222 solid"></div>
+                <div class="Vector56" style="width: 4px; height: 0px; left: 9.50px; top: 13.50px; position: absolute; border-radius: 2px; border: 1px #222222 solid"></div>
+                <div class="Vector58" style="width: 5px; height: 0px; left: 9.50px; top: 16.50px; position: absolute; border-radius: 2px; border: 1px #222222 solid"></div>
+                <div class="Rectangle4134" style="width: 11px; height: 4px; left: 6.50px; top: 2.50px; position: absolute; border: 1px #222222 solid"></div>
+              </div>
+              <div class="PrintResume" style="color: #222222; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word">Print Resume</div>
+            </div>
+            <div class="Logout" style="width: 318px; height: 40px; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; left: 90px; top: 737px; position: absolute; border-radius: 10px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
+              <div class="TrophyLight" style="width: 24px; height: 24px; position: relative">
+                <div class="Rectangle1" style="width: 9px; height: 0px; left: 7.50px; top: 20.50px; position: absolute; border-radius: 1.80px; border: 1px #222222 solid"></div>
+                <div class="Rectangle3" style="width: 0px; height: 2.50px; left: 12px; top: 18.50px; position: absolute; border-radius: 1.80px; border: 1px #222222 solid"></div>
+                <div class="Rectangle5" style="width: 3px; height: 0px; left: 10.50px; top: 9.50px; position: absolute; border-radius: 0.18px; border: 1px #222222 solid"></div>
+                <div class="Rectangle2" style="width: 4px; height: 8px; left: 3.50px; top: 6.50px; position: absolute; border: 1px #222222 solid"></div>
+                <div class="Rectangle4" style="width: 4px; height: 8px; left: 20.50px; top: 6.50px; position: absolute; transform: rotate(180deg); transform-origin: 0 0; border: 1px #222222 solid"></div>
+                <div class="Vector346" style="width: 9px; height: 11px; left: 7.50px; top: 5.50px; position: absolute; border: 1px #33363F solid"></div>
+              </div>
+              <div class="AwardsAndRecognitions" style="width: 222px; color: #222222; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word">Awards and Recognitions</div>
+            </div>
+            <div class="ExpandDownLight" style="width: 18px; height: 18px; left: 274px; top: 717px; position: absolute">
+              <div class="Vector9" style="width: 4.50px; height: 9px; left: 13.50px; top: 11.25px; position: absolute; transform: rotate(-90deg); transform-origin: 0 0; border: 1px #2D349A solid"></div>
+            </div>
+            <div class="ExpandDownLight" style="width: 18px; height: 18px; left: 259px; top: 889px; position: absolute">
+              <div class="Vector9" style="width: 4.50px; height: 9px; left: 13.50px; top: 11.25px; position: absolute; transform: rotate(-90deg); transform-origin: 0 0; border: 1px #2D349A solid"></div>
+            </div>
+            <div class="Logout" style="width: 318px; height: 40px; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; left: 90px; top: 777px; position: absolute; border-radius: 10px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
+              <div class="DBoxLight" style="width: 24px; height: 24px; position: relative">
+                <div class="Vector83" style="width: 14px; height: 18px; left: 5px; top: 3px; position: absolute; border-radius: 1px; border: 1px #222222 solid"></div>
+              </div>
+              <div class="TrainingsSeminars" style="width: 222px; color: #222222; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word">Trainings & Seminars</div>
+            </div>
+            <div class="Logout" style="width: 318px; height: 40px; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; left: 90px; top: 817px; position: absolute; border-radius: 10px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
+              <div class="GroupShareLight" style="width: 24px; height: 24px; position: relative">
+                <div class="Ellipse48" style="width: 6px; height: 6px; left: 15px; top: 3px; position: absolute; transform: rotate(180deg); transform-origin: 0 0; border-radius: 9999px; border: 1px #222222 solid"></div>
+                <div class="Ellipse49" style="width: 6px; height: 6px; left: 10.04px; top: 17.60px; position: absolute; transform: rotate(-120deg); transform-origin: 0 0; border-radius: 9999px; border: 1px #222222 solid"></div>
+                <div class="Ellipse49" style="width: 6px; height: 6px; left: 13.96px; top: 17.60px; position: absolute; transform: rotate(-60deg); transform-origin: 0 0; border-radius: 9999px; border: 1px #222222 solid"></div>
+                <img class="Subtract" style="width: 17px; height: 16.52px; left: 3.50px; top: 4.98px; position: absolute" src="https://via.placeholder.com/17x17" />
+              </div>
+              <div class="CurricularActivities" style="width: 222px; color: #222222; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word">Curricular Activities</div>
+            </div>
+            <div class="OnlineServices" style="width: 172px; left: 102px; top: 885px; position: absolute; color: #2D349A; font-size: 20px; font-family: Inter; font-weight: 500; word-wrap: break-word">Online Services</div>
+            <div class="OtherInformation" style="width: 199px; left: 97px; top: 713px; position: absolute; color: #2D349A; font-size: 20px; font-family: Inter; font-weight: 500; word-wrap: break-word">Other Information</div>
+            <div class="Rectangle4215" style="width: 1191px; height: 493px; left: 469px; top: 242px; position: absolute; background: rgba(255, 255, 255, 0.90); box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.25); border-radius: 4px; border: 1px white solid"></div>
+            <div class="Rectangle4264" style="width: 1191px; height: 203px; left: 469px; top: 242px; position: absolute; background: #2D349A; border-radius: 4px"></div>
+            <div class="JuanCuevasDelaCruz" style="width: 537px; height: 69px; left: 500px; top: 556px; position: absolute; color: black; font-size: 40px; font-family: Inter; font-weight: 700; word-wrap: break-word">JUAN CUEVAS DELA CRUZ</div>
+            <div class="BachelorOfScienceInComputerScience2023" style="width: 494px; height: 40px; left: 499px; top: 652px; position: absolute; opacity: 0.60; color: black; font-size: 20px; font-family: Inter; font-weight: 500; word-wrap: break-word">Bachelor of Science in Computer Science, 2023</div>
+            <div class="Rectangle4266" style="width: 1191px; height: 304px; left: 469px; top: 749px; position: absolute; background: rgba(255, 255, 255, 0.90); box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.25); border-radius: 4px; border: 1px white solid"></div>
+            <div class="StudentNo201902938" style="width: 289px; height: 41px; left: 500px; top: 615px; position: absolute; color: #2D349A; font-size: 24px; font-family: Inter; font-weight: 600; word-wrap: break-word">Student No. 201902938</div>
+            <div class="Connections" style="width: 167px; height: 41px; left: 500px; top: 689px; position: absolute; color: #2D349A; font-size: 20px; font-family: Inter; font-weight: 600; word-wrap: break-word">30 Connections</div>
+            <div style="width: 120px; height: 24px; left: 774px; top: 508px; position: absolute; opacity: 0.60; text-align: center; color: black; font-size: 14px; font-family: Jomolhari; font-weight: 400; word-wrap: break-word">-</div>
+            <div style="width: 119px; height: 25px; left: 1210px; top: 761px; position: absolute; opacity: 0.60; text-align: center; color: black; font-size: 14px; font-family: Jomolhari; font-weight: 400; word-wrap: break-word">-</div>
+            <img class="Rectangle4216" style="width: 70px; height: 70px; left: 189px; top: 207px; position: absolute; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) inset; border-radius: 100px; border: 3px white solid" src="https://via.placeholder.com/70x70" />
+            <img class="Rectangle4265" style="width: 214px; height: 214px; left: 958px; top: 302px; position: absolute; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) inset; border-radius: 100px; border: 3px white solid" src="https://via.placeholder.com/214x214" />
+            <div class="Rectangle4217" style="width: 125px; height: 2px; left: 519px; top: 826px; position: absolute; background: #2D349A"></div>
+            <div class="Ellipse98" style="width: 45px; height: 45px; left: 1590px; top: 259px; position: absolute; background: white; border-radius: 9999px; border: 1px black solid"></div>
+            <div class="GenderBirthdayBirthPlaceNationalityCivilStatus" style="width: 318px; height: 127px; left: 521px; top: 840px; position: absolute; color: #222222; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">Gender<br/>Birthday<br/>Birth Place<br/>Nationality<br/>Civil Status</div>
+            <div class="EditLight" style="width: 38.82px; height: 40px; left: 1594px; top: 260px; position: absolute">
+              <div class="Rectangle1" style="width: 21.03px; height: 21.67px; left: 8.09px; top: 10px; position: absolute; border: 1px #222222 solid"></div>
+              <div class="Vector107" style="width: 9.71px; height: 10px; left: 20.22px; top: 9.17px; position: absolute; background: #222222"></div>
+            </div>
+            <div class="Logout" style="width: 213px; height: 46px; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; left: 707px; top: 769px; position: absolute; border-radius: 10px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
+              <div class="ContactInformation" style="color: #222222; font-size: 20px; font-family: Inter; font-weight: 500; word-wrap: break-word">Contact Information</div>
+            </div>
+            <div class="Logout" style="width: 213px; height: 46px; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; left: 968px; top: 767px; position: absolute; border-radius: 10px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
+              <div class="WorkExperience" style="color: #222222; font-size: 20px; font-family: Inter; font-weight: 500; word-wrap: break-word">Work Experience</div>
+            </div>
+            <div class="Logout" style="width: 213px; height: 46px; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; left: 1199px; top: 767px; position: absolute; border-radius: 10px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
+              <div class="EducationalBackground" style="color: #222222; font-size: 20px; font-family: Inter; font-weight: 500; word-wrap: break-word">Educational Background</div>
+            </div>
+            <div class="Logout" style="width: 213px; height: 46px; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; left: 1501px; top: 767px; position: absolute; border-radius: 10px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
+              <div class="Skills" style="color: #222222; font-size: 20px; font-family: Inter; font-weight: 500; word-wrap: break-word">Skills</div>
+            </div>
+            <div class="Logout" style="width: 318px; height: 40px; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; left: 93px; top: 609px; position: absolute; border-radius: 10px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
+              <div class="MortarboardLight" style="width: 24px; height: 24px; position: relative">
+                <div class="Vector441" style="width: 18px; height: 8px; left: 3px; top: 4.50px; position: absolute; border: 1px #33363F solid"></div>
+                <div class="Vector443" style="width: 0px; height: 4px; left: 20.50px; top: 8.50px; position: absolute; border: 1px #33363F solid"></div>
+                <div class="Vector442" style="width: 11px; height: 7px; left: 6.50px; top: 10.50px; position: absolute; border: 1px #33363F solid"></div>
+              </div>
+              <div class="EducationalBackground" style="width: 219px; color: #222222; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word">Educational Background</div>
+            </div>
+            <div class="MortarboardLight" style="width: 45px; height: 45px; left: 1158px; top: 767px; position: absolute">
+              <div class="Vector441" style="width: 33.75px; height: 15px; left: 5.62px; top: 8.44px; position: absolute; border: 1px #33363F solid"></div>
+              <div class="Vector443" style="width: 0px; height: 7.50px; left: 38.44px; top: 15.94px; position: absolute; border: 1px #33363F solid"></div>
+              <div class="Vector442" style="width: 20.62px; height: 13.12px; left: 12.19px; top: 19.69px; position: absolute; border: 1px #33363F solid"></div>
+            </div>
+            <div class="Logout" style="width: 318px; height: 40px; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; left: 92px; top: 569px; position: absolute; border-radius: 10px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
+              <div class="SertificateLightLight" style="width: 28px; height: 28px; position: relative">
+                <div class="Rectangle4213" style="width: 16.33px; height: 11.67px; left: 5.25px; top: 6.42px; position: absolute; border-radius: 2px; border: 1px #222222 solid"></div>
+                <div class="Vector406" style="width: 4.67px; height: 0px; left: 8.75px; top: 14.58px; position: absolute; border-radius: 2px; border: 1px #33363F solid"></div>
+                <div class="Vector407" style="width: 8.17px; height: 0px; left: 8.75px; top: 9.92px; position: absolute; border-radius: 2px; border: 1px #33363F solid"></div>
+                <div class="Ellipse189" style="width: 5.83px; height: 5.83px; left: 17.50px; top: 12.83px; position: absolute; border-radius: 9999px; border: 1px #222222 solid"></div>
+                <div class="Vector480" style="width: 4.67px; height: 1.17px; left: 18.08px; top: 20.42px; position: absolute; border: 1px #222222 solid"></div>
+              </div>
+              <div class="WorkExperience" style="width: 173px; color: #222222; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word">Work Experience</div>
+            </div>
+            <div class="Logout" style="width: 318px; height: 40px; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; left: 93px; top: 527px; position: absolute; border-radius: 10px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
+              <div class="PhoneLight" style="width: 24px; height: 24px; position: relative">
+                <div class="Vector189" style="width: 18px; height: 18px; left: 3px; top: 3px; position: absolute; border: 1px #222222 solid"></div>
+              </div>
+              <div class="ContactInformation" style="width: 173px; color: #222222; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word">Contact Information</div>
+            </div>
+            <div class="Logout" style="width: 168px; height: 49px; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; left: 499px; top: 767px; position: absolute; border-radius: 10px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
+              <div class="UserLight" style="width: 30px; height: 30px; position: relative">
+                <div class="Ellipse45" style="width: 20px; height: 15px; left: 5px; top: 20px; position: absolute; border-radius: 9999px; border: 1px #222222 solid"></div>
+                <div class="Ellipse46" style="width: 10px; height: 10px; left: 10px; top: 5px; position: absolute; border-radius: 9999px; border: 1px #222222 solid"></div>
+              </div>
+              <div class="AboutMe" style="width: 100px; color: #222222; font-size: 20px; font-family: Inter; font-weight: 500; word-wrap: break-word">About Me</div>
+            </div>
+            <div class="Phone" style="width: 32px; height: 30px; left: 1284px; top: 714px; position: absolute"></div>
+            <div class="Vector189" style="width: 25px; height: 25px; left: 682px; top: 780px; position: absolute; border: 2px #33363F solid"></div>
+            <div class="Logout" style="width: 318px; height: 40px; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; left: 93px; top: 645px; position: absolute; border-radius: 10px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
+              <div class="ChartAltLight" style="width: 24px; height: 24px; position: relative">
+                <div class="Vector8" style="width: 8px; height: 10px; left: 17px; top: 9px; position: absolute; transform: rotate(90deg); transform-origin: 0 0; border: 1px #222222 solid"></div>
+                <div class="Rectangle25" style="width: 18px; height: 18px; left: 3px; top: 3px; position: absolute; border-radius: 2px; border: 1px #222222 solid"></div>
+              </div>
+              <div class="Skills" style="width: 173px; color: #222222; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word">Skills</div>
+            </div>
+            <div class="ChartAltLight" style="width: 35px; height: 35px; left: 1470px; top: 770px; position: absolute">
+              <div class="Vector8" style="width: 11.67px; height: 14.58px; left: 24.79px; top: 13.12px; position: absolute; transform: rotate(90deg); transform-origin: 0 0; border: 1px #222222 solid"></div>
+              <div class="Rectangle25" style="width: 26.25px; height: 26.25px; left: 4.38px; top: 4.38px; position: absolute; border-radius: 2px; border: 1px #222222 solid"></div>
+            </div>
+            <div class="Rectangle4246" style="width: 1772px; height: 41px; left: -18px; top: 114px; position: absolute; background: #2D349A"></div>
+            <div class="Logout" style="width: 318px; height: 40px; padding-left: 12px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; left: 92px; top: 485px; position: absolute; border-radius: 10px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
+              <div class="UserLight" style="width: 28px; height: 28px; position: relative">
+                <div class="Ellipse45" style="width: 18.67px; height: 14px; left: 4.67px; top: 18.67px; position: absolute; border-radius: 9999px; border: 1px #222222 solid"></div>
+                <div class="Ellipse46" style="width: 9.33px; height: 9.33px; left: 9.33px; top: 4.67px; position: absolute; border-radius: 9999px; border: 1px #222222 solid"></div>
+              </div>
+              <div class="AboutMe" style="width: 100px; color: #222222; font-size: 16px; font-family: Inter; font-weight: 400; word-wrap: break-word">About Me</div>
+            </div>
+            <div class="LoremIpsumDolorSitAmetConsecteturAdipiscingElitSedDoEiusmodTemporIncididuntUtLaboreEtDoloreMagnaAliqua" style="width: 213px; height: 53px; left: 119px; top: 333px; position: absolute; text-align: center; color: #434343; font-size: 13px; font-family: Inter; font-weight: 300; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+            <div class="Rectangle4247" style="width: 1773px; height: 116px; left: -25px; top: 0px; position: absolute; background: white; border: 1px black solid"></div>
+            <div class="PlmLogoLogoOnlyLogoOnly" style="width: 91px; height: 91px; left: 44px; top: 15px; position: absolute">
+              <img class="Image6" style="width: 91px; height: 91px; left: 0px; top: 0px; position: absolute" src="https://via.placeholder.com/91x91" />
+            </div>
+            <div class="Rectangle4248" style="width: 175px; height: 46px; left: 1473px; top: 41px; position: absolute; background: #2D349A; border-radius: 5px; border: 1px #434343 solid"></div>
+            <div class="LogIn" style="width: 90px; left: 1516px; top: 54px; position: absolute; text-align: center; color: #EFF0FF; font-size: 16px; font-family: Inter; font-weight: 500; word-wrap: break-word">LOG IN</div>
+            <div class="Rectangle4249" style="width: 175px; height: 46px; left: 1268px; top: 41px; position: absolute; background: white; border-radius: 5px; border: 1px #4F74BB solid"></div>
+            <div class="SignUp" style="width: 90px; left: 1311px; top: 54px; position: absolute; text-align: center; color: #434343; font-size: 16px; font-family: Inter; font-weight: 500; word-wrap: break-word">SIGN UP</div>
+            <div class="PamantasanNgLungsodNgMaynila" style="width: 483px; height: 24px; left: 158px; top: 36px; position: absolute; color: #D5A106; font-size: 35px; font-family: Katibeh; font-weight: 400; word-wrap: break-word">PAMANTASAN NG LUNGSOD NG MAYNILA</div>
+            <div class="UniversityOfTheCityOfManila" style="width: 374px; left: 158px; top: 64px; position: absolute; color: black; font-size: 16px; font-family: Inter; font-weight: 300; word-wrap: break-word">UNIVERSITY OF THE CITY OF MANILA</div>
+            <div class="ExpandDownLight" style="width: 18px; height: 18px; left: 305px; top: 459px; position: absolute">
+              <div class="Vector9" style="width: 4.50px; height: 9px; left: 13.50px; top: 11.25px; position: absolute; transform: rotate(-90deg); transform-origin: 0 0; border: 1px #2D349A solid"></div>
+            </div>
+            <div class="Rectangle4251" style="width: 1773px; height: 116px; left: -25px; top: 0px; position: absolute; background: white; border: 1px black solid"></div>
+            <div class="PlmLogoLogoOnlyLogoOnly" style="width: 91px; height: 91px; left: 44px; top: 15px; position: absolute">
+              <img class="Image6" style="width: 91px; height: 91px; left: 0px; top: 0px; position: absolute" src="https://via.placeholder.com/91x91" />
+            </div>
+            <div class="PamantasanNgLungsodNgMaynila" style="width: 483px; height: 24px; left: 158px; top: 36px; position: absolute; color: #D5A106; font-size: 35px; font-family: Katibeh; font-weight: 400; word-wrap: break-word">PAMANTASAN NG LUNGSOD NG MAYNILA</div>
+            <div class="UniversityOfTheCityOfManila" style="width: 374px; left: 158px; top: 64px; position: absolute; color: black; font-size: 16px; font-family: Inter; font-weight: 300; word-wrap: break-word">UNIVERSITY OF THE CITY OF MANILA</div>
+            <div class="JuanCuevasDelaCruz" style="width: 407px; height: 54px; left: 92px; top: 298px; position: absolute; color: black; font-size: 20px; font-family: Inter; font-weight: 700; word-wrap: break-word">JUAN CUEVAS DELA CRUZ</div>
+            <div class="Rectangle4240" style="width: 638px; height: 31px; left: 469px; top: 181px; position: absolute; background: rgba(255, 255, 255, 0.60); border-radius: 10px; border: 1px #4F74BB solid"></div>
+            <div class="SearchLight" style="width: 30px; height: 30px; left: 471px; top: 182px; position: absolute">
+              <div class="Ellipse65" style="width: 15px; height: 15px; left: 6.25px; top: 6.25px; position: absolute; border-radius: 9999px; border: 1px #4F74BB solid"></div>
+              <div class="Vector109" style="width: 3.75px; height: 3.75px; left: 21.25px; top: 21.25px; position: absolute; border: 1px #4F74BB solid"></div>
+            </div>
+            <div class="PersonalInformation" style="width: 224px; left: 99px; top: 456px; position: absolute; color: #2D349A; font-size: 20px; font-family: Inter; font-weight: 500; word-wrap: break-word">Personal Information</div>
+            <div class="SertificateLightLight" style="width: 54px; height: 54px; left: 923px; top: 766px; position: absolute">
+              <div class="Rectangle4213" style="width: 31.50px; height: 22.50px; left: 10.12px; top: 12.38px; position: absolute; border-radius: 2px; border: 1px black solid"></div>
+              <div class="Vector406" style="width: 9px; height: 0px; left: 16.88px; top: 28.12px; position: absolute; border-radius: 2px; border: 1px black solid"></div>
+              <div class="Vector407" style="width: 15.75px; height: 0px; left: 16.88px; top: 19.12px; position: absolute; border-radius: 2px; border: 1px black solid"></div>
+              <div class="Ellipse189" style="width: 11.25px; height: 11.25px; left: 33.75px; top: 24.75px; position: absolute; border-radius: 9999px; border: 1px black solid"></div>
+              <div class="Vector480" style="width: 9px; height: 2.25px; left: 34.88px; top: 39.38px; position: absolute; border: 1px black solid"></div>
+            </div>
+            <div class="ApplyForPartnership" style="width: 169px; height: 15px; left: 142px; top: 127px; position: absolute; color: white; font-size: 12px; font-family: Inter; font-weight: 400; word-wrap: break-word">APPLY FOR PARTNERSHIP</div>
+            <div class="NewsAndUpdate" style="left: 527px; top: 127px; position: absolute; color: white; font-size: 12px; font-family: Inter; font-weight: 400; word-wrap: break-word">NEWS AND UPDATE</div>
+            <div class="Frame8658" style="width: 80px; height: 18px; left: 858px; top: 476px; position: absolute; justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex">
+              <div class="Services" style="color: white; font-size: 12px; font-family: Inter; font-weight: 400; word-wrap: break-word">SERVICES</div>
+              <div class="ExpandDownLight" style="width: 18px; height: 18px; position: relative">
+                <div class="Vector9" style="width: 4.50px; height: 9px; left: 13.50px; top: 11.25px; position: absolute; transform: rotate(-90deg); transform-origin: 0 0; border: 1px white solid"></div>
+              </div>
+            </div>
+            <div class="Frame8657" style="width: 83px; height: 18px; left: 1154px; top: 125px; position: absolute; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
+              <div class="Careers" style="color: white; font-size: 12px; font-family: Inter; font-weight: 400; word-wrap: break-word">CAREERS</div>
+              <div class="ExpandDownLight" style="width: 18px; height: 18px; position: relative">
+                <div class="Vector9" style="width: 4.50px; height: 9px; left: 13.50px; top: 11.25px; position: absolute; transform: rotate(-90deg); transform-origin: 0 0; border: 1px white solid"></div>
+              </div>
+            </div>
+            <div class="Frame8659" style="width: 125px; height: 18px; left: 1459px; top: 125px; position: absolute; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
+              <div class="AlumniEvents" style="color: white; font-size: 12px; font-family: Inter; font-weight: 400; word-wrap: break-word">ALUMNI EVENTS</div>
+              <div class="ExpandDownLight" style="width: 18px; height: 18px; position: relative">
+                <div class="Vector9" style="width: 4.50px; height: 9px; left: 13.50px; top: 11.25px; position: absolute; transform: rotate(-90deg); transform-origin: 0 0; border: 1px white solid"></div>
+              </div>
+            </div>
+            <img class="PlmSealBorApproved20145" style="width: 39px; height: 38px; left: 1244px; top: 611px; position: absolute" src="https://via.placeholder.com/39x38" />
+            <div class="PamantasanNgLungsodNgMaynila" style="width: 347px; height: 31px; left: 1293px; top: 616px; position: absolute; color: #222222; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">Pamantasan ng Lungsod ng Maynila</div>
+            <div class="MetaPlatformsInc" style="width: 196px; height: 33px; left: 1445px; top: 656px; position: absolute; color: #222222; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">Meta Platforms, Inc.</div>
+            <img class="Image1358" style="width: 50px; height: 43px; left: 1395px; top: 647px; position: absolute" src="https://via.placeholder.com/50x43" />
+            <div class="Phone" style="width: 32px; height: 30px; left: 1284px; top: 714px; position: absolute"></div>
+            <img class="Image1403" style="width: 1728px; height: 702px; left: -1px; top: 1117px; position: absolute" src="https://via.placeholder.com/1728x702" />
+            <div class="Rectangle4365" style="width: 1742px; height: 702px; left: -14px; top: 1117px; position: absolute; background: rgba(45, 52, 154, 0.90)"></div>
+            <div class="PlmLogoLogoOnlyLogoOnly" style="width: 100px; height: 100px; left: 63px; top: 1228px; position: absolute">
+              <img class="Image6" style="width: 100px; height: 100px; left: 0px; top: 0px; position: absolute" src="https://via.placeholder.com/100x100" />
+            </div>
+            <div class="PamantasanNgLungsodNgMaynila" style="width: 708px; height: 24px; left: 188px; top: 1254px; position: absolute; color: white; font-size: 30px; font-family: Katibeh; font-weight: 400; word-wrap: break-word">PAMANTASAN NG LUNGSOD NG MAYNILA</div>
+            <div class="UniversityOfTheCityOfManila" style="width: 551px; left: 188px; top: 1284px; position: absolute; color: white; font-size: 15px; font-family: Inter; font-weight: 300; word-wrap: break-word">UNIVERSITY OF THE CITY OF MANILA</div>
+            <div class="GetInTouch" style="width: 201px; left: 63px; top: 1382px; position: absolute; color: white; font-size: 20px; font-family: Inter; font-weight: 700; word-wrap: break-word">Get in Touch</div>
+            <div class="GotAQuestion" style="width: 462px; left: 1038px; top: 1237px; position: absolute; color: white; font-size: 50px; font-family: Inter; font-weight: 700; word-wrap: break-word">GOT A QUESTION?</div>
+            <div class="GenLunaCornerMurallaStIntramurosManilaPhilippines1002" style="width: 452px; left: 63px; top: 1422px; position: absolute; color: white; font-size: 20px; font-family: Inter; font-weight: 300; word-wrap: break-word">Gen. Luna corner Muralla St., Intramuros Manila, Philippines 1002</div>
+            <div class="19672024PamantasanNgLungsodNgMaynilaAllRightsReserved" style="width: 691px; left: 515px; top: 1760px; position: absolute; color: white; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">© 1967 - 2024 Pamantasan ng Lungsod ng Maynila. All Rights Reserved</div>
+            <div class="LoremIpsumDolorSitAmetConsecteturAdipiscingElitSedDoEiusmodTemporIncididuntUtLaboreEtDoloreMagnaAliqua" style="width: 652px; left: 950px; top: 1326px; position: absolute; opacity: 0.60; text-align: center; color: white; font-size: 18px; font-family: Inter; font-weight: 500; line-height: 27.77px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div>
+            <div class="Rectangle4274" style="width: 312px; height: 40px; left: 950px; top: 1422px; position: absolute; background: white; box-shadow: 0px 4px 4px rgba(160, 174, 192, 0.25) inset; border-radius: 10px; border: 1px #4F74BB solid"></div>
+            <div class="Rectangle4367" style="width: 312px; height: 40px; left: 950px; top: 1470px; position: absolute; background: white; box-shadow: 0px 4px 4px rgba(160, 174, 192, 0.25) inset; border-radius: 10px; border: 1px #4F74BB solid"></div>
+            <div class="Rectangle4369" style="width: 632px; height: 40px; left: 950px; top: 1518px; position: absolute; background: white; box-shadow: 0px 4px 4px rgba(160, 174, 192, 0.25) inset; border-radius: 10px; border: 1px #4F74BB solid"></div>
+            <div class="Rectangle4370" style="width: 632px; height: 136px; left: 950px; top: 1566px; position: absolute; background: white; box-shadow: 0px 4px 4px rgba(160, 174, 192, 0.25) inset; border-radius: 10px; border: 1px #4F74BB solid"></div>
+            <div class="Rectangle4368" style="width: 309px; height: 40px; left: 1273px; top: 1470px; position: absolute; background: white; box-shadow: 0px 4px 4px rgba(160, 174, 192, 0.25) inset; border-radius: 10px; border: 1px #4F74BB solid"></div>
+            <div class="Rectangle4366" style="width: 309px; height: 40px; left: 1273px; top: 1422px; position: absolute; background: white; box-shadow: 0px 4px 4px rgba(160, 174, 192, 0.25) inset; border-radius: 10px; border: 1px #4F74BB solid"></div>
+            <div class="NameLnFnMi" style="left: 967px; top: 1431px; position: absolute; color: #A0AEC0; font-size: 18px; font-family: Inter; font-weight: 400; word-wrap: break-word">Name (LN, FN, MI.)</div>
+            <div class="YearOfGraduation" style="left: 967px; top: 1478px; position: absolute; color: #A0AEC0; font-size: 18px; font-family: Inter; font-weight: 400; word-wrap: break-word">Year of Graduation</div>
+            <div class="TypeOfHelpRequested" style="left: 967px; top: 1527px; position: absolute; color: #A0AEC0; font-size: 18px; font-family: Inter; font-weight: 400; word-wrap: break-word">Type of Help Requested</div>
+            <div class="Message" style="left: 967px; top: 1580px; position: absolute; color: #A0AEC0; font-size: 18px; font-family: Inter; font-weight: 400; word-wrap: break-word">Message</div>
+            <div class="EmailAddress" style="left: 1286px; top: 1431px; position: absolute; color: #A0AEC0; font-size: 18px; font-family: Inter; font-weight: 400; word-wrap: break-word">Email Address</div>
+            <div class="CourseProgram" style="left: 1286px; top: 1474px; position: absolute; color: #A0AEC0; font-size: 18px; font-family: Inter; font-weight: 400; word-wrap: break-word">Course/Program</div>
+            <div class="Group8671" style="width: 24px; height: 36px; left: 1547px; top: 1520px; position: absolute">
+              <div class="ArrowDropUp" style="width: 24px; height: 24px; left: 0px; top: 0px; position: absolute">
+                <div class="Vector10" style="width: 6px; height: 10px; left: 17px; top: 9px; position: absolute; transform: rotate(90deg); transform-origin: 0 0; background: #222222"></div>
+              </div>
+              <div class="ArrowDropDown" style="width: 24px; height: 24px; left: 0px; top: 12px; position: absolute">
+                <div class="Vector10" style="width: 6px; height: 10px; left: 7px; top: 15px; position: absolute; transform: rotate(-90deg); transform-origin: 0 0; background: #222222"></div>
+              </div>
+            </div>
+            <div class="Frame8674" style="width: 290px; height: 125px; left: 1370px; top: 41px; position: absolute">
+              <div class="MessageLight" style="width: 47px; height: 47px; left: 98px; top: 0px; position: absolute">
+                <div class="Rectangle1" style="width: 31.33px; height: 23.50px; left: 7.83px; top: 11.75px; position: absolute; border-radius: 2px; border: 1px #222222 solid"></div>
+                <div class="Vector3" style="width: 31.33px; height: 7.83px; left: 7.83px; top: 17.62px; position: absolute; border-radius: 2px; border: 1px #222222 solid"></div>
+              </div>
+              <div class="BellPinLight" style="width: 36px; height: 36px; left: 151px; top: 4px; position: absolute">
+                <img class="Subtract" style="width: 26.39px; height: 22px; left: 4.80px; top: 5.50px; position: absolute" src="https://via.placeholder.com/26x22" />
+                <div class="Ellipse45" style="width: 9px; height: 10.50px; left: 22.50px; top: 31.50px; position: absolute; transform: rotate(180deg); transform-origin: 0 0; border-radius: 9999px; border: 1px #222222 solid"></div>
+                <div class="Ellipse6" style="width: 6px; height: 6px; left: 22.50px; top: 7.50px; position: absolute; background: #2D349A; border-radius: 9999px"></div>
+              </div>
+              <div class="GroupLight" style="width: 48px; height: 45px; left: 49px; top: 0px; position: absolute">
+                <div class="Ellipse46" style="width: 12px; height: 11.25px; left: 18px; top: 9.38px; position: absolute; border-radius: 9999px; border: 1px #222222 solid"></div>
+                <div class="Ellipse47" style="width: 10px; height: 9.38px; left: 26px; top: 9.38px; position: absolute; border-radius: 9999px; border: 1px #222222 solid"></div>
+                <div class="Ellipse49" style="width: 10px; height: 9.38px; left: 22px; top: 9.38px; position: absolute; transform: rotate(180deg); transform-origin: 0 0; border-radius: 9999px; border: 1px #222222 solid"></div>
+                <div class="Rectangle4160" style="width: 22px; height: 11.25px; left: 13px; top: 23.44px; position: absolute; border: 1px #222222 solid"></div>
+                <img class="Subtract" style="width: 12.66px; height: 9.38px; left: 26.17px; top: 21.56px; position: absolute; border: 1px #222222 solid" src="https://via.placeholder.com/13x9" />
+                <img class="Subtract" style="width: 12.66px; height: 9.38px; left: 9.16px; top: 21.56px; position: absolute; border: 1px #222222 solid" src="https://via.placeholder.com/13x9" />
+              </div>
+              <div class="HomeDuotoneLine" style="width: 45px; height: 45px; left: 0px; top: 0px; position: absolute">
+                <div class="Rectangle4127" style="width: 24.37px; height: 17.81px; left: 10.31px; top: 18.75px; position: absolute; border: 1px black solid"></div>
+                <div class="Vector292" style="width: 31.88px; height: 11.25px; left: 6.56px; top: 10.31px; position: absolute; border-radius: 1px; border: 1px black solid"></div>
+                <div class="Vector3" style="width: 9.37px; height: 11.25px; left: 17.81px; top: 24.37px; position: absolute; border: 1px #222222 solid"></div>
+                <div class="Vector293" style="width: 0px; height: 6.56px; left: 32.81px; top: 10.31px; position: absolute; border-radius: 1px; border: 1px black solid"></div>
+              </div>
+              <div class="UserAltFill" style="width: 37px; height: 37px; left: 192px; top: 4px; position: absolute">
+                <div class="Ellipse46" style="width: 12.33px; height: 12.33px; left: 12.33px; top: 6.17px; position: absolute; background: #2D349A; border-radius: 9999px"></div>
+                <div class="Rectangle4160" style="width: 21.58px; height: 10.79px; left: 7.71px; top: 20.04px; position: absolute; background: #2D349A"></div>
+              </div>
+              <div class="Rectangle4371" style="width: 92px; height: 78px; left: 198px; top: 47px; position: absolute; background: white; border-radius: 4px; border: 1px #4F74BB solid"></div>
+              <div class="SignOutCircleLight" style="width: 14px; height: 14px; left: 210px; top: 60px; position: absolute">
+                <div class="Ellipse47" style="width: 9.33px; height: 9.33px; left: 11.67px; top: 2.33px; position: absolute; transform: rotate(180deg); transform-origin: 0 0; border-radius: 9999px; border: 1px #222222 solid"></div>
+                <div class="Vector9" style="width: 5.25px; height: 5.83px; left: 1.17px; top: 4.08px; position: absolute; border: 1px #222222 solid"></div>
+              </div>
+              <div class="SettingLineLight" style="width: 13px; height: 14px; left: 208px; top: 96px; position: absolute">
+                <img class="Subtract" style="width: 10.83px; height: 11.67px; left: 1.08px; top: 1.17px; position: absolute; border: 1px #222222 solid" src="https://via.placeholder.com/11x12" />
+              </div>
+              <div class="SignOut" style="left: 227px; top: 61px; position: absolute; color: #222222; font-size: 10px; font-family: Inter; font-weight: 400; word-wrap: break-word">Sign Out</div>
+              <div class="Settings" style="left: 228px; top: 96px; position: absolute; color: black; font-size: 10px; font-family: Inter; font-weight: 400; word-wrap: break-word">Settings</div>
+              <div class="Line29" style="width: 90px; height: 0px; left: 199px; top: 86px; position: absolute; border: 1px #4F74BB solid"></div>
+            </div>
+            <div class="Frame40601" style="width: 100px; height: 100px; left: 132px; top: -1px; position: absolute"></div>
+          </div>
+    </body>
+</html>
+
+
+
+
