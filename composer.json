@@ -17,6 +17,7 @@
     "diglactic/laravel-breadcrumbs": "^9.0",
     "filament/filament": "^3.2",
     "filament/infolists": "^3.2",
+    "filament/notifications": "^3.2",
     "filament/spatie-laravel-media-library-plugin": "^3.2",
     "guzzlehttp/guzzle": "^7.2",
     "jeffgreco13/filament-breezy": "^2.2",

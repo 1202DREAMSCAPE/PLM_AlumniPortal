@@ -14,6 +14,7 @@ use Filament\Infolists\Infolist;
 use Filament\Infolists\Components\TextEntry;
 use App\Filament\Exports\UserExporter;
 use Filament\Tables\Actions\ExportAction;
+use Filament\Infolists\Components;
 
 
 class UserResource extends Resource
@@ -56,7 +57,8 @@ class UserResource extends Resource
      public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
-            ->schema([
+        ->schema([
+            Components\Section::make()->schema([
                 TextEntry::make('name')
                     ->label('First Name'),
                 TextEntry::make('LName')
@@ -70,6 +72,7 @@ class UserResource extends Resource
                 TextEntry::make('ContactNum')
                     ->label('Contact Number'),
                 
+            ])
             ]);
     }
     public static function form(Form $form): Form
