@@ -26,6 +26,9 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
 use Pboivin\FilamentPeek\FilamentPeekPlugin;
 use App\Providers\Filament\Variants;
+use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
+use Swis\Filament\Backgrounds\ImageProviders\MyImages;
+
 class AlumniPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -36,7 +39,7 @@ class AlumniPanelProvider extends PanelProvider
             ->topNavigation()
             ->spa()
             ->login(Login::class)
-            ->registration()    
+            //->registration()    
             ->databaseNotifications(true)
             ->plugins([
                 BreezyCore::make()
@@ -48,13 +51,17 @@ class AlumniPanelProvider extends PanelProvider
                 FilamentPeekPlugin::make()
                     ->disablePluginStyles(),
                 GravatarPlugin::make(),
-
-            ])
+                FilamentBackgroundsPlugin::make()
+                ->imageProvider(
+                    MyImages::make()
+                        ->directory('images/backgrounds')
+                ),
+        ])
             ->defaultAvatarProvider(GravatarProvider::class)
             ->favicon(asset('/favicon-32x32.png'))
             ->brandLogo(fn () => view('components.logo'))
             ->colors([
-                'primary' => Color::Fuchsia,
+                'primary' => Color::Blue,
             ])
             ->viteTheme('resources/css/admin.css')
             ->discoverResources(in: app_path('Filament/Alumni/Resources'), for: 'App\\Filament\\Alumni\\Resources')

@@ -29,6 +29,7 @@
     "pboivin/filament-peek": "^2.2",
     "romanzipp/laravel-seo": "^2.6",
     "sinnbeck/markdom": "^2.0",
+    "swisnl/filament-backgrounds": "^1.1",
     "z3d0x/filament-logger": "^0.7.0"
   },
   "require-dev": {
