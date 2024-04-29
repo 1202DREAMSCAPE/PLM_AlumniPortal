@@ -15,11 +15,11 @@ class MessageStats extends BaseWidget
                 ->description('The total number of messages')
                 ->icon('heroicon-o-chat-bubble-left-right'),
 
-            Stat::make('Unread Messages', Messages::where('Status', '0')->count())
+            Stat::make('Unread Messages', Messages::where('Status', 'Unread')->count())
                 ->description('The total number of unread messages')
                 ->icon('heroicon-o-envelope'),
 
-            Stat::make('Read Messages', Messages::where('Status', '1')->count())
+            Stat::make('Read Messages', Messages::where('Status', 'Replied')->count())
                 ->description('The total number of read messages')
                 ->icon('heroicon-o-envelope-open'),
         ];

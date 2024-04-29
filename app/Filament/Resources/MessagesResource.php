@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\ToggleButtons;
+
 
 class MessagesResource extends Resource
 {
@@ -48,14 +50,21 @@ class MessagesResource extends Resource
                 Forms\Components\Textarea::make('Description')
                     ->label('Description')
                     ->required(),
-                Forms\Components\Select::make('Status')
-                    ->label('Status')
+                Forms\Components\ToggleButtons::make('Status')
                     ->options([
-                        'Unread' => 'Unread',
-                        'Read' => 'Read',
+                    'Unread' => 'Unread',
+                    'Replied' => 'Replied'
                     ])
+                    ->icons([
+                        'Unread' => 'heroicon-s-minus-circle',
+                        'Replied' => 'heroicon-s-check-circle',
+                        ])
+                    ->colors([
+                        'Unread' => 'warning',
+                        'Replied' => 'success',
+                    ])
+                    ->inline()
                     ->required(),
-                    
             ]);
     }
 
@@ -75,7 +84,8 @@ class MessagesResource extends Resource
                     ->label('Description')
                     ->wrap(),
                 Tables\Columns\TextColumn::make('Status')
-                    ->label('Status'),
+                    ->label('Status')
+                    ->badge(),
             ])
             ->filters([
                 //
