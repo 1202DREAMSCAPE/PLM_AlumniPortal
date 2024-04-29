@@ -13,6 +13,10 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\ToggleButtons;
+use Filament\Infolists\Components;
+use Filament\Infolists\Infolist;
+use Filament\Infolists\Components\TextEntry;
+
 
 
 class MessagesResource extends Resource
@@ -68,6 +72,31 @@ class MessagesResource extends Resource
             ]);
     }
 
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+        ->schema([
+            Components\Section::make()->schema([
+                Components\TextEntry::make('SNum')
+                    ->label('Student Number'),
+                Components\TextEntry::make('name')
+                    ->label('Name'),
+                Components\TextEntry::make('email')
+                    ->label('Email'),
+                Components\TextEntry::make('Date')
+                    ->label('Date'),
+                Components\TextEntry::make('Description')
+                    ->label('Description'),
+                   // ->wrap(),
+                Components\TextEntry::make('Status')
+                    ->label('Status')
+                    ->badge(),
+                
+            ])
+            ]);
+    }
+
+
     public static function table(Table $table): Table
     {
         return $table
@@ -91,7 +120,9 @@ class MessagesResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                //Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
