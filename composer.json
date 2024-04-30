@@ -26,6 +26,7 @@
     "laravel/sanctum": "^4.0",
     "laravel/tinker": "^2.9",
     "livewire/livewire": "^3.3",
+    "parallax/filament-comments": "^1.2",
     "pboivin/filament-peek": "^2.2",
     "romanzipp/laravel-seo": "^2.6",
     "sinnbeck/markdom": "^2.0",

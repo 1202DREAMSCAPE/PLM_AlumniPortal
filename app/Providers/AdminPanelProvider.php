@@ -26,6 +26,10 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
 use Pboivin\FilamentPeek\FilamentPeekPlugin;
 use App\Providers\NavigationItem;
+use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
+use Swis\Filament\Backgrounds\ImageProviders\MyImages;
+
+
 class AdminPanelProvider extends PanelProvider
 {
 
@@ -33,7 +37,6 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             //->sidebarCollapsibleOnDesktop()
-            //->default()
             ->default()
             ->id('admin')
             ->path('admin')
@@ -63,6 +66,11 @@ class AdminPanelProvider extends PanelProvider
                 FilamentPeekPlugin::make()
                     ->disablePluginStyles(),
                 GravatarPlugin::make(),
+                FilamentBackgroundsPlugin::make()
+                ->imageProvider(
+                    MyImages::make()
+                        ->directory('images/backgrounds')
+                ),
             ])
             ->defaultAvatarProvider(GravatarProvider::class)
             ->favicon(asset('/favicon-32x32.png'))

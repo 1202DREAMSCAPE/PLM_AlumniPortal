@@ -6,6 +6,8 @@ use App\Filament\Resources\MessagesResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use App\Filament\Resources\MessagesResource\Widgets;
+use Parallax\FilamentComments\Actions\CommentsAction;
+
 class ListMessages extends ListRecords
 {
     protected static string $resource = MessagesResource::class;
@@ -14,6 +16,7 @@ class ListMessages extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+            
         ];
     }
 

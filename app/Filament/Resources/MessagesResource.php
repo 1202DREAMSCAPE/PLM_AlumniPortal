@@ -16,6 +16,10 @@ use Filament\Forms\Components\ToggleButtons;
 use Filament\Infolists\Components;
 use Filament\Infolists\Infolist;
 use Filament\Infolists\Components\TextEntry;
+use Parallax\FilamentComments\Tables\Actions\CommentsAction;
+use Parallax\FilamentComments\Infolists\Components\CommentsEntry;
+
+
 
 
 
@@ -90,8 +94,7 @@ class MessagesResource extends Resource
                    // ->wrap(),
                 Components\TextEntry::make('Status')
                     ->label('Status')
-                    ->badge(),
-                
+                    ->badge(),                
             ])
             ]);
     }
@@ -120,9 +123,10 @@ class MessagesResource extends Resource
                 //
             ])
             ->actions([
-                //Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\ViewAction::make(),
+                CommentsAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
