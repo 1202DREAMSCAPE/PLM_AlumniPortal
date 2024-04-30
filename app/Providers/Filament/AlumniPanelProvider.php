@@ -46,7 +46,7 @@ class AlumniPanelProvider extends PanelProvider
                     ->myProfile(
                         shouldRegisterUserMenu: true,
                         shouldRegisterNavigation: false,
-                        hasAvatars: true
+                        hasAvatars: false
                     ),
                 FilamentPeekPlugin::make()
                     ->disablePluginStyles(),
