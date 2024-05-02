@@ -211,7 +211,7 @@ class UserResource extends Resource
                 ->exporter(UserExporter::class)
         ])
             ->columns([
-                ImageColumn::make('ProfilePhoto')
+                ImageColumn::make('avatar_url')
                     ->label('Photo'),
 
                 Tables\Columns\TextColumn::make('SNum')
