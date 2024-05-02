@@ -93,6 +93,8 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
                 // adjust the widget to full length
+                // protected int | string | array $columnSpan = 'full';  
+
             ])
             ->middleware([
                 EncryptCookies::class,
