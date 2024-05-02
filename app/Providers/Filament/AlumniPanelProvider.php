@@ -73,6 +73,7 @@ class AlumniPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
                // \App\Filament\Alumni\Widgets\AboutMe::class,
+                \App\Filament\Alumni\Widgets\AlumniConnect::class,
             ])
             ->middleware([
                 EncryptCookies::class,

@@ -15,6 +15,10 @@ use Filament\Infolists\Components\TextEntry;
 use App\Filament\Exports\UserExporter;
 use Filament\Tables\Actions\ExportAction;
 use Filament\Infolists\Components;
+use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\ImageColumn;
+
+
 
 
 class UserResource extends Resource
@@ -59,6 +63,7 @@ class UserResource extends Resource
         return $infolist
         ->schema([
             Components\Section::make()->schema([
+
                 TextEntry::make('name')
                     ->label('First Name'),
                 TextEntry::make('LName')
@@ -79,6 +84,11 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
+                FileUpload::make('ProfilePhoto')
+                    ->image()
+                    ->avatar()
+                    ->imageEditor()
+                    ->circleCropper(),
 
                 Forms\Components\TextInput::make('SNum')
                     ->label('Student Number')
@@ -201,6 +211,9 @@ class UserResource extends Resource
                 ->exporter(UserExporter::class)
         ])
             ->columns([
+                Tables\Columns\ImageColumn::make('ProfilePhoto')
+                    ->label('Photo'),
+
                 Tables\Columns\TextColumn::make('SNum')
                     ->searchable()
                     ->label('Student Number')
