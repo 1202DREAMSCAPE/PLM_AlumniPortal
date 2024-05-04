@@ -26,6 +26,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
 use Pboivin\FilamentPeek\FilamentPeekPlugin;
 use App\Providers\Filament\Variants;
+use Illuminate\Contracts\View\View;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 
@@ -62,7 +63,7 @@ class AlumniPanelProvider extends PanelProvider
             ->brandLogo(fn () => view('components.logo'))
             ->renderHook(
                 'panels::body.end',
-                fn ()=> view('footer'),  
+                fn (): View => view('footer'),  
             )
             ->viteTheme('resources/css/filament/alumni/theme.css')
             ->colors([
