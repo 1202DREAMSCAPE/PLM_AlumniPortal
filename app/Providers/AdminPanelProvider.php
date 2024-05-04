@@ -28,6 +28,7 @@ use Pboivin\FilamentPeek\FilamentPeekPlugin;
 use App\Providers\NavigationItem;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
+use Filament\Forms\Components\FileUpload;
 
 
 class AdminPanelProvider extends PanelProvider

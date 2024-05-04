@@ -84,11 +84,6 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                FileUpload::make('ProfilePhoto')
-                    ->image()
-                    ->avatar()
-                    ->imageEditor()
-                    ->circleCropper(),
 
                 Forms\Components\TextInput::make('SNum')
                     ->label('Student Number')
@@ -212,7 +207,9 @@ class UserResource extends Resource
         ])
             ->columns([
                 ImageColumn::make('avatar_url')
-                    ->label('Photo'),
+                    ->label('Photo')
+                    ->disk('profile-photos')
+                    ->circular(),
 
                 Tables\Columns\TextColumn::make('SNum')
                     ->searchable()
