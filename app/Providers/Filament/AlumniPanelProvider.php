@@ -60,6 +60,10 @@ class AlumniPanelProvider extends PanelProvider
             ->defaultAvatarProvider(GravatarProvider::class)
             ->favicon(asset('/favicon-32x32.png'))
             ->brandLogo(fn () => view('components.logo'))
+            ->renderHook(
+                'panels::body.end',
+                fn ()=> view('footer'),  
+            )
             ->colors([
                 'primary' => Color::Blue,
             ])
