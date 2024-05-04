@@ -59,12 +59,7 @@ class AdminPanelProvider extends PanelProvider
                     ->pluralLabel('Gallery')
                     ->navigationIcon('heroicon-o-photo')
                     ->navigationSort(8)
-                    //->navigationGroup('Media')
                     ->navigationCountBadge(),
-               // FilamentExceptionsPlugin::make(),
-                //FilamentJobsMonitorPlugin::make()
-                  //  ->navigationCountBadge()
-                    //->navigationGroup('Settings'),
                 FilamentPeekPlugin::make()
                     ->disablePluginStyles(),
                 GravatarPlugin::make(),
@@ -77,6 +72,8 @@ class AdminPanelProvider extends PanelProvider
             //->defaultAvatarProvider(GravatarProvider::class)
             ->favicon(asset('/favicon-32x32.png'))
             ->brandLogo(fn () => view('components.logo'))
+            ->brandLogoHeight('50px')
+            ->brandName('Alumni Portal')
             ->navigationGroups([
                 // 'Collections',
                 // 'Media',
