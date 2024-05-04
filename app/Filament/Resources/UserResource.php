@@ -213,17 +213,19 @@ class UserResource extends Resource
 
                 Tables\Columns\TextColumn::make('SNum')
                     ->searchable()
+                    ->AlignJustify()
                     ->label('Student Number')
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('LName')
                     ->searchable()
+                    ->AlignJustify()
                     ->label('Last Name'),
                     
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->label('First Name')
-                    ->alignCenter(),
+                    ->AlignJustify(),
                 
                 Tables\Columns\TextColumn::make('MName')
                     ->searchable()

@@ -52,26 +52,12 @@ class MessagesResource extends Resource
                     ->label('Email')
                     ->required()
                     ->unique(ignoreRecord: true),
-                Forms\Components\DatePicker::make('Date')
+                Forms\Components\DatePicker::make('RDate')
                     ->label('Date')
-                    ->required(),
+                    ->required()
+                    ->unique(ignoreRecord: false),
                 Forms\Components\Textarea::make('Description')
                     ->label('Description')
-                    ->required(),
-                Forms\Components\ToggleButtons::make('Status')
-                    ->options([
-                    'Unread' => 'Unread',
-                    'Replied' => 'Replied'
-                    ])
-                    ->icons([
-                        'Unread' => 'heroicon-s-minus-circle',
-                        'Replied' => 'heroicon-s-check-circle',
-                        ])
-                    ->colors([
-                        'Unread' => 'warning',
-                        'Replied' => 'success',
-                    ])
-                    ->inline()
                     ->required(),
             ]);
     }
@@ -87,7 +73,7 @@ class MessagesResource extends Resource
                     ->label('Name'),
                 Components\TextEntry::make('email')
                     ->label('Email'),
-                Components\TextEntry::make('Date')
+                Components\TextEntry::make('RDate')
                     ->label('Date'),
                 Components\TextEntry::make('Description')
                     ->label('Description'),
@@ -103,34 +89,88 @@ class MessagesResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            
+            ->recordClasses(fn (Messages $record) => match ($record->Status) {
+            'Replied' => 'opacity-60',
+            'Unread' => 'font-bold',
+            default => null,
+            })
+
             ->columns([
                 Tables\Columns\TextColumn::make('SNum')
-                    ->label('Student Number'),
+                    ->label('Student Number')
+                    ->color('secondary')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Name'),
                 Tables\Columns\TextColumn::make('email')
                     ->label('Email'),
-                Tables\Columns\TextColumn::make('Date')
+                Tables\Columns\TextColumn::make('RDate')
                     ->label('Date'),
                 Tables\Columns\TextColumn::make('Description')
                     ->label('Description')
+                    ->AlignJustify()
                     ->wrap(),
                 Tables\Columns\TextColumn::make('Status')
-                    ->label('Status')
-                    ->badge(),
+                    ->searchable()
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state){
+                        'Unread' => 'danger',
+                        'Replied' => 'success',
+                    }),
             ])
+            ->defaultSort('Status', 'desc')
+
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-                Tables\Actions\ViewAction::make(),
+                //Tables\Actions\EditAction::make(),
+                //Tables\Actions\DeleteAction::make(),
+                //Tables\Actions\ViewAction::make(),
                 CommentsAction::make(),
+                Tables\Actions\Action::make("Read")
+                ->icon(fn(Messages $appeal): string => match ($appeal->Status){
+                    'Unread' => 'heroicon-o-eye',
+                    'Replied' => 'heroicon-s-eye',
+                })
+                    ->label(fn(Messages $appeal): string => match ($appeal->Status){
+                        'Unread' => 'Mark as Replied',
+                        'Replied' => 'Mark as Unread',
+                    })
+                    ->action(function (Messages $appeal, array $data): void{
+                        if($appeal->Status == "Replied"){
+                            $appeal->Status = "Unread";
+                            $appeal->save();
+                            return;
+                        }
+
+                        if($appeal->Status == "Unread"){
+                            $appeal->Status = "Replied";
+                            $appeal->save();
+                            return;
+                        }
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->label('Delete'),
+                    Tables\Actions\BulkAction::make("Mark as Replied")
+                        ->label('Mark as Read')
+                        ->action(function (): void {
+                        Messages::where('Status', 'Unread')->update(['Status' => 'Replied']);
+                        })
+                        ->icon('heroicon-o-eye')
+                        ->color('success'),
+
+                    Tables\Actions\BulkAction::make("Mark as Unread")
+                        ->label('Mark as Unread')
+                        ->action(function (): void {
+                        Messages::where('Status', 'Replied')->update(['Status' => 'Unread']);
+                        })
+                        ->icon('heroicon-s-eye')
+                        ->color('gray'),
                 ]),
             ]);
     }
