@@ -40,7 +40,7 @@ return new class extends Migration
             ->nullable();
             $table->date('BDay')
             ->nullable();
-            $table->date('Graduated')
+            $table->string('Graduated')
             ->nullable();
             $table->string('POB')
             ->nullable();

@@ -36,7 +36,7 @@ class AlumniPanelProvider extends PanelProvider
         return $panel
             ->id('alumni')
             ->path('alumni')
-            //->topNavigation()
+            ->topNavigation()
             ->spa()
             ->login(Login::class)
             //->registration()    
@@ -50,23 +50,22 @@ class AlumniPanelProvider extends PanelProvider
                     ),
                 FilamentPeekPlugin::make()
                     ->disablePluginStyles(),
-                GravatarPlugin::make(),
                 FilamentBackgroundsPlugin::make()
                 ->imageProvider(
                     MyImages::make()
                         ->directory('images/backgrounds')
                 ),
         ])
-            ->defaultAvatarProvider(GravatarProvider::class)
             ->favicon(asset('/favicon-32x32.png'))
             ->brandLogo(fn () => view('components.logo'))
+            ->brandLogoHeight('50px')
             ->renderHook(
                 'panels::body.end',
                 fn ()=> view('footer'),  
             )
             ->viteTheme('resources/css/filament/alumni/theme.css')
             ->colors([
-                'primary' => Color::Blue,
+                'primary' => Color::Amber,
             ])
             ->viteTheme('resources/css/admin.css')
             ->discoverResources(in: app_path('Filament/Alumni/Resources'), for: 'App\\Filament\\Alumni\\Resources')
