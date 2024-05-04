@@ -74,6 +74,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->colors([
                 'primary' => Color::Blue,
+                'secondary' => Color::Yellow,
             ])
             ->viteTheme('resources/css/admin.css')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')

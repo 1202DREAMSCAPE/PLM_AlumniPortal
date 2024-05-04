@@ -1,5 +1,5 @@
 <img src="{{ asset('/images/logo only.png') }}" alt="Logo" class="h-12">
-<div class="white-space-nowrap">
+<div class="relative whitespace-nowrap  pl-2">
       <h1 class="text-sm font-bold text-primary-500">
           PAMANTASAN NG LUNGSOD NG MAYNILA
       </h1>
