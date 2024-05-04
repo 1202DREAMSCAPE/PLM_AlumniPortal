@@ -64,6 +64,7 @@ class AlumniPanelProvider extends PanelProvider
                 'panels::body.end',
                 fn ()=> view('footer'),  
             )
+            ->viteTheme('resources/css/filament/alumni/theme.css')
             ->colors([
                 'primary' => Color::Blue,
             ])

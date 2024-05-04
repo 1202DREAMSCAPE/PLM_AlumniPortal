@@ -8,6 +8,7 @@ export default defineConfig({
         'resources/css/app.css',
         'resources/js/app.js',
         'resources/css/admin.css',
+        'resources/css/filament/alumni/theme.css'
       ],
       refresh: true,
     }),
