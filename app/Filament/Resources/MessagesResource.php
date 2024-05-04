@@ -155,9 +155,9 @@ class MessagesResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make()
-                        ->label('Delete'),
+                        ->label('Delete Messages'),
                     Tables\Actions\BulkAction::make("Mark as Replied")
-                        ->label('Mark as Read')
+                        ->label('Mark as Replied')
                         ->action(function (): void {
                         Messages::where('Status', 'Unread')->update(['Status' => 'Replied']);
                         })
