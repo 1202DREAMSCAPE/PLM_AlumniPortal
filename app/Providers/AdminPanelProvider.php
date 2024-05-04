@@ -28,6 +28,7 @@ use Pboivin\FilamentPeek\FilamentPeekPlugin;
 use App\Providers\NavigationItem;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
+use Filament\Forms\Components\FileUpload;
 
 
 class AdminPanelProvider extends PanelProvider
@@ -46,6 +47,7 @@ class AdminPanelProvider extends PanelProvider
             ->databaseNotifications(true)
             ->plugins([
                 BreezyCore::make()
+                ->avatarUploadComponent(fn($fileUpload) => $fileUpload->disableLabel())
                     ->myProfile(
                         shouldRegisterUserMenu: true,
                         shouldRegisterNavigation: false,
@@ -72,7 +74,7 @@ class AdminPanelProvider extends PanelProvider
                         ->directory('images/backgrounds')
                 ),
             ])
-            ->defaultAvatarProvider(GravatarProvider::class)
+            //->defaultAvatarProvider(GravatarProvider::class)
             ->favicon(asset('/favicon-32x32.png'))
             ->brandLogo(fn () => view('components.logo'))
             ->navigationGroups([

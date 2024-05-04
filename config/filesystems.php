@@ -30,6 +30,11 @@ return [
 
     'disks' => [
 
+        'profile-photos' => [
+            'driver' => 'local',
+            'root' => storage_path('app/profile-photos'),
+        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
