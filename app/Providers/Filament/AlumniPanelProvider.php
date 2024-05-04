@@ -36,7 +36,7 @@ class AlumniPanelProvider extends PanelProvider
         return $panel
             ->id('alumni')
             ->path('alumni')
-            ->topNavigation()
+            //->topNavigation()
             ->spa()
             ->login(Login::class)
             //->registration()    
@@ -60,6 +60,11 @@ class AlumniPanelProvider extends PanelProvider
             ->defaultAvatarProvider(GravatarProvider::class)
             ->favicon(asset('/favicon-32x32.png'))
             ->brandLogo(fn () => view('components.logo'))
+            ->renderHook(
+                'panels::body.end',
+                fn ()=> view('footer'),  
+            )
+            ->viteTheme('resources/css/filament/alumni/theme.css')
             ->colors([
                 'primary' => Color::Blue,
             ])
