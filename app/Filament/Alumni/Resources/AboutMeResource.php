@@ -63,14 +63,7 @@ class AboutMeResource extends Resource
             ]);
     }
 
-    public static function getRecordSubNavigation(Page $page): array
-    {
-        return $page->generateNavigationItems([
-            Pages\AboutMe::class,
-            //Pages\EditPost::class,
-            //Pages\ManagePostComments::class,
-        ]);
-    }
+   
     // public static function form(Form $form): Form
     // {
     //     return $form
