@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Infolists\Components;
+use Filament\Infolists\Infolist;
 
 class JobPOResource extends Resource
 {
@@ -64,10 +66,24 @@ class JobPOResource extends Resource
                     ])
                     ->label('Employment Type')
                     ->required(),
-
-                Forms\Components\Toggle::make('Accepted')
-                    ->label('Published'),
-                    //->required(),
+            ]);
+    }
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+        ->schema([
+            Components\Section::make()->schema([
+                Components\TextEntry::make('JTitle')
+                    ->label('Job Title'),
+                Components\TextEntry::make('JLocation')
+                    ->label('Job Location'),
+                Components\TextEntry::make('CName')
+                    ->label('Company Name'),
+                Components\TextEntry::make('CPerson')
+                    ->label('Contact Person'),
+                Components\TextEntry::make('EmpType')
+                    ->label('Employment Type'),
+            ])
             ]);
     }
 
@@ -97,9 +113,7 @@ class JobPOResource extends Resource
                     ->label('Employment Type'),
                 
                 Tables\Columns\IconColumn::make('Accepted')
-                    ->label('Published')
                     ->boolean()
-                    ->sortable()
                     ->alignCenter(),
             ])
             ->filters([
@@ -112,8 +126,23 @@ class JobPOResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+                    Tables\Actions\BulkAction::make("Mark as Accepted")
+                        ->label('Mark as Accepted')
+                        ->action(function (): void {
+                        JobPO::where('Accepted', false)->update(['Accepted' => true]);
+                        })
+                        ->icon('heroicon-s-check-circle') 
+                        ->color('success'),
+
+                    Tables\Actions\BulkAction::make("Mark as Unaccepted")
+                        ->label('Mark as Unaccepted')
+                        ->action(function (): void {
+                        JobPO::where('Accepted', true)->update(['Accepted' => false]);
+                        })
+                        ->icon('heroicon-s-x-circle') 
+                        ->color('gray'),
+                        ])
+                    ]);
     }
 
     public static function getRelations(): array
