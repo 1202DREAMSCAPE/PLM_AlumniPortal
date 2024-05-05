@@ -12,6 +12,8 @@ use Filament\Pages\Concerns\ExposesTableToWidgets;
 class ListAboutMes extends ListRecords
 {
     use ExposesTableToWidgets;
+
+    protected static ?string $navigationGroup = 'About Me';
     protected static string $resource = AboutMeResource::class;
 
     protected function getHeaderActions(): array

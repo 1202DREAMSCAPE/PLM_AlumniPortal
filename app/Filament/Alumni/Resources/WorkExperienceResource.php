@@ -17,7 +17,10 @@ class WorkExperienceResource extends Resource
 {
     protected static ?string $model = WorkExperience::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'About Me';
+
+    protected static ?int $navigationSort = 1;
+    protected static ?string $navigationIcon = 'heroicon-s-briefcase';
 
     public static function form(Form $form): Form
     {

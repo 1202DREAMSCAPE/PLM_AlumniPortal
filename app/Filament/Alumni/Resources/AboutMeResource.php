@@ -20,27 +20,18 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Contracts\View\View;
 use Filament\Infolists\Components\SpatieTagsEntry;
 
-
-
-
 class AboutMeResource extends Resource
 {
     
     protected static ?string $label = 'About Me ';
+    protected static ?string $navigationGroup = 'About Me';
+
 
     protected static ?int $navigationSort = 0;
 
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-s-user';
-    
-
-     public function getFooter(): ?View
-     {
-     return view('filament.settings.custom-footer');
-     }
-    //Now, create a /resources/views/users/table/collapsible-row-content.blade.php
-
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
@@ -64,106 +55,13 @@ class AboutMeResource extends Resource
     }
 
    
-    // public static function form(Form $form): Form
-    // {
-    //     return $form
-    //         ->schema([
-    //             Forms\Components\TextInput::make('name')
-    //                 ->label('First Name')
-    //                 ->required()
-    //                // ->unique(ignoreRecord: true)
-    //                 ->maxLength(255),
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
                 
-    //             Forms\Components\TextInput::make('LName')
-    //                 ->label('Last Name')
-    //                 ->required()
-    //                 //->unique(ignoreRecord: true)
-    //                 ->maxLength(255),
-                
-    //             Forms\Components\TextInput::make('MName')
-    //                 ->label('Middle Name')
-    //                 ->required()
-    //                // ->unique(ignoreRecord: true)
-    //                 ->maxLength(255),
-                
-    //             Forms\Components\TextInput::make('NameExt') // Name Extension
-    //                 ->label('Name Extension')
-    //                 //->required(FALSE)
-    //                // ->unique(ignoreRecord: true)
-    //                 ->maxLength(255),
-                
-    //             Forms\Components\TextInput::make('MaidenName')
-    //                 ->label('Maiden Name')
-    //                 //->unique(ignoreRecord: true)
-    //                 ->maxLength(255),
-                
-    //             Forms\Components\TextInput::make('ContactNum')
-    //                 ->label('Contact Number')
-    //                 ->required()
-    //                 ->unique(ignoreRecord: true)
-    //                 ->maxLength(255),
-                
-    //             Forms\Components\TextInput::make('Gender')
-    //                 ->label('Gender')
-    //                 ->required(),
-                
-    //             Forms\Components\TextInput::make('BDay')
-    //                 ->label('Birthdate')
-    //                 ->required()
-    //                 ->date()
-    //                 ->unique(ignoreRecord: true)
-    //                 ->maxLength(255),
-
-    //             Forms\Components\TextInput::make('email')
-    //                 ->email()
-    //                 ->required()
-    //                 ->unique(ignoreRecord: true)
-    //                 ->maxLength(255),
-                
-    //                 Forms\Components\Select::make('Course')
-    //                 ->options([
-    //                     'College of Engineering' => [
-    //                         'Bachelor of Science in Computer Engineering' => 'Bachelor of Science in Computer Engineering',
-    //                         'Bachelor of Science in Civil Engineering' => 'Bachelor of Science in Civil Engineering',
-    //                         'Bachelor of Science in Electrical Engineering' => 'Bachelor of Science in Electrical Engineering',
-    //                         'Bachelor of Science in Mechanical Engineering' => 'Bachelor of Science in Mechanical Engineering',
-    //                     ],
-    //                     'College of Science' => [
-    //                         'Bachelor of Science in Biology' => 'Bachelor of Science in Biology',
-    //                         'Bachelor of Science in Chemistry' => 'Bachelor of Science in Chemistry',
-    //                         'Bachelor of Science in Physics' => 'Bachelor of Science in Physics',
-    //                         'Bachelor of Science in Mathematics' => 'Bachelor of Science in Mathematics',
-    //                     ],
-    //                     'College of Arts and Letters' => [
-    //                         'Bachelor of Arts in English' => 'Bachelor of Arts in English',
-    //                         'Bachelor of Arts in Filipino' => 'Bachelor of Arts in Filipino',
-    //                         'Bachelor of Arts in History' => 'Bachelor of Arts in History',
-    //                         'Bachelor of Arts in Literature' => 'Bachelor of Arts in Literature',
-    //                     ],
-    //                     'College of Health Sciences' => [
-    //                         'Bachelor of Science in Nursing' => 'Bachelor of Science in Nursing',
-    //                         'Bachelor of Science in Pharmacy' => 'Bachelor of Science in Pharmacy',
-    //                         'Bachelor of Science in Dentistry' => 'Bachelor of Science in Dentistry',
-    //                         'Bachelor of Science in Optometry' => 'Bachelor of Science in Optometry',
-    //                     ],
-    //                     'College of Architecture and Fine Arts' => [
-    //                         'Bachelor of Fine Arts in Visual Arts' => 'Bachelor of Fine Arts in Visual Arts',
-    //                         'Bachelor of Fine Arts in Music' => 'Bachelor of Fine Arts in Music',
-    //                         'Bachelor of Fine Arts in Theater Arts' => 'Bachelor of Fine Arts in Theater Arts',
-    //                         'Bachelor of Science in Architecture' => 'Bachelor of Science in Architecture',
-    //                     ],
-    //                     'College of Business and Accountancy' => [
-    //                         'Bachelor of Science in Business Administration' => 'Bachelor of Science in Business Administration',
-    //                         'Bachelor of Science in Accountancy' => 'Bachelor of Science in Accountancy',
-    //                         'Bachelor of Science in Marketing' => 'Bachelor of Science in Marketing',
-    //                         'Bachelor of Science in Human Resource Management' => 'Bachelor of Science in Human Resource Management',
-    //                     ],
-    //                     // Add more colleges and programs as needed
-    //                 ])
-    //                 ->label('Course')
-    //                 ->required(),
-    //         ]);
-    // }
+            ]);
+    }
 
     public static function table(Table $table): Table
     {

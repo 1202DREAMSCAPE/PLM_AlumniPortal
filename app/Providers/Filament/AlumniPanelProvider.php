@@ -57,6 +57,10 @@ class AlumniPanelProvider extends PanelProvider
                         ->directory('images/backgrounds')
                 ),
         ])
+            ->navigationGroups([
+                'About Me',
+            ])
+
             ->favicon(asset('/favicon-32x32.png'))
             ->brandLogo(fn () => view('components.logo'))
             ->brandLogoHeight('50px')
@@ -66,7 +70,7 @@ class AlumniPanelProvider extends PanelProvider
             )
             ->viteTheme('resources/css/filament/alumni/theme.css')
             ->colors([
-                'primary' => Color::Yellow,
+                'primary' => Color::Violet,
             ])
             ->viteTheme('resources/css/admin.css')
             ->discoverResources(in: app_path('Filament/Alumni/Resources'), for: 'App\\Filament\\Alumni\\Resources')
