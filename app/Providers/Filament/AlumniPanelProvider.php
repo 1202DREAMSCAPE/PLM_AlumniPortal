@@ -65,7 +65,7 @@ class AlumniPanelProvider extends PanelProvider
             )
             ->viteTheme('resources/css/filament/alumni/theme.css')
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Yellow,
             ])
             ->viteTheme('resources/css/admin.css')
             ->discoverResources(in: app_path('Filament/Alumni/Resources'), for: 'App\\Filament\\Alumni\\Resources')
