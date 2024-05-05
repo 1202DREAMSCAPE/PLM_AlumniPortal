@@ -20,6 +20,7 @@
       <x-sections.footer />
     </div>
 
+
     @livewireScriptConfig
     @stack('scripts')
   </body>

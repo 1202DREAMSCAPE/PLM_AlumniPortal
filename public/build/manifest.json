@@ -1,21 +1,21 @@
 {
   "resources/css/admin.css": {
-    "file": "assets/admin-B4L36Wbr.css",
+    "file": "assets/admin-CAHPUh42.css",
     "src": "resources/css/admin.css",
     "isEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app-BbmGAUJD.css",
+    "file": "assets/app-Cj4bFdgN.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/css/filament/alumni/theme.css": {
-    "file": "assets/theme-CzQsZ2Gx.css",
+    "file": "assets/theme-AN5H3bgq.css",
     "src": "resources/css/filament/alumni/theme.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-Ba9wZQvq.js",
+    "file": "assets/app-tV4OZkBt.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
