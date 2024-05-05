@@ -68,7 +68,6 @@ return new class extends Migration
             ->nullable();
             $table->text('Skills')
             ->nullable();
-            $table->boolean('is_admin')->default(false);
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
