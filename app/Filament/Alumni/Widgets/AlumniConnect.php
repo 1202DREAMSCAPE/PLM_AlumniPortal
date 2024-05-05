@@ -5,6 +5,13 @@ namespace App\Filament\Alumni\Widgets;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
+use Filament\Support\Enums\FontWeight;
+use Filament\Tables\Columns\Layout\Split;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\Layout\Stack;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\Layout\Grid;
+
 
 class AlumniConnect extends BaseWidget
 {
@@ -14,28 +21,58 @@ class AlumniConnect extends BaseWidget
         return $table
             ->query(\App\Models\User::query())
             ->columns([
+                Split::make([
+                    ImageColumn::make('avatar_url')
+                    ->label('Photo')
+                    ->disk('profile-photos')
+                    ->circular(),
 
-                Tables\Columns\TextColumn::make('LName')
-                    ->label('Last Name'),
+                    Stack::make([
+                        TextColumn::make('LName')
+                            ->label('Last Name')
+                            ->weight(FontWeight::Bold)
+                            ->searchable()
+                            ->alignCenter(),
+                        TextColumn::make('name')
+                            ->label('First Name')
+                            ->searchable()
+                            ->alignCenter(),
+                            // TextColumn::make('MName')
+                            // ->label('Middle Name')
+                            // ->searchable()
+                            // ->alignCenter(),
+                            
+                    ]),
 
-                Tables\Columns\TextColumn::make('name')
-                    ->label('First Name')
-                    ->alignCenter(),
+                    Stack::make([
+                        Tables\Columns\TextColumn::make('ContactNum')
+                        ->label('Contact Number')
+                        ->alignCenter()
+                        ->copyable()
+                        ->copyMessage('Contact Number Copied')
+                        ->copyMessageDuration(1500),
 
-                Tables\Columns\TextColumn::make('MName')
-                    ->label('Middle Name')
-                    ->alignCenter(),
+                    Tables\Columns\TextColumn::make('email')
+                        ->label('Email Address')
+                        ->searchable()
+                        ->alignCenter()
+                        ->icon('heroicon-m-envelope')
+                        ->copyable()
+                            ->copyMessage('Email Address Copied')
+                            ->copyMessageDuration(1500),
 
-                Tables\Columns\TextColumn::make('ContactNum')
-                    ->label('Contact Number')
-                    ->alignCenter(),
+                    // Tables\Columns\TextColumn::make('Course')
+                    // ->label('Course')
+                    // ->alignCenter()
+                    // ->wrap(),
+                    ]),
+                ])
+            ])
 
-                Tables\Columns\TextColumn::make('email')
-                    ->alignCenter(),
-
-                Tables\Columns\TextColumn::make('Course')
-                    ->alignCenter(),
-    
-            ]);
+                ->contentGrid([
+                    'sm' => 1,
+                    'md' => 2,
+                    'xl' => 3,
+                ]);
     }
 }

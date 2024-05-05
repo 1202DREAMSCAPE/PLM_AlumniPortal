@@ -23,6 +23,7 @@ module.exports = {
     extend: {
       colors: {
         primary: colors.blue,
+        transparent: 'transparent',
       },
     },
   },

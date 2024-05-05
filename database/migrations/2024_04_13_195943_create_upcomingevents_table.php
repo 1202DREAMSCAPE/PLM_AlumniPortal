@@ -26,7 +26,8 @@ return new class extends Migration
             $table->time('TimeEnd')
             ->nullable();
             $table->timestamps();
-            $table->boolean('Accepted')->default(false);
+            $table->boolean('Accepted')
+            ->default(false);
         });
     }
 

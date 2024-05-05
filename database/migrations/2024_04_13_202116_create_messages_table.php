@@ -13,14 +13,20 @@ return new class extends Migration
     {
         Schema::create('Messages', function (Blueprint $table) {
             $table->id('HelpID');
-            $table->unsignedBigInteger('SNum') ->nullable();
+            $table->unsignedBigInteger('SNum') 
+            ->nullable();
             $table->string('name');
             $table->string('email');
-            $table->year('Graduated') ->nullable();
-            $table->string('Course') ->nullable();
-            $table->date('RDate') ->nullable();
-            $table->longText('Description') ->nullable();
-            $table->string('Status') ->nullable();
+            $table->year('Graduated') 
+            ->nullable();
+            $table->string('Course') 
+            ->nullable();
+            $table->date('RDate') 
+            ->nullable();
+            $table->longText('Description') 
+            ->nullable();
+            $table->string('Status') 
+            ->default('Unread');
             $table->timestamps();
         });
     }

@@ -57,8 +57,20 @@ class PartnershipResource extends Resource
                 ->label('End Date')
                 ->unique(ignoreRecord: true),
             
-            Forms\Components\Toggle::make('Accepted')
-                ->label('Published')
+                Forms\Components\ToggleButtons::make('Accepted')
+                ->options([
+                    'Unpublished' => 'Unpublished',
+                    'Published' => 'Published'
+                ])
+                ->icons([
+                    'Unpublished' => 'heroicon-s-minus-circle',
+                    'Published' => 'heroicon-s-check-circle',
+                ])
+                ->colors([
+                    'Unpublished' => 'warning',
+                    'Published' => 'success',
+                ])
+                ->inline()
                 ->required(),
 
         ]);

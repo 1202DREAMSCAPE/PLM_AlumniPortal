@@ -17,6 +17,13 @@ use Filament\Tables\Actions\ExportAction;
 use Filament\Infolists\Components;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\IconColumn;
+use Illuminate\Database\Query\Builder;
+use Filament\Support\Enums\FontWeight;
+use Filament\Tables\Columns\Layout\Split;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\Layout\Grid;
+
 
 
 
@@ -176,6 +183,11 @@ class UserResource extends Resource
                     ->label('Course')
                     ->required(),
 
+                Forms\Components\TextInput::make('Graduated')
+                    ->label('Year Graduated')
+                    ->required()
+                    ->maxLength(255),
+
                 Forms\Components\TextInput::make('password')
                     ->dehydrateStateUsing(fn (string $state): string => Hash::make($state))
                     ->dehydrated(fn (?string $state): bool => filled($state))
@@ -190,8 +202,7 @@ class UserResource extends Resource
                     ->required(fn (string $operation): bool => $operation === 'create')
                     ->maxLength(255),
 
-                Forms\Components\Toggle::make('is_admin')
-                    ->label('Admin Access'),
+                //fix admin toggle in database
             ]);
     }
 
@@ -206,6 +217,7 @@ class UserResource extends Resource
                 ->exporter(UserExporter::class)
         ])
             ->columns([
+                
                 ImageColumn::make('avatar_url')
                     ->label('Photo')
                     ->disk('profile-photos')
@@ -213,17 +225,19 @@ class UserResource extends Resource
 
                 Tables\Columns\TextColumn::make('SNum')
                     ->searchable()
-                    ->label('Student Number')
-                    ->sortable(),
+                    ->AlignJustify()
+                    ->label('Student Number'),
+
 
                 Tables\Columns\TextColumn::make('LName')
                     ->searchable()
+                    ->AlignJustify()
                     ->label('Last Name'),
                     
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->label('First Name')
-                    ->alignCenter(),
+                    ->AlignJustify(),
                 
                 Tables\Columns\TextColumn::make('MName')
                     ->searchable()
@@ -236,15 +250,28 @@ class UserResource extends Resource
 
                 Tables\Columns\TextColumn::make('ContactNum')
                 ->label('Contact Number')
-                ->alignCenter(),
+                ->alignCenter()
+                ->copyable()
+                    ->copyMessage('Contact Number Copied')
+                    ->copyMessageDuration(1500),
 
                 Tables\Columns\TextColumn::make('email')
                     ->searchable()
-                    ->alignCenter(),
+                    ->alignCenter()
+                    ->icon('heroicon-m-envelope')
+                    ->copyable()
+                        ->copyMessage('Email Address Copied')
+                        ->copyMessageDuration(1500),
 
                 Tables\Columns\TextColumn::make('Course')
-                ->alignCenter(),
+                ->alignCenter()
+                ->wrap(),
+
+                // Tables\Columns\TextColumn::make('Graduated')
+                // ->alignCenter(),
+                    
             ])
+
             ->filters([
                 //
             ])

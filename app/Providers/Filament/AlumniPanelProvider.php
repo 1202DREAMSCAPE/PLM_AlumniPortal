@@ -51,16 +51,15 @@ class AlumniPanelProvider extends PanelProvider
                     ),
                 FilamentPeekPlugin::make()
                     ->disablePluginStyles(),
-                GravatarPlugin::make(),
                 FilamentBackgroundsPlugin::make()
                 ->imageProvider(
                     MyImages::make()
                         ->directory('images/backgrounds')
                 ),
         ])
-            ->defaultAvatarProvider(GravatarProvider::class)
             ->favicon(asset('/favicon-32x32.png'))
             ->brandLogo(fn () => view('components.logo'))
+            ->brandLogoHeight('50px')
             ->renderHook(
                 'panels::body.end',
                 fn (): View => view('footer'),  
