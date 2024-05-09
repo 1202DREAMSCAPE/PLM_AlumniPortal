@@ -19,10 +19,6 @@ use Filament\Infolists\Components\TextEntry;
 use Parallax\FilamentComments\Tables\Actions\CommentsAction;
 use Parallax\FilamentComments\Infolists\Components\CommentsEntry;
 
-
-
-
-
 class MessagesResource extends Resource
 {
     protected static ?string $model = Messages::class;
@@ -59,6 +55,21 @@ class MessagesResource extends Resource
                 Forms\Components\Textarea::make('Description')
                     ->label('Description')
                     ->required(),
+                Forms\Components\ToggleButtons::make('Status')
+                    ->options([
+                        'Unread' => 'Unread',
+                        'Replied' => 'Replied'
+                    ])
+                    ->icons([
+                        'Unread' => 'heroicon-s-minus-circle',
+                        'Replied' => 'heroicon-s-check-circle',
+                    ])
+                    ->colors([
+                        'Unread' => 'warning',
+                        'Replied' => 'success',
+                    ])
+                    ->inline()
+                    ->default('Unread'),                
             ]);
     }
 

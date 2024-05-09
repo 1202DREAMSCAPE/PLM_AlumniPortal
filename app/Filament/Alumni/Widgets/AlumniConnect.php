@@ -37,20 +37,17 @@ class AlumniConnect extends BaseWidget
                             ->label('First Name')
                             ->searchable()
                             ->alignCenter(),
-                            // TextColumn::make('MName')
-                            // ->label('Middle Name')
-                            // ->searchable()
-                            // ->alignCenter(),
-                            
                     ]),
 
                     Stack::make([
                         Tables\Columns\TextColumn::make('ContactNum')
                         ->label('Contact Number')
+                        ->icon('heroicon-s-phone')
                         ->alignCenter()
                         ->copyable()
                         ->copyMessage('Contact Number Copied')
-                        ->copyMessageDuration(1500),
+                        ->copyMessageDuration(1500)
+                        ->searchable(),
 
                     Tables\Columns\TextColumn::make('email')
                         ->label('Email Address')
