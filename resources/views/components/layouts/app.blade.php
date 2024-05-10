@@ -7,6 +7,8 @@
 
     @livewireStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite('resources/css/app.css')
+
   </head>
 
   <body class="font-sans text-base leading-normal tracking-normal text-gray-800">

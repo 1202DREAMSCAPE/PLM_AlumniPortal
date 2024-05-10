@@ -6,5 +6,8 @@ export default {
         './app/Filament/Alumni/**/*.php',
         './resources/views/filament/alumni/**/*.blade.php',
         './vendor/filament/**/*.blade.php',
+        "./resources/**/*.blade.php",
+        "./resources/**/*.js",
+        "./resources/**/*.vue",
     ],
 }

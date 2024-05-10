@@ -62,7 +62,7 @@ class AlumniPanelProvider extends PanelProvider
             ->brandLogoHeight('50px')
             ->renderHook(
                 'panels::body.end',
-                fn (): View => view('footer'),  
+                fn (): View => view('components.footer'),  
             )
             ->viteTheme('resources/css/filament/alumni/theme.css')
             ->colors([
