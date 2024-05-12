@@ -86,11 +86,9 @@ class EducationalBackgroundResource extends Resource
                 Tables\Columns\TextColumn::make('school')
                     ->label(' ')
                     ->weight('bold')
-                    ->searchable()
                     ->sortable(false),
                     Tables\Columns\TextColumn::make('degree')
                     ->label(' ')
-                    ->searchable()
                     ->sortable(false),
                 Tables\Columns\TextColumn::make(' ')
                     ->label(' ')

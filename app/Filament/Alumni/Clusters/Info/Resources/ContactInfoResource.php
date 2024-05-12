@@ -13,6 +13,12 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\View;
+use Filament\Tables\Columns\Layout\Split;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components;
+use Filament\Tables\Columns\ContactInfoColumn;
 
 class ContactInfoResource extends Resource
 {
@@ -24,7 +30,6 @@ class ContactInfoResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-s-phone';
 
     protected static ?string $cluster = Info::class;
-
     public static function form(Form $form): Form
     {
         return $form
@@ -53,9 +58,11 @@ class ContactInfoResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+               
             ->columns([
-                //
-            ])
+                // \App\Filament\Tables\Columns\ContactInfoColumn::make('Contact Info')::make('Contact Info')
+                // ->label('Contact Information')        
+                ])
             ->filters([
                 //
             ])

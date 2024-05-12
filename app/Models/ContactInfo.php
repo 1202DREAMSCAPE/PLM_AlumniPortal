@@ -10,13 +10,16 @@ class ContactInfo extends Model
     use HasFactory;
     
     protected $fillable = [
-        'SNum',
-        'name',
         'email',
-        'Graduated',
-        'Course',
-        'RDate',
-        'Description',
-        'Status',
+        'telephone_number',
+        'cellphone_number',
+        'home_address',
+        'country',
+        'city',
+        'province',
+        'region',
+        'postal_code',
+        'linkedin_account_link',
+
     ];
 }
