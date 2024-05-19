@@ -184,9 +184,7 @@ class UserResource extends Resource
                     ->required(),
 
                 Forms\Components\TextInput::make('Graduated')
-                    ->label('Year Graduated')
-                    ->required()
-                    ->maxLength(255),
+                    ->label('Year Graduated'),
 
                 Forms\Components\TextInput::make('password')
                     ->dehydrateStateUsing(fn (string $state): string => Hash::make($state))
@@ -258,7 +256,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email')
                     ->searchable()
                     ->alignCenter()
-                    ->icon('heroicon-m-envelope')
+                    //->icon('heroicon-m-envelope')
                     ->copyable()
                         ->copyMessage('Email Address Copied')
                         ->copyMessageDuration(1500),

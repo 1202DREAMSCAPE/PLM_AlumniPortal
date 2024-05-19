@@ -29,6 +29,8 @@ use App\Providers\Filament\Variants;
 use Illuminate\Contracts\View\View;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
+use Filament\Support\Enums\MaxWidth;
+
 
 class AlumniPanelProvider extends PanelProvider
 {
@@ -57,6 +59,9 @@ class AlumniPanelProvider extends PanelProvider
                         ->directory('images/backgrounds')
                 ),
         ])
+            // ->navigationGroups([
+            //     'About Me',
+            // ])
             ->favicon(asset('/favicon-32x32.png'))
             ->brandLogo(fn () => view('components.logo'))
             ->brandLogoHeight('50px')
@@ -66,11 +71,12 @@ class AlumniPanelProvider extends PanelProvider
             )
             ->viteTheme('resources/css/filament/alumni/theme.css')
             ->colors([
-                'primary' => Color::Yellow,
+                'primary' => Color::Blue,
             ])
             ->viteTheme('resources/css/admin.css')
             ->discoverResources(in: app_path('Filament/Alumni/Resources'), for: 'App\\Filament\\Alumni\\Resources')
             ->discoverPages(in: app_path('Filament/Alumni/Pages'), for: 'App\\Filament\\Alumni\\Pages')
+            ->discoverClusters(in: app_path('Filament/Alumni/Clusters'), for: 'App\\Filament\\Alumni\\Clusters')
             ->pages([
                 Pages\Dashboard::class,
                 ])

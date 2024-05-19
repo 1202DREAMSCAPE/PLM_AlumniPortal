@@ -4,7 +4,8 @@ namespace App\Filament\Alumni\Resources;
 
 use App\Filament\Alumni\Resources\TransactionHistoryResource\Pages;
 use App\Filament\Alumni\Resources\TransactionHistoryResource\RelationManagers;
-use App\Models\TransactionHistory;
+use App\Models\TransactionHisto;
+use App\Models\Transaction;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TransactionHistoryResource extends Resource
 {
-    protected static ?string $model = TransactionHistory::class;
+    protected static ?string $model = Transaction::class;
 
     protected static ?string $label = 'Transaction History ';
 
