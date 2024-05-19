@@ -52,6 +52,12 @@ class ContactInfoResource extends Resource
                 Forms\Components\TextInput::make('Country')
                     ->label('Country')
                     ->required(false),
+                Forms\Components\TextInput::make('PostalCode')
+                    ->label('Postal Code')
+                    ->required(false),
+                Forms\Components\TextInput::make('LinkedIn')
+                    ->label('LinkedIn Account')
+                    ->required(false),
             ]);
     }
 

@@ -58,6 +58,7 @@ class WorkExperienceResource extends Resource
                         'MY' => 'Malaysia',
                         'JP' => 'Japan',
                     ])
+                    ->searchable()
                     ->required(),
                 Forms\Components\TextInput::make('WorkIndustry')
                     ->label('Work Industry')
