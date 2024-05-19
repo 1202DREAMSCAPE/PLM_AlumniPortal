@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Infolists\Components;
+use Filament\Infolists\Infolist;
 
 class PartnershipResource extends Resource
 {
@@ -56,35 +58,36 @@ class PartnershipResource extends Resource
             Forms\Components\DatePicker::make('EndDate')
                 ->label('End Date')
                 ->unique(ignoreRecord: true),
-            
-                Forms\Components\ToggleButtons::make('Accepted')
-                ->options([
-                    'Unpublished' => 'Unpublished',
-                    'Published' => 'Published'
-                ])
-                ->icons([
-                    'Unpublished' => 'heroicon-s-minus-circle',
-                    'Published' => 'heroicon-s-check-circle',
-                ])
-                ->colors([
-                    'Unpublished' => 'warning',
-                    'Published' => 'success',
-                ])
-                ->inline()
-                ->required(),
 
         ]);
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+        ->schema([
+            Components\Section::make()->schema([
+                Components\TextEntry::make('ComName')
+                    ->label('Company Name'),
+                Components\TextEntry::make('EmailAdd')
+                    ->label('Company Email Address'),
+                Components\TextEntry::make('PartType')
+                    ->label('Type of Partnership'),
+                Components\Grid::make()->schema([
+                        Components\TextEntry::make('StartDate')
+                            ->label('Start Date'),
+                        Components\TextEntry::make('EndDate')
+                            ->label('End Date'),
+                    ])->columns(2),
+            ])
+            ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-        ->columns([
-            // Tables\Columns\TextColumn::make('PartnerID')
-            //     ->searchable()
-            //     ->label('Partnership ID')
-            //     ->sortable(),
 
+        ->columns([
             Tables\Columns\TextColumn::make('ComName')
                 ->searchable()
                 ->label('Company Name'),
@@ -111,25 +114,35 @@ class PartnershipResource extends Resource
                 ->sortable(),
 
             Tables\Columns\IconColumn::make('Accepted')
-                ->label('Published')
                 ->boolean()
-                ->sortable()
                 ->alignCenter(),
-            
-
-            
         ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
                 Tables\Actions\ViewAction::make(),
+                
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                    Tables\Actions\BulkAction::make("Mark as Accepted")
+                        ->label('Mark as Accepted')
+                        ->action(function (): void {
+                        Partnership::where('Accepted', false)->update(['Accepted' => true]);
+                        })
+                        ->icon('heroicon-s-check-circle') 
+                        ->color('success'),
+
+                    Tables\Actions\BulkAction::make("Mark as Unaccepted")
+                        ->label('Mark as Unaccepted')
+                        ->action(function (): void {
+                        Partnership::where('Accepted', true)->update(['Accepted' => false]);
+                        })
+                        ->icon('heroicon-s-x-circle') 
+                        ->color('gray'),
+                        ]),
             ]);
     }
 
@@ -145,7 +158,6 @@ class PartnershipResource extends Resource
     {
         return [
             'index' => Pages\ListPartnerships::route('/'),
-            
             //'create' => Pages\CreatePartnership::route('/create'),
             //'edit' => Pages\EditPartnership::route('/{record}/edit'),
         ];
