@@ -175,7 +175,7 @@
         
     <div class="border border-blue rounded-[1.75rem]">
         <div class="flex flex-row">
-            <img class="w-[697px] h-[486px]" src="/img/Group 8686.png">
+            <img class="w-[697px] h-[150px]" src="/images/Group 8686.png">
             <span class="absolute ml-[3rem] mt-[27rem] text-[24px] font-inter font-semibold text-white-10">
                 LOREM IPSUM DOLOR SIT AMET  
             </span>
@@ -341,7 +341,7 @@
     </div>
 
     <!--ALUMNI EVENTS-->
-    <div class="w-screen py-32 mt-4 text-center">
+    <div class="w-screen py-32 text-center">
         <div class="ml-[5rem] text-blue text-[64px] font-bold font-inter">
             ALUMNI EVENTS
         </div>
