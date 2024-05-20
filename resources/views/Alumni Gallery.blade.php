@@ -139,7 +139,7 @@
                                         {{ $post->title }}
                                     </span>
                                     <span class="text-white text-[16px] font-normal font-['Inter'] absolute top-[285px] pl-4">
-                                        {{ \Carbon\Carbon::parse($post->created_at)->format('F j, Y') }}
+                                        {{ \Carbon\Carbon::parse($post->published_at)->format('F j, Y') }}
                                     </span>
 
                                 </div>
