@@ -26,8 +26,6 @@ return new class extends Migration
             ->nullable();
             $table->string('LName')
             ->nullable();
-            $table->string('FName')
-            ->nullable();
             $table->string('MName')
             ->nullable();
             $table->string('NameExt')
@@ -68,6 +66,7 @@ return new class extends Migration
             ->nullable();
             $table->text('Skills')
             ->nullable();
+
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -78,7 +77,7 @@ return new class extends Migration
 
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->foreignId('user_id')->nullable()->index();
+            $table->foreignId('user_id')->nullable();
             $table->string('ip_address', 45)->nullable();
             $table->text('user_agent')->nullable();
             $table->longText('payload');
