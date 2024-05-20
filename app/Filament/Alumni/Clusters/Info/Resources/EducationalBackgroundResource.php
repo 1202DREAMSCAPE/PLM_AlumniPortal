@@ -13,6 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class EducationalBackgroundResource extends Resource
 {
@@ -76,6 +77,10 @@ class EducationalBackgroundResource extends Resource
                 Forms\Components\DatePicker::make('endperiod')
                     ->label('End Period')
                     ->required(false),
+                // Hidden field to store the authenticated user's ID
+                Forms\Components\Hidden::make('user_id')
+                ->default(fn () => Auth::id())
+                ->required(),
             ]);
     }
 
@@ -127,8 +132,8 @@ class EducationalBackgroundResource extends Resource
         ];
     }
 
-    // public static function getEloquentQuery(): Builder
-    // {
-    // return parent::getEloquentQuery()->where('user_id',auth()->id());
-    // }
+    public static function getEloquentQuery(): Builder
+    {
+    return parent::getEloquentQuery()->where('user_id',auth()->id());
+    }
 }

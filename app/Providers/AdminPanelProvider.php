@@ -52,7 +52,6 @@ class AdminPanelProvider extends PanelProvider
                         shouldRegisterNavigation: false,
                         hasAvatars: true
                     ),
-                    //->enableTwoFactorAuthentication(),
                 CuratorPlugin::make()
                     ->label('Gallery')
                     ->pluralLabel('Gallery')

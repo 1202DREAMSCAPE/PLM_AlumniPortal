@@ -16,6 +16,7 @@ use App\Filament\Alumni\Clusters\Info;
 use Filament\Infolists\Components;
 use Filament\Infolists\Infolist;
 use Filament\Support\Enums\FontWeight;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -72,6 +73,10 @@ class WorkExperienceResource extends Resource
                 Forms\Components\DatePicker::make('EndOfEmployment')
                     ->label('End Of Employment')
                     ->required(false),
+                    // Hidden field to store the authenticated user's ID
+                Forms\Components\Hidden::make('user_id')
+                ->default(fn () => Auth::id())
+                ->required(),
             ]);
     }
 
@@ -107,10 +112,7 @@ class WorkExperienceResource extends Resource
                     ->label(' ')
                     ->weight(FontWeight::Bold)
                     ->searchable(false),
-                
-                // Tables\Columns\TextColumn::make('StartOfEmployment')
-                //     ->label(' ')
-                //     ->searchable(false),
+            
             ])
             ->filters([
                 //
@@ -140,5 +142,10 @@ class WorkExperienceResource extends Resource
            // 'create' => Pages\CreateWorkExperience::route('/create'),
            // 'edit' => Pages\EditWorkExperience::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+    return parent::getEloquentQuery()->where('user_id',auth()->id());
     }
 }
