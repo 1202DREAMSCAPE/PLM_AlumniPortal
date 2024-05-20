@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('educational_backgrounds', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('school')->nullable();
             $table->string('educattain')->nullable();
             $table->string('degree')->nullable();
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->date('endperiod')->nullable();
             $table->timestamps();
         });
+        
     }
 
     /**
@@ -29,6 +31,9 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('educational_backgrounds', function (Blueprint $table) {
+            $table->dropForeign(['user_id']); // Drop foreign key constraint
+        });
         Schema::dropIfExists('educational_backgrounds');
     }
 };

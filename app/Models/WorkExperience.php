@@ -10,6 +10,7 @@ class WorkExperience extends Model
     use HasFactory;
     protected $table = 'workexp';
     protected $fillable = [
+        'user_id',
         'EmploymentStatus',
         'JobTitle',
         'CompanyName',
