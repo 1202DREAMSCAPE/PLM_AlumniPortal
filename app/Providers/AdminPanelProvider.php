@@ -81,7 +81,6 @@ class AdminPanelProvider extends PanelProvider
                 'green' => Color::Green,
                 'red' => Color::Red,
                 'yellow' => Color::Yellow,
-                'blue' => Color::Blue,
                 'indigo' => Color::Indigo,
             ])
             ->viteTheme('resources/css/admin.css')

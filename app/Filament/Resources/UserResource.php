@@ -214,12 +214,15 @@ class UserResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-        ->headerActions([
-            ExportAction::make()
-                ->exporter(UserExporter::class)
-        ])
+            ->query(User::query())
             ->columns([
-               
+
+                Tables\Columns\TextColumn::make('SNum')
+                    ->searchable()
+                    ->label('Student Number')
+                    ->sortable()
+                    ->badge()
+                    ->color('indigo'),
 
                 Tables\Columns\TextColumn::make('LName')
                     ->searchable()
