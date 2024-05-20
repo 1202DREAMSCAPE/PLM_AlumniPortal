@@ -121,9 +121,6 @@
                 <div class="border border-blue rounded-[1.75rem]">
                     <div class="flex flex-row">
                         <img class="w-[697px] h-[500px]" src="/images/Group 8686.png">
-                        <span class="absolute ml-[3rem] mt-[27rem] text-[24px] font-inter font-semibold text-white-10">
-                            LOREM IPSUM DOLOR SIT AMET
-                        </span>
                         <div class="flex flex-col">
                             <span
                                 class=" mx-[3rem] pr-[3rem] mt-[5rem] whitespace-pre-line text-[24px] font-inter font-bold text-blue-pressed ">
