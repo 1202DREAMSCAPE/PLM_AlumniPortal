@@ -33,11 +33,13 @@
         </div>
         
      <!--BUTTONS-->
-     <div class="flex flex-row -ml-[4rem] ">
-      <button class=" hover:bg-blue-hover duration-150 hover:border-blue-hover font-inter text-center text-16 whitespace-nowrap text-white-10 my-6 px-14 bg-blue rounded border-[1px] border-blue">
+     <div class="flex flex-row -ml-[4rem]">
+    <button 
+      onclick="window.location.href='/alumni'" 
+      class="hover:bg-blue-hover duration-150 hover:border-blue-hover font-inter text-center text-16 whitespace-nowrap text-white-10 my-6 px-14 bg-blue rounded border-[1px] border-blue">
       LOG IN
     </button>
-    </div>
+  </div>
 </div>
 
 <!--NAVBAR-->
