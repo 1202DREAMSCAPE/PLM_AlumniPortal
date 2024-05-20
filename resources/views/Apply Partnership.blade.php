@@ -101,7 +101,7 @@
                 window.location.href = url;
             }
         </script>
-
+        
         <!--MAIN PAGE-->
         <div class="h-screen w-screen flex flex-col">
 
