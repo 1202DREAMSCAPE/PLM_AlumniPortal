@@ -112,6 +112,21 @@ class WorkExperienceResource extends Resource
                     ->label(' ')
                     ->weight(FontWeight::Bold)
                     ->searchable(false),
+                Tables\Columns\TextColumn::make('JobTitle')
+                    ->label(' ')
+                    ->searchable(false),
+                Tables\Columns\TextColumn::make(' ')
+                    ->label(' ')
+                    ->sortable(false),
+                Tables\Columns\TextColumn::make('1 ')
+                    ->label(' ')
+                    ->sortable(false),
+                Tables\Columns\TextColumn::make('2 ')
+                    ->label(' ')
+                    ->sortable(false),
+                Tables\Columns\TextColumn::make('3 ')
+                    ->label(' ')
+                    ->sortable(false),
             
             ])
             ->filters([
@@ -125,7 +140,7 @@ class WorkExperienceResource extends Resource
                 //Tables\Actions\BulkActionGroup::make([
                     //Tables\Actions\DeleteBulkAction::make(),
                 // ]),
-            ]);
+            ])->paginated(5);
     }
 
     public static function getRelations(): array

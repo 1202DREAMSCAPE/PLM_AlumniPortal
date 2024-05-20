@@ -26,3 +26,5 @@
 .filament-peek-modal-title {
   @apply text-primary-500 uppercase tracking-wider before:content-['Page_'] before:text-white;
 }
+
+

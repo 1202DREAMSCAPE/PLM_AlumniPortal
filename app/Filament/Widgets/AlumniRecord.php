@@ -9,6 +9,7 @@ use Filament\Widgets\TableWidget as BaseWidget;
 class AlumniRecord extends BaseWidget
 {
     protected static ?int $sort = 2;
+    protected static ?string $heading = 'Quick Search';
     protected int | string | array $columnSpan = 'full';  
 
     public function table(Table $table): Table
@@ -35,10 +36,6 @@ class AlumniRecord extends BaseWidget
                 ->label('Middle Name')
                 ->alignCenter(),
                 
-            //Tables\Columns\TextColumn::make('created_at')
-              //  ->dateTime()
-                //->sortable(),
-
             Tables\Columns\TextColumn::make('ContactNum')
             ->label('Contact Number')
             ->alignCenter(),
@@ -48,7 +45,8 @@ class AlumniRecord extends BaseWidget
                 ->alignCenter(),
 
             Tables\Columns\TextColumn::make('Course')
-            ->alignCenter(),            
+            ->alignCenter()
+            ->wrap(),            
         ]);
     }
 }

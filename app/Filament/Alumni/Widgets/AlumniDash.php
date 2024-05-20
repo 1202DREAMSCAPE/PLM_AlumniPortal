@@ -6,9 +6,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 
-class AboutMe extends BaseWidget
+class AlumniDash extends BaseWidget
 {
-    protected static ?string $label = 'About Me';
     protected int | string | array $columnSpan = 'full';
     
     

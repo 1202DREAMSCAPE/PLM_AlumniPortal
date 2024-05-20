@@ -5,12 +5,15 @@ use App\Livewire\Post\Show as PostShow;
 use App\Providers\Filament\AlumniPanelProvider;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', Home::class)->name('home');
-Route::get('/article/{post:slug}', PostShow::class)->name('post.show');
-
+// Route::get('/', Home::class)->name('home');
+// Route::get('/article/{post:slug}', PostShow::class)->name('post.show');
 
 Route::get('/gallery1', function () {
     return view('Alumni Gallery');
+});
+
+Route::get('/', function () {
+    return view('mainpage');
 });
 
 Route::get('/gallery2', function () {
