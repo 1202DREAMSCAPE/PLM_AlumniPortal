@@ -23,6 +23,8 @@ use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\Layout\Grid;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+
 
 
 
@@ -91,7 +93,6 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-
                 Forms\Components\TextInput::make('SNum')
                     ->label('Student Number')
                     ->required()
@@ -261,13 +262,14 @@ class UserResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
                 //Tables\Actions\DeleteAction::make(),
                 Tables\Actions\ViewAction::make(),
                 ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make()
+                    ExportBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ])
             ->emptyStateActions([
