@@ -24,8 +24,8 @@ class AlumniConnect extends BaseWidget
                 Split::make([
                     ImageColumn::make('avatar_url')
                     ->label('Photo')
-                    ->disk('profile-photos')
-                    ->circular(),
+                    ->circular()
+                    ->url(fn($record) => $record->getFilamentAvatarUrl()),
 
                     Stack::make([
                         TextColumn::make('LName')
