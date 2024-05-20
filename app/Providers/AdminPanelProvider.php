@@ -47,7 +47,6 @@ class AdminPanelProvider extends PanelProvider
             ->databaseNotifications(true)
             ->plugins([
                 BreezyCore::make()
-                ->avatarUploadComponent(fn($fileUpload) => $fileUpload->disableLabel())
                     ->myProfile(
                         shouldRegisterUserMenu: true,
                         shouldRegisterNavigation: false,
@@ -62,17 +61,14 @@ class AdminPanelProvider extends PanelProvider
                     ->navigationCountBadge(),
                 FilamentPeekPlugin::make()
                     ->disablePluginStyles(),
-                GravatarPlugin::make(),
                 FilamentBackgroundsPlugin::make()
                 ->imageProvider(
                     MyImages::make()
                         ->directory('images/backgrounds')
                 ),
             ])
-            //->defaultAvatarProvider(GravatarProvider::class)
             ->favicon(asset('/favicon-32x32.png'))
-            ->brandLogo(fn () => view('components.logo'))
-            ->brandLogoHeight('50px')
+            ->brandLogo(fn () => view('components.logo2'))
             ->brandName('Alumni Portal')
             ->navigationGroups([
                 // 'Collections',
