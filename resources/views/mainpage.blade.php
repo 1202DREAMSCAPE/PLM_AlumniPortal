@@ -32,12 +32,12 @@
             </h2>
         </div>
         
-           <!--BUTTONS-->
-      <div class="flex flex-row -ml-[4rem]">
-        @livewire('alumni-panel-redirect')
-      </div>
+     <!--BUTTONS-->
+     <div class="flex flex-row -ml-[4rem] ">
+      <button class=" hover:bg-blue-hover duration-150 hover:border-blue-hover font-inter text-center text-16 whitespace-nowrap text-white-10 my-6 px-14 bg-blue rounded border-[1px] border-blue">
+      LOG IN
+    </button>
     </div>
-    @livewireScripts
 </div>
 
 <!--NAVBAR-->
@@ -123,7 +123,7 @@
                 <span class=" -mt-5 text-center font-inter font-bold text-white-10 text-[60px]"> 
                     DEAR HARIBON!
                 </span>
-                <span class="font-inter text-right text-white-10 text-[15px] mr-[6rem]"> 
+                <span class="font-inter text-right text-white-10 text-[15px] pr-28 mr-20"> 
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
                     incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
                     nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
@@ -136,7 +136,7 @@
 
     <!--OUR SERVICES-->
     <div class="w-screen py-28 text-center">
-        <div class="text-blue ml-[5rem] text-[64px] font-bold font-inter">
+        <div class="text-blue text-[64px] font-bold font-inter">
             OUR SERVICES
         </div>
         <div class="opacity-60 pl-[10rem] ml-[20rem] mt-4 text-center w-1/2 text-[20px] text-blue font-inter">
@@ -158,7 +158,7 @@
 
     <!--NEWS AND UPDATES-->
     <div class="w-screen py-32 mt-4 text-center">
-    <div class="ml-[5rem] text-blue text-[64px] font-bold font-inter">
+    <div class=" text-blue text-[64px] font-bold font-inter">
         NEWS AND UPDATES
     </div>
     <div class="opacity-60 pl-[10rem] ml-[20rem] pt-[2rem] pb-[3rem] text-center w-1/2 text-[20px] text-blue font-inter">
@@ -176,9 +176,6 @@
     <div class="border border-blue rounded-[1.75rem]">
         <div class="flex flex-row">
             <img class="w-[697px] h-[150px]" src="/images/Group 8686.png">
-            <span class="absolute ml-[3rem] mt-[27rem] text-[24px] font-inter font-semibold text-white-10">
-                LOREM IPSUM DOLOR SIT AMET  
-            </span>
             <div class="flex flex-col">
             <span class=" mx-[3rem] pr-[3rem] mt-[3.5rem] whitespace-pre-line text-[24px] font-inter font-bold text-blue-pressed ">
                 LOREM IPSUM DOLOR SIT AMET, 
@@ -342,7 +339,7 @@
 
     <!--ALUMNI EVENTS-->
     <div class="w-screen py-32 text-center">
-        <div class="ml-[5rem] text-blue text-[64px] font-bold font-inter">
+        <div class=" text-blue text-[64px] font-bold font-inter">
             ALUMNI EVENTS
         </div>
         <div class="opacity-60 pl-[10rem] ml-[20rem] mt-4 text-center w-1/2 text-[20px] text-blue font-inter">
@@ -377,7 +374,7 @@
                     <span class="ml-2">
                         Location
                     </span>
-                    <a href="#" href="#" onclick="window.location.href='/resources/views/mainpage.html'" class="text-blue-hover pl-28 font-inter dark:text-blue hover:underline text-[18px]">
+                    <a href="#" href="#" onclick="window.location.href='/resources/views/mainpage.html'" class="ml-20 pl-28 text-blue-hover pl-28 font-inter dark:text-blue hover:underline text-[18px]">
                         View More
                     </a>
                 </div>
@@ -403,7 +400,7 @@
                 <span class="ml-2">
                     Location
                 </span>
-                <a href="#" href="#" onclick="window.location.href='/resources/views/mainpage.html'" class="text-blue-hover pl-28 font-inter dark:text-blue hover:underline text-[18px]">
+                <a href="#" href="#" onclick="window.location.href='/resources/views/mainpage.html'" class="ml-20 pl-28 text-blue-hover pl-28 font-inter dark:text-blue hover:underline text-[18px]">
                     View More
                 </a>
             </div>
@@ -429,7 +426,7 @@
             <span class="ml-2">
                 Location
             </span>
-            <a href="#" href="#" onclick="window.location.href='/resources/views/mainpage.html'" class="text-blue-hover pl-28 font-inter dark:text-blue hover:underline text-[18px]">
+            <a href="#" href="#" onclick="window.location.href='/resources/views/mainpage'" class="text-blue-hover ml-20 pl-28 font-inter dark:text-blue hover:underline text-[18px]">
                 View More
             </a>
         </div>
