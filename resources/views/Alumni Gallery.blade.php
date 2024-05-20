@@ -17,7 +17,6 @@
     <body class="bg-white-10 flex flex-col flex-nowrap">
 
         <!--HEADER-->
-        <div class="flex flex-row bg-white border border-black w-screen"></div>
         <div class="flex flex-row">
 
             <!--PLM HEADER-->
@@ -48,29 +47,7 @@
                     </a>
                 </div>
 
-                <div class="relative flex flex-row" x-data="{ open: false }" @click.away="open = false">
-                    <div>
-                        <a href="#" onclick="window.location.href='/resources/views/services.html'"
-                            class ="hover:text-gold">
-                            SERVICES
-                        </a>
-                    </div>
-                    <svg class="dropdown flex flex-col" width="18" height="18" viewBox="0 0 18 18" fill="none"
-                        xmlns="http://www.w3.org/2000/svg" @click="open = !open">
-                        <path :d="open ? 'M13.5 11.25L9 6.75L4.5 11.25' : 'M13.5 6.75L9 11.25L4.5 6.75'" stroke="white"
-                            class="hover:fill-current hover:text-gold" />
-                    </svg>
-                    <div class="bg-blue dropdown-menu absolute top-full mt-2 z-10 text-left px-[1.15rem] whitespace-nowrap"
-                        :class="{ 'scale-100': open, 'scale-0': !open }" x-show="open" id="dropdownMenu">
-                        <div @click="navigate('/resources/views/mainlogin.html')"
-                            class="dropdown-menu-item hover:text-gold duration-150">Request For Documents</div>
-                        <div @click="navigate('/resources/views/mainlogin.html')"
-                            class="dropdown-menu-item hover:text-gold duration-150">Print Resume</div>
-                        <div @click="navigate('/resources/views/mainlogin.html')"
-                            class="dropdown-menu-item hover:text-gold duration-150">Networking</div>
-                    </div>
-                </div>
-
+              
                 <div class="relative flex flex-row" x-data="{ open: false }" @click.away="open = false">
                     <div>
                         <a href="#" onclick="window.location.href='/resources/views/careers.html'"
@@ -104,8 +81,6 @@
                     </svg>
                     <div class="bg-blue dropdown-menu absolute top-full mt-2 z-10 text-left pl-[1rem] pr-[2.25rem] whitespace-nowrap"
                         :class="{ 'scale-100': open, 'scale-0': !open }" x-show="open" id="dropdownMenu">
-                        <div onclick="window.location.href='{{ url('bookevent') }}'"
-                            class="dropdown-menu-item hover:text-gold duration-150">Book an Event</div>
                         <div onclick="window.location.href='{{ url('gallery1') }}'"
                             class="dropdown-menu-item hover:text-gold duration-150">Gallery</div>
                         <div onclick="window.location.href='{{ url('event1') }}'"
