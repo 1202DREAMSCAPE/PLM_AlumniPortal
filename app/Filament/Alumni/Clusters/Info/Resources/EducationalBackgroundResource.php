@@ -126,4 +126,9 @@ class EducationalBackgroundResource extends Resource
             //'edit' => Pages\EditEducationalBackground::route('/{record}/edit'),
         ];
     }
+
+    public static function getEloquentQuery(): Builder
+    {
+    return parent::getEloquentQuery()->where('user_id',auth()->id());
+    }
 }

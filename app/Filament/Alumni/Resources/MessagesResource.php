@@ -63,4 +63,9 @@ class MessagesResource extends Resource
             'edit' => Pages\EditMessages::route('/{record}/edit'),
         ];
     }
+
+    public static function getEloquentQuery(): Builder
+    {
+    return parent::getEloquentQuery()->where('user_id',auth()->id());
+    }
 }

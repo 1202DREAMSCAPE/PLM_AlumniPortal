@@ -11,6 +11,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\Layout\Grid;
+use Illuminate\Support\Facades\Storage;
 
 
 class AlumniConnect extends BaseWidget
@@ -22,10 +23,6 @@ class AlumniConnect extends BaseWidget
             ->query(\App\Models\User::query())
             ->columns([
                 Split::make([
-                    ImageColumn::make('avatar_url')
-                    ->label('Photo')
-                    ->circular()
-                    ->url(fn($record) => $record->getFilamentAvatarUrl()),
 
                     Stack::make([
                         TextColumn::make('LName')

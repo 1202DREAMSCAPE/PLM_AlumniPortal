@@ -19,6 +19,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components;
 use Filament\Tables\Columns\ContactInfoColumn;
+use Illuminate\Support\Facades\Auth;
 
 class ContactInfoResource extends Resource
 {
@@ -34,40 +35,50 @@ class ContactInfoResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('ContactNum')
-                    ->label('Contact Number')
-                    ->required(false),
-                Forms\Components\TextInput::make('email')
-                    ->label('Email Address')
-                    ->required(false),
-                Forms\Components\TextInput::make('Address')
-                    ->label('Address')
-                    ->required(false),
-                Forms\Components\TextInput::make('City')
-                    ->label('City')
-                    ->required(false),
-                Forms\Components\TextInput::make('Province')
-                    ->label('Province')
-                    ->required(false),
-                Forms\Components\TextInput::make('Country')
-                    ->label('Country')
-                    ->required(false),
-                Forms\Components\TextInput::make('PostalCode')
-                    ->label('Postal Code')
-                    ->required(false),
-                Forms\Components\TextInput::make('LinkedIn')
-                    ->label('LinkedIn Account')
-                    ->required(false),
+                //
+
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-               
-            ->columns([
-                // \App\Filament\Tables\Columns\ContactInfoColumn::make('Contact Info')::make('Contact Info')
-                // ->label('Contact Information')        
+        ->columns([
+                Tables\Columns\TextColumn::make('email')
+                ->searchable()
+                ->AlignJustify()
+                ->label('Email Address'),
+                Tables\Columns\TextColumn::make('telephone_number')
+                ->searchable()
+                ->label('Telephone Number'),
+                Tables\Columns\TextColumn::make('cellphone_number')
+                ->searchable()
+                ->label('Contact Number'),
+                Tables\Columns\TextColumn::make('home_address')
+                ->searchable()
+                ->wrap()
+                ->alignJustify()
+                ->label('Address'),
+                Tables\Columns\TextColumn::make('city')
+                ->searchable()
+                ->label('City'),
+                Tables\Columns\TextColumn::make('province')
+                ->searchable()
+                ->label('Province'),
+                Tables\Columns\TextColumn::make('country')
+                ->searchable()
+                ->label('Country'),
+                Tables\Columns\TextColumn::make('region')
+                ->searchable()
+                ->label('Region'),
+                Tables\Columns\TextColumn::make('postal_code')
+                ->searchable()
+                ->label('Postal Code'),
+                Tables\Columns\TextColumn::make('linkedin_account_link')
+                ->searchable()
+                ->wrap()
+                ->label('LinkedIn Account'),
+    
                 ])
             ->filters([
                 //
@@ -96,5 +107,10 @@ class ContactInfoResource extends Resource
             //'create' => Pages\CreateContactInfo::route('/create'),
             //'edit' => Pages\EditContactInfo::route('/{record}/edit'),
         ];
+    }
+
+        public static function getEloquentQuery(): Builder
+    {
+    return parent::getEloquentQuery()->where('user_id',auth()->id());
     }
 }
