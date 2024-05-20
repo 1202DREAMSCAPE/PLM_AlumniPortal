@@ -35,8 +35,8 @@ class ContactInfoResource extends Resource
     {
         return $form
             ->schema([
-                //
-
+                Components\TextInput::make('linkedin_account_link')
+                    ->label('LinkedIn Account')
             ]);
     }
 
@@ -44,38 +44,7 @@ class ContactInfoResource extends Resource
     {
         return $table
         ->columns([
-                Tables\Columns\TextColumn::make('email')
-                ->searchable()
-                ->AlignJustify()
-                ->label('Email Address'),
-                Tables\Columns\TextColumn::make('telephone_number')
-                ->searchable()
-                ->label('Telephone Number'),
-                Tables\Columns\TextColumn::make('cellphone_number')
-                ->searchable()
-                ->label('Contact Number'),
-                Tables\Columns\TextColumn::make('home_address')
-                ->searchable()
-                ->wrap()
-                ->alignJustify()
-                ->label('Address'),
-                Tables\Columns\TextColumn::make('city')
-                ->searchable()
-                ->label('City'),
-                Tables\Columns\TextColumn::make('province')
-                ->searchable()
-                ->label('Province'),
-                Tables\Columns\TextColumn::make('country')
-                ->searchable()
-                ->label('Country'),
-                Tables\Columns\TextColumn::make('region')
-                ->searchable()
-                ->label('Region'),
-                Tables\Columns\TextColumn::make('postal_code')
-                ->searchable()
-                ->label('Postal Code'),
                 Tables\Columns\TextColumn::make('linkedin_account_link')
-                ->searchable()
                 ->wrap()
                 ->label('LinkedIn Account'),
     
@@ -86,11 +55,7 @@ class ContactInfoResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+            ->paginated(false);
     }
 
     public static function getRelations(): array

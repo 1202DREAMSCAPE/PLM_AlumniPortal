@@ -219,10 +219,7 @@ class UserResource extends Resource
                 ->exporter(UserExporter::class)
         ])
             ->columns([
-                Tables\Columns\TextColumn::make('SNum')
-                    ->searchable()
-                    ->AlignJustify()
-                    ->label('Student Number'),
+               
 
                 Tables\Columns\TextColumn::make('LName')
                     ->searchable()
