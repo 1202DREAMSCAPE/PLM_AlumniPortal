@@ -141,6 +141,7 @@ class UserResource extends Resource
                     ->maxLength(255),
                 
                     Forms\Components\Select::make('Course')
+                    ->searchable()
                     ->options([
                         'College of Engineering' => [
                             'Bachelor of Science in Computer Engineering' => 'Bachelor of Science in Computer Engineering',
@@ -184,7 +185,9 @@ class UserResource extends Resource
                     ->required(),
 
                 Forms\Components\TextInput::make('Graduated')
-                    ->label('Year Graduated'),
+                    ->label('Year Graduated')
+                    ->numeric()  // Ensure the input is numeric if it's a year
+                    ->maxLength(4),
 
                 Forms\Components\TextInput::make('password')
                     ->dehydrateStateUsing(fn (string $state): string => Hash::make($state))
@@ -215,17 +218,10 @@ class UserResource extends Resource
                 ->exporter(UserExporter::class)
         ])
             ->columns([
-                
-                ImageColumn::make('avatar_url')
-                    ->label('Photo')
-                    ->disk('profile-photos')
-                    ->circular(),
-
                 Tables\Columns\TextColumn::make('SNum')
                     ->searchable()
                     ->AlignJustify()
                     ->label('Student Number'),
-
 
                 Tables\Columns\TextColumn::make('LName')
                     ->searchable()
@@ -241,10 +237,6 @@ class UserResource extends Resource
                     ->searchable()
                     ->label('Middle Name')
                     ->alignCenter(),
-                    
-                //Tables\Columns\TextColumn::make('created_at')
-                  //  ->dateTime()
-                    //->sortable(),
 
                 Tables\Columns\TextColumn::make('ContactNum')
                 ->label('Contact Number')
@@ -256,7 +248,6 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email')
                     ->searchable()
                     ->alignCenter()
-                    //->icon('heroicon-m-envelope')
                     ->copyable()
                         ->copyMessage('Email Address Copied')
                         ->copyMessageDuration(1500),
@@ -264,10 +255,6 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('Course')
                 ->alignCenter()
                 ->wrap(),
-
-                // Tables\Columns\TextColumn::make('Graduated')
-                // ->alignCenter(),
-                    
             ])
 
             ->filters([
