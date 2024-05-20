@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Storage;
 
 class AlumniConnect extends BaseWidget
 {
-    protected int | string | array $columnSpan = '2 / 4';
+    protected int | string | array $columnSpan = 'full';
     public function table(Table $table): Table
     {
         return $table
