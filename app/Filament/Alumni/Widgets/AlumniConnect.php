@@ -23,10 +23,6 @@ class AlumniConnect extends BaseWidget
             ->query(\App\Models\User::query())
             ->columns([
                 Split::make([
-                    ImageColumn::make('avatar_url')
-                    ->label('Photo')
-                    ->circular()
-                    ->url(fn($record) => $record->getFilamentAvatarUrl()),
 
                     Stack::make([
                         TextColumn::make('LName')
