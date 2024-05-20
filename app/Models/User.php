@@ -11,6 +11,8 @@ use Illuminate\Notifications\Notifiable;
 use Jeffgreco13\FilamentBreezy\Traits\TwoFactorAuthenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
 
 
 class User extends Authenticatable implements FilamentUser, HasAvatar
@@ -47,7 +49,6 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         'SNum',
         'Gender',
         'LName',
-        'FName',
         'MName',
         'NameExt',
         'MaidenName',
@@ -102,5 +103,10 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function contactInfo(): HasOne
+    {
+        return $this->hasOne(ContactInfo::class);
     }
 }

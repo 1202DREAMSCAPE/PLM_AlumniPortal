@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('contact_infos', function (Blueprint $table) {
             $table->id();
-            $table->string('email')->unique();
+            $table->unsignedBigInteger('user_id')->nullable(); // Add user_id column
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Add foreign key constraint
+            $table->string('email')->nullable();
             $table->string('telephone_number')->nullable();
             $table->string('cellphone_number')->nullable();
-            $table->text('home_address')->nullable();
+            $table->string('home_address', 255)->nullable();
             $table->string('country')->nullable();
             $table->string('city')->nullable();
             $table->string('province')->nullable();
@@ -29,9 +31,14 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
+        Schema::table('contact_infos', function (Blueprint $table) {
+            $table->dropForeign(['user_id']); // Drop foreign key constraint
+        });
         Schema::dropIfExists('contact_infos');
     }
 };
