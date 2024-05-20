@@ -42,54 +42,7 @@ class AboutMeResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            // ->columns([
-            //     Tables\Columns\TextColumn::make('LName')
-            //         ->searchable()
-            //         ->label('Last Name'),
-                    
-            //     Tables\Columns\TextColumn::make('name')
-            //         ->searchable()
-            //         ->label('First Name')
-            //         ->alignCenter(),
-                
-            //     Tables\Columns\TextColumn::make('MName')
-            //         ->searchable()
-            //         ->label('Middle Name')
-            //         ->alignCenter(),
-                    
-            //     //Tables\Columns\TextColumn::make('created_at')
-            //       //  ->dateTime()
-            //         //->sortable(),
 
-            //     Tables\Columns\TextColumn::make('ContactNum')
-            //     ->label('Contact Number')
-            //     ->alignCenter(),
-
-            //     Tables\Columns\TextColumn::make('Gender')
-            //         ->searchable()
-            //         ->alignCenter(),
-                
-            //     Tables\Columns\TextColumn::make('BDay')
-            //         ->label('Birthday')
-            //         ->searchable()
-            //         ->alignCenter(),
-
-            //     Tables\Columns\TextColumn::make('email')
-            //         ->searchable()
-            //         ->alignCenter(),
-                
-            //     Tables\Columns\TextColumn::make('SNum')
-            //         ->searchable()
-            //         ->label('Student Number')
-            //         ->sortable(),
-
-            //     Tables\Columns\TextColumn::make('Course')
-            //         ->alignCenter(),
-
-            //     Tables\Columns\TextColumn::make('Graduated')
-            //         ->label('Year of Graduation')
-            //         ->alignCenter(),
-            //])
             ->filters([
                 //
             ])
@@ -122,6 +75,6 @@ class AboutMeResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-    return parent::getEloquentQuery()->where('user_id',auth()->id());
+    return parent::getEloquentQuery()->where('id',auth()->id());
     }
 }
