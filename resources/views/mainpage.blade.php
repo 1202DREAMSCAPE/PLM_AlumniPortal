@@ -23,7 +23,7 @@
 
   <!--PLM HEADER-->
         <img class="h-[5.5rem] w-[5.5rem] ml-8 my-2" src="/images/Logo only.png">
-        <div class = " py-3 w-4/5 ml-5 flex flex-col">
+        <div class = " py-3 w-4/5 ml-5 flex flex-col mt-2">
             <h1 class="text-[35px] font-katibeh mt-0 -mb-2 text-gold">
                 PAMANTASAN NG LUNGSOD NG MAYNILA
             </h1>
@@ -32,12 +32,12 @@
             </h2>
         </div>
         
-     <!--BUTTONS-->
-     <div class="flex flex-row -ml-[4rem] ">
-      <button class=" hover:bg-blue-hover duration-150 hover:border-blue-hover font-inter text-center text-16 whitespace-nowrap text-white-10 my-6 px-14 bg-blue rounded border-[1px] border-blue">
-      LOG IN
-    </button>
+           <!--BUTTONS-->
+      <div class="flex flex-row -ml-[4rem]">
+        @livewire('alumni-panel-redirect')
+      </div>
     </div>
+    @livewireScripts
 </div>
 
 <!--NAVBAR-->
