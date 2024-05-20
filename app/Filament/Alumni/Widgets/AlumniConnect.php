@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Storage;
 
 class AlumniConnect extends BaseWidget
 {
-    protected int | string | array $columnSpan = 'full';
+    protected int | string | array $columnSpan = '2 / 4';
     public function table(Table $table): Table
     {
         return $table
@@ -50,6 +50,7 @@ class AlumniConnect extends BaseWidget
                         ->label('Email Address')
                         ->searchable()
                         ->alignCenter()
+                        ->wrap()
                         ->icon('heroicon-m-envelope')
                         ->copyable()
                             ->copyMessage('Email Address Copied')
@@ -66,7 +67,7 @@ class AlumniConnect extends BaseWidget
                 ->contentGrid([
                     'sm' => 1,
                     'md' => 2,
-                    'xl' => 3,
+                    'xl' => 2,
                 ]);
     }
 }

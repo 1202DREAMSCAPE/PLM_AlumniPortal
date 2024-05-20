@@ -42,6 +42,7 @@
   </div>
 </div>
 
+
 <!--NAVBAR-->
         <div class="bg-blue  h-1/5 w-screen">
             <navbar
