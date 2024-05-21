@@ -28,7 +28,7 @@ class ListBasicInfos extends ListRecords
             Widgets\Gender::class,
             Widgets\Bday::class,
             Widgets\BPlace::class,
-            Widgets\CivilStat::class,
+            //Widgets\CivilStat::class,
         ];
     }
 }

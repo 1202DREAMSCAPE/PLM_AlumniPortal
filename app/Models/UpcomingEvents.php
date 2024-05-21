@@ -31,4 +31,9 @@ class UpcomingEvents extends Model
     {
         return $this->photo ? Storage::url($this->photo) : null;
     }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'upcoming_event_id', 'EventID');
+    }
 }
