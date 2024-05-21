@@ -59,14 +59,6 @@ class AlumniConnect extends BaseWidget
                         ->copyable()
                             ->copyMessage('Email Address Copied')
                             ->copyMessageDuration(1500),
-                        TextColumn::make('ContactNum')
-                            ->label('Contact Number')
-                            ->icon('heroicon-s-phone')
-                            ->alignCenter()
-                            ->copyable()
-                            ->copyMessage('Contact Number Copied')
-                            ->copyMessageDuration(1500)
-                            ->searchable(),
                         
                         // Uncomment if needed
                         // TextColumn::make('Course')
