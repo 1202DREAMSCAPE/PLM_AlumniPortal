@@ -50,6 +50,7 @@ class AlumniConnect extends BaseWidget
                         ->label('Email Address')
                         ->searchable()
                         ->alignCenter()
+                        ->wrap()
                         ->icon('heroicon-m-envelope')
                         ->copyable()
                             ->copyMessage('Email Address Copied')
@@ -66,7 +67,7 @@ class AlumniConnect extends BaseWidget
                 ->contentGrid([
                     'sm' => 1,
                     'md' => 2,
-                    'xl' => 3,
+                    'xl' => 2,
                 ]);
     }
 }
