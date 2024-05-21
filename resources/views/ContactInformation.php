@@ -1,5 +1,4 @@
-<!-- resources/views/contact_info.blade.php -->
-
+<!-- resources/views/contact-information.blade.php -->
 <div class="py-2 px-5">
     @foreach ($contactInfos as $contactInfo)
         <div>
