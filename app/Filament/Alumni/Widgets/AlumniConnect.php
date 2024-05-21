@@ -10,26 +10,46 @@ use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\ImageColumn;
-use Filament\Tables\Columns\Layout\Grid;
-use Illuminate\Support\Facades\Storage;
+use Filament\Tables\Actions\Action;
+use Filament\Notifications\Notification;
+use Illuminate\Support\Facades\Auth;
 
 class AlumniConnect extends BaseWidget
 {
     protected int | string | array $columnSpan = 'full';
 
+    protected function getTableHeaderActions(): array
+    {
+        return [
+            Action::make('toggleVisibility')
+                ->label(fn () => Auth::user()->is_visible ? 'Make Profile Private' : 'Make Profile Public')
+                ->action(function () {
+                    $user = Auth::user();
+                    $user->is_visible = !$user->is_visible;
+                    $user->save();
+
+                    Notification::make()
+                        ->title('Visibility Toggled')
+                        ->body($user->is_visible ? 'Your profile is now public.' : 'Your profile is now private.')
+                        ->success()
+                        ->send();
+                })
+                ->icon(fn () => Auth::user()->is_visible ? 'heroicon-o-eye-slash' : 'heroicon-o-eye')
+        ];
+    }
+
     public function table(Table $table): Table
     {
         return $table
-            ->query(\App\Models\User::query())
+            ->query(\App\Models\User::query()->where('is_visible', true))
             ->columns([
                 Split::make([
                     ImageColumn::make('profile_photo_path')
-                            ->label(' ')
-                            ->disk('public')
-                            //->path(fn ($record) => $record->profile_photo_path ? Storage::url($record->profile_photo_path) : null)
-                            ->defaultImageUrl(url('/default-avatar.png'))
-                            ->width(50)
-                            ->height(50),
+                        ->label(' ')
+                        ->disk('public')
+                        ->defaultImageUrl(url('/default-avatar.png'))
+                        ->width(50)
+                        ->height(50),
                     Stack::make([
                         TextColumn::make('LName')
                             ->label('Last Name')
@@ -42,24 +62,22 @@ class AlumniConnect extends BaseWidget
                             ->alignCenter(),
                     ]),
                     Stack::make([
-                        Tables\Columns\TextColumn::make('ContactNum')
-                        ->label('Contact Number')
-                        ->icon('heroicon-s-phone')
-                        ->alignCenter()
-                        ->copyable()
-                        ->copyMessage('Contact Number Copied')
-                        ->copyMessageDuration(1500)
-                        ->searchable(),
-
-                    Tables\Columns\TextColumn::make('email')
-                        ->label('Email Address')
-                        ->searchable()
-                        ->alignCenter()
-                        ->icon('heroicon-m-envelope')
-                        ->copyable()
+                        TextColumn::make('ContactNum')
+                            ->label('Contact Number')
+                            ->icon('heroicon-s-phone')
+                            ->alignCenter()
+                            ->copyable()
+                            ->copyMessage('Contact Number Copied')
+                            ->copyMessageDuration(1500)
+                            ->searchable(),
+                        TextColumn::make('email')
+                            ->label('Email Address')
+                            ->searchable()
+                            ->alignCenter()
+                            ->icon('heroicon-m-envelope')
+                            ->copyable()
                             ->copyMessage('Email Address Copied')
                             ->copyMessageDuration(1500),
-                        
                         // Uncomment if needed
                         // TextColumn::make('Course')
                         //     ->label('Course')
@@ -68,11 +86,11 @@ class AlumniConnect extends BaseWidget
                     ]),
                 ])
             ])
-
-                ->contentGrid([
-                    'sm' => 1,
-                    'md' => 2,
-                    'xl' => 3,
-                ]);
+            ->headerActions($this->getTableHeaderActions()) 
+            ->contentGrid([
+                'sm' => 1,
+                'md' => 2,
+                'xl' => 3,
+            ]);
     }
 }

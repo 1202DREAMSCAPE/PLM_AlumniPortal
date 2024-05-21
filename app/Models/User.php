@@ -44,6 +44,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     protected $fillable = [
         'name',
         'email',
+        'is_visible',
         'is_admin',
         'avatar_url',
         'password',
@@ -93,6 +94,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'is_admin' => 'boolean',
+            'is_visible' => 'boolean',
         ];
     }
 
