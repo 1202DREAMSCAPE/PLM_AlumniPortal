@@ -14,6 +14,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
+use Filament\Infolists\Components;
+use Filament\Infolists\Infolist;
 
 class EducationalBackgroundResource extends Resource
 {
@@ -84,6 +86,28 @@ class EducationalBackgroundResource extends Resource
             ]);
     }
 
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Components\Section::make()->schema([
+                    Components\TextEntry::make('school')
+                        ->label('School'),
+                    Components\TextEntry::make('educattain')
+                        ->label('Educational Attainment'),
+                    Components\TextEntry::make('degree')
+                        ->label('Degree Obtained'),
+                    Components\TextEntry::make('gwa')
+                        ->label('General Weighted Average'),
+                    Components\TextEntry::make('honors')
+                        ->label('Honors/Achievement'),
+                    Components\TextEntry::make('startperiod')
+                        ->label('Start Period'),
+                    Components\TextEntry::make('endperiod')
+                        ->label('End Period'),           
+                ])
+            ]);
+    }
     public static function table(Table $table): Table
     {
         return $table
@@ -108,6 +132,8 @@ class EducationalBackgroundResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 // Tables\Actions\BulkActionGroup::make([

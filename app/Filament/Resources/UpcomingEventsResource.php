@@ -11,11 +11,12 @@ use Filament\Tables\Table;
 use Awcodes\Curator\Components\Forms\CuratorPicker;
 use Awcodes\Curator\Components\Tables\CuratorColumn;
 use Filament\Forms\Components\FileUpload;
+use Filament\Notifications\Notification;
 
 class UpcomingEventsResource extends Resource
 {
     protected static ?string $model = UpcomingEvents::class;
-    protected static ?string $label = 'Events Directory ';
+    protected static ?string $label = 'Events  ';
     protected static ?int $navigationSort = 7;
 
     public static function getNavigationBadge(): ?string
@@ -29,11 +30,6 @@ class UpcomingEventsResource extends Resource
     {
         return $form
             ->schema([
-                FileUpload::make('photo')
-                    ->label('Photo')
-                    ->directory('photos')
-                    ->image()
-                    ->required(),
                 Forms\Components\TextInput::make('EventName')
                     ->label('Event Name')
                     ->required()
@@ -73,9 +69,6 @@ class UpcomingEventsResource extends Resource
                 default => null,
             })
             ->columns([
-                CuratorColumn::make('curator_id')
-                    ->circular()
-                    ->label('Photo'),
                 Tables\Columns\TextColumn::make('EventName')
                     ->searchable()
                     ->label('Event Name'),
@@ -89,7 +82,8 @@ class UpcomingEventsResource extends Resource
                 Tables\Columns\TextColumn::make('EDesc')
                     ->searchable()
                     ->label('Event Description')
-                    ->wrap(),
+                    ->wrap()
+                    ->limit(100),
                 Tables\Columns\TextColumn::make('TimeStart')
                     ->searchable()
                     ->label('Start Time'),
@@ -102,26 +96,28 @@ class UpcomingEventsResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\BulkAction::make("Mark as Accepted")
-                        ->label('Mark as Accepted')
-                        ->action(function (): void {
-                            UpcomingEvents::where('Accepted', false)->update(['Accepted' => true]);
-                        })
-                        ->icon('heroicon-s-check-circle')
-                        ->color('success'),
-                    Tables\Actions\BulkAction::make("Mark as Unaccepted")
-                        ->label('Mark as Unaccepted')
-                        ->action(function (): void {
-                            UpcomingEvents::where('Accepted', true)->update(['Accepted' => false]);
-                        })
-                        ->icon('heroicon-s-x-circle')
-                        ->color('gray'),
-                ]),
+                Tables\Actions\Action::make('toggleAccepted')
+                ->label(fn (UpcomingEvents $record): string => $record->Accepted ? 'Reject' : 'Accept')
+                ->color(fn (UpcomingEvents $record): string => $record->Accepted ? 'danger' : 'success')
+                ->icon(fn (UpcomingEvents $record): string => $record->Accepted ? 'heroicon-s-x-circle' : 'heroicon-s-check-circle')
+                ->action(function (UpcomingEvents $record) {
+                $record->Accepted = !$record->Accepted;
+                $record->save();
+
+                $status = $record->Accepted ? 'accepted' : 'rejected';
+
+                Notification::make()
+                ->title('Event Status Updated')
+                ->body("The event: {$record->EventName} has been $status.")
+                ->info()
+                ->send();
+                })
             ]);
+            // ->bulkActions([
+            //     Tables\Actions\BulkActionGroup::make([
+            //         Tables\Actions\DeleteBulkAction::make(),
+            //     ]),
+           // ]);
     }
 
     public static function getPages(): array

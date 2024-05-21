@@ -12,11 +12,14 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Parallax\FilamentComments\Tables\Actions\CommentsAction;
+use Filament\Infolists\Infolist;
+use Filament\Infolists\Components;
 
 class MessagesResource extends Resource
 {
     protected static ?string $model = Messages::class;
 
+    protected static ?string $label = 'Messages';
     protected static ?string $navigationIcon = 'heroicon-o-envelope';
 
     protected static ?int $navigationSort = 1;
@@ -73,6 +76,24 @@ class MessagesResource extends Resource
             ]);
     }
 
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Components\Section::make()->schema([
+                    Components\TextEntry::make('SNum')
+                        ->label('Student Number'),
+                    Components\TextEntry::make('name')
+                        ->label('Name'),
+                    Components\TextEntry::make('email')
+                        ->label('Email'),
+                    Components\TextEntry::make('RDate')
+                        ->label('Date'),
+                    Components\TextEntry::make('Description')
+                        ->label('Message'),
+                ])
+            ]);
+    }
     public static function table(Table $table): Table
     {
         $user = Auth::user();
@@ -112,6 +133,7 @@ class MessagesResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 CommentsAction::make()
                     ->label('Reply'),
                 Tables\Actions\Action::make('Read')
