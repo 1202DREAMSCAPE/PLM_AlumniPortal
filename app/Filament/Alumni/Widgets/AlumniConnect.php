@@ -13,17 +13,23 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\Layout\Grid;
 use Illuminate\Support\Facades\Storage;
 
-
 class AlumniConnect extends BaseWidget
 {
     protected int | string | array $columnSpan = 'full';
+
     public function table(Table $table): Table
     {
         return $table
             ->query(\App\Models\User::query())
             ->columns([
                 Split::make([
-
+                    ImageColumn::make('profile_photo_path')
+                            ->label(' ')
+                            ->disk('public')
+                            //->path(fn ($record) => $record->profile_photo_path ? Storage::url($record->profile_photo_path) : null)
+                            ->defaultImageUrl(url('/default-avatar.png'))
+                            ->width(50)
+                            ->height(50),
                     Stack::make([
                         TextColumn::make('LName')
                             ->label('Last Name')
@@ -35,7 +41,6 @@ class AlumniConnect extends BaseWidget
                             ->searchable()
                             ->alignCenter(),
                     ]),
-
                     Stack::make([
                         Tables\Columns\TextColumn::make('ContactNum')
                         ->label('Contact Number')
@@ -50,16 +55,24 @@ class AlumniConnect extends BaseWidget
                         ->label('Email Address')
                         ->searchable()
                         ->alignCenter()
-                        ->wrap()
                         ->icon('heroicon-m-envelope')
                         ->copyable()
                             ->copyMessage('Email Address Copied')
                             ->copyMessageDuration(1500),
-
-                    // Tables\Columns\TextColumn::make('Course')
-                    // ->label('Course')
-                    // ->alignCenter()
-                    // ->wrap(),
+                        TextColumn::make('ContactNum')
+                            ->label('Contact Number')
+                            ->icon('heroicon-s-phone')
+                            ->alignCenter()
+                            ->copyable()
+                            ->copyMessage('Contact Number Copied')
+                            ->copyMessageDuration(1500)
+                            ->searchable(),
+                        
+                        // Uncomment if needed
+                        // TextColumn::make('Course')
+                        //     ->label('Course')
+                        //     ->alignCenter()
+                        //     ->wrap(),
                     ]),
                 ])
             ])
@@ -67,7 +80,7 @@ class AlumniConnect extends BaseWidget
                 ->contentGrid([
                     'sm' => 1,
                     'md' => 2,
-                    'xl' => 2,
+                    'xl' => 3,
                 ]);
     }
 }
