@@ -26,7 +26,7 @@ class Graduate extends BaseWidget
                     ->label('Year of Graduation')
                     ->alignCenter()
                     ->weight(FontWeight::Bold)
-                    ->color('primary')
+                    ->color('warning')
                     ->formatStateUsing(fn ($state) => "Year of $state"),
             ])
             ->paginated(false);

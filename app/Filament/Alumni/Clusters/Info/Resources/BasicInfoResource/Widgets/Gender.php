@@ -28,7 +28,7 @@ class Gender extends BaseWidget
                 TextColumn::make('Gender')
                     ->label('Gender')
                     ->alignCenter()
-                    ->color('primary')
+                    ->color('warning')
                     ->weight(FontWeight::Bold),
             ])
             ->paginated(false)

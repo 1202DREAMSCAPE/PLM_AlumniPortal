@@ -29,7 +29,7 @@ class SNum extends BaseWidget
                     ->label('Student Number')
                     ->alignCenter()
                     ->weight(FontWeight::Bold)
-                    ->color('primary'),
+                    ->color('warning'),
             ])
             ->paginated(false);
     }

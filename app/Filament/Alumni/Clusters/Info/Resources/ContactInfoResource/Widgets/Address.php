@@ -24,18 +24,30 @@ class Address extends BaseWidget
             ->query(ContactInfo::query()->where('user_id', Auth::id()))
             ->columns([
                 Tables\Columns\TextColumn::make('home_address')
-                    ->label('Home Address'),
+                    ->label('Home Address')
+                    ->color('warning')
+            ->weight('bold'),
                 Tables\Columns\TextColumn::make('city')
-                    ->label(' '),
+                    ->label(' ')
+                    ->color('warning')
+            ->weight('bold'),
                 Tables\Columns\TextColumn::make('province')
-                    ->label(' '),
+                    ->label(' ')
+                    ->color('warning')
+            ->weight('bold'),
                 Tables\Columns\TextColumn::make('country')
-                    ->label(' '),
+                    ->label(' ')
+                    ->color('warning')
+            ->weight('bold'),
                 Tables\Columns\TextColumn::make('region')
-                    ->label(' '),
+                    ->label(' ')
+                    ->color('warning')
+            ->weight('bold'),
                 Tables\Columns\TextColumn::make('postal_code')
-                    ->label(' '),
-            ])
+                    ->label(' ')
+                    ->color('warning')
+            ->weight('bold'),
+            ]) 
             ->actions([
                 Tables\Actions\EditAction::make()
                     ->modalHeading('Edit Contact Information')

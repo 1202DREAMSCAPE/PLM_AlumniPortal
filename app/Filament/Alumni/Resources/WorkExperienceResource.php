@@ -111,6 +111,7 @@ class WorkExperienceResource extends Resource
                 Tables\Columns\TextColumn::make('CompanyName')
                     ->label(' ')
                     ->weight(FontWeight::Bold)
+                    ->color('warning')
                     ->searchable(false),
                 Tables\Columns\TextColumn::make('JobTitle')
                     ->label(' ')

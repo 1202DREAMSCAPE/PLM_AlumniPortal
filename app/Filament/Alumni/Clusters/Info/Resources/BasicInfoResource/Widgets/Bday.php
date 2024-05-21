@@ -25,10 +25,10 @@ class Bday extends BaseWidget
         return $table
             ->query(User::query()->where('id', Auth::id()))
             ->columns([
-                TextColumn::make('date_of_birth')
+                TextColumn::make('BDay')
                     ->label('Date of Birth')
                     ->alignCenter()
-                    ->color('primary')
+                    ->color('warning')
                     ->weight(FontWeight::Bold),
             ])
             ->paginated(false);

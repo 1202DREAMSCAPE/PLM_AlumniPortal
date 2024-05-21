@@ -24,10 +24,14 @@ class TelNum extends BaseWidget
             ->query(ContactInfo::query()->where('user_id', Auth::id()))
             ->columns([
                 Tables\Columns\TextColumn::make('telephone_number')
-                    ->label('Telephone Number'),
+                    ->label('Telephone Number')
+                    ->color('warning')
+            ->weight('bold'),
                 
                 Tables\Columns\TextColumn::make('cellphone_number')
                     ->label('Cellphone Number')
+                    ->color('warning')
+            ->weight('bold'),
 
             ])
             ->actions([

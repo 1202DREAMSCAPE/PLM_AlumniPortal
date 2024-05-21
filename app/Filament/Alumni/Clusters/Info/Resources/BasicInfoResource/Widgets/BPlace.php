@@ -18,7 +18,7 @@ class BPlace extends BaseWidget
     protected static ?string $heading = ' ';
 
     protected static ?int $sort = 2;
-    protected int | string | array $columnSpan = 'full';
+    protected int | string | array $columnSpan = '1/2';
 
     public function table(Table $table): Table
     {
@@ -28,13 +28,13 @@ class BPlace extends BaseWidget
                 TextColumn::make('City')
                     ->label('Birthplace')
                     ->alignCenter()
-                    ->color('primary')
+                    ->color('warning')
                     ->weight(FontWeight::Bold),
-                TextColumn::make('Nationality')
-                    ->label('Nationality')
-                    ->alignCenter()
-                    ->color('primary')
-                    ->weight(FontWeight::Bold),
+                // TextColumn::make('Nationality')
+                //     ->label('Nationality')
+                //     ->alignCenter()
+                //     ->color('primary')
+                //     ->weight(FontWeight::Bold),
             ])
             ->paginated(false);
     }

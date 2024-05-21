@@ -46,6 +46,8 @@ class ContactInfoResource extends Resource
         ->columns([
                 Tables\Columns\TextColumn::make('linkedin_account_link')
                 ->wrap()
+                ->color('warning')
+                ->weight('bold')
                 ->label('LinkedIn Account'),
     
                 ])

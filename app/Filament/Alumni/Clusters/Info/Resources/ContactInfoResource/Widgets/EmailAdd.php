@@ -25,6 +25,7 @@ class EmailAdd extends BaseWidget
                 TextInput::make('email')
                     ->label('Email Address')
                     ->email()
+                    
                     ->maxLength(255),
             ]);
     }
@@ -35,7 +36,9 @@ class EmailAdd extends BaseWidget
             ->query(ContactInfo::query()->where('user_id', Auth::id()))
             ->columns([
                 Tables\Columns\TextColumn::make('email')
-                    ->label('Email Address'),
+                    ->label('Email Address')
+                    ->color('warning')
+            ->weight('bold'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()

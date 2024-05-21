@@ -38,23 +38,23 @@ class BasicInfoResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label('Name')
-                    ->color('primary')
+                    ->color('warning')
                     ->weight('bold'),
                 Tables\Columns\TextColumn::make('LName')
                     ->label(' ')
-                    ->color('primary')
+                    ->color('warning')
                     ->weight('bold'),
                 Tables\Columns\TextColumn::make('MName')
                     ->label(' ')
-                    ->color('primary')
+                    ->color('warning')
                     ->weight('bold'),
                 Tables\Columns\TextColumn::make('NameExt')
                     ->label(' ')
-                    ->color('primary')
+                    ->color('warning')
                     ->weight('bold'),
                 Tables\Columns\TextColumn::make('MaidenName')
                     ->label(' ')
-                    ->color('primary')
+                    ->color('warning')
                     ->weight('bold'),
             ]) 
             ->filters([
