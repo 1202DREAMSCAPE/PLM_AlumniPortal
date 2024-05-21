@@ -101,9 +101,8 @@ class AboutMeResource extends Resource
     {
         return [
             'index' => Pages\ListAboutMes::route('/'),
-            'create' => Pages\CreateAboutMe::route('/create'),
-            'edit' => Pages\EditAboutMe::route('/{record}/edit'),
-            'view' => Pages\ViewAboutMe::route('/{record}'),
+            // 'create' => Pages\CreateAboutMe::route('/create'),
+            // 'edit' => Pages\EditAboutMe::route('/{record}/edit'),
         ];
     }
 
