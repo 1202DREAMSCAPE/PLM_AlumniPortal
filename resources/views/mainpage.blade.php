@@ -156,7 +156,7 @@
     <!-- PHOTOS-->
     <div class="w-screen pb-14 bg-blue">
         <div class="flex flex-row place-content-evenly place-content-center">
-            <img src="/img/ReqDocu.png">
+            <!-- <img src="/img/ReqDocu.png"> -->
             <img src="/img/JobOpp.png">
             <img src="/img/Networking.png">
             <img src="/img/AlumniEvents.png">
@@ -345,7 +345,7 @@
     </div>
 
     <!--ALUMNI EVENTS-->
-    <div class="w-screen py-32 text-center">
+    <div class="w-screen pt-32 text-center">
         <div class=" text-blue text-[64px] font-bold font-inter">
             ALUMNI EVENTS
         </div>
@@ -355,14 +355,21 @@
         </div>
         </div>
 
+        <!-- VIEW EVENTS BUTTON-->
+    <div class="w-full flex justify-center">
+        <button onclick="window.location.href='{{ url('/gallery1') }}'" class=" hover:bg-blue-hover duration-150 hover:border-blue-hover font-inter text-center text-10 whitespace-nowrap text-white-10 py-4 my-5 px-8 bg-blue rounded border-[1px] border-blue">
+    VIEW ALL EVENTS
+       </button>
+       </div>
+
     <!-- BANNER -->
-    <div class="w-screen flex flex-grow">
+    <div class="w-screen pb-32 flex flex-grow">
             <img src="/img/AlumniEventsBanner.png">
     </div>
 
-    <!--CALENDAR-->
+    <!-- CALENDAR
     <div class="mt-12 flex flex-row place-content-evenly">
-        <!--SCHED 1-->
+       <!-- SCHED 1
         <div class="flex flex-col bg-white-10 drop-shadow-[0px_0px_3px_rgba(0,0,0,0.3)]">
             <div class="px-10 flex flex-row bg-blue font-inter font-bold text-white-10">
                 <span class="text-[34px] px-5 py-3">
@@ -388,7 +395,7 @@
             </div>  
         </div>
 
-       <!--SCHED 2-->
+       <!--SCHED 2
        <div class="flex flex-col bg-white-10 drop-shadow-[0px_0px_3px_rgba(0,0,0,0.3)]">
         <div class="px-10 flex flex-row bg-blue font-inter font-bold text-white-10">
             <span class="text-[34px] px-5 py-3">
@@ -414,7 +421,7 @@
         </div>  
     </div>
 
- <!--SCHED 3-->
+ <!--SCHED 3
  <div class="flex flex-col bg-white-10 drop-shadow-[0px_0px_3px_rgba(0,0,0,0.3)]">
     <div class="px-10 flex flex-row bg-blue font-inter font-bold text-white-10">
         <span class="text-[34px] px-5 py-3">
@@ -439,14 +446,9 @@
         </div>
     </div>  
     </div>
-</div>
+</div> -->
 
-    <!-- VIEW EVENTS BUTTON-->
-    <div class="w-full py-36 flex justify-center">
-        <button onclick="window.location.href='/resources/views/AlumniEvents.html'" class=" hover:bg-blue-hover duration-150 hover:border-blue-hover font-inter text-center text-10 whitespace-nowrap text-white-10 py-4 my-5 px-8 bg-blue rounded border-[1px] border-blue">
-    VIEW ALL EVENTS
-       </button>
-       </div>
+    
 
        <!--FOLLOW US-->
       <div class="w-screen py-32 text-center bg-blue-hover">
