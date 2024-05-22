@@ -109,8 +109,28 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         return $this->hasMany(Post::class);
     }
 
+    /**
+     * Get the user's contact information.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function contactInfo(): HasOne
     {
         return $this->hasOne(ContactInfo::class);
+    }
+
+      /**
+     * Get the messages for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function messages()
+    {
+        return $this->hasMany(Messages::class, 'SNum', 'SNum');
+    }
+
+    public function workExperiences()
+    {
+        return $this->hasMany(WorkExperience::class);
     }
 }

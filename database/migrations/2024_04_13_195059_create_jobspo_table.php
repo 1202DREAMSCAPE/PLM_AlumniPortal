@@ -14,27 +14,27 @@ return new class extends Migration
         Schema::create('JobPO', function (Blueprint $table) {
             $table->id('JobID');
             $table->string('JTitle', 50)
-            ->nullable(); // Job Title
+            ->nullable(); 
             $table->string('JLocation', 50)
-            ->nullable(); // Job Location
+            ->nullable(); 
             $table->string('Salary', 50)
-            ->nullable(); // Salary
+            ->nullable(); 
             $table->string('EmailAdd', 50)
-            ->nullable(); // Company Email Address
+            ->nullable(); 
             $table->string('Address', 50)
-            ->nullable(); // Company Address
+            ->nullable(); 
             $table->string('CPerson', 50)
-            ->nullable(); // Name of the Primary Contact Person
+            ->nullable(); 
             $table->string('EmpType', 50)
-            ->nullable(); // Type of Employment
+            ->nullable();
             $table->string('CIndustry', 50)
-            ->nullable(); // Company Industry
+            ->nullable(); 
             $table->string('CName', 50)
-            ->nullable(); // Company Name
+            ->nullable(); 
             $table->string('JDesc', 50)
-            ->nullable(); // Job Description
+            ->nullable(); 
             $table->string('CNumCompany', 50)
-            ->nullable(); // Company Number
+            ->nullable(); 
             $table->timestamps();
             $table->boolean('Accepted')->default(false);
         });
