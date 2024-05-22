@@ -26,7 +26,8 @@ class Address extends BaseWidget
                 Tables\Columns\TextColumn::make('home_address')
                     ->label('Home Address')
                     ->color('warning')
-            ->weight('bold'),
+            ->weight('bold')
+            ->wrap(),
                 Tables\Columns\TextColumn::make('city')
                     ->label(' ')
                     ->color('warning')
