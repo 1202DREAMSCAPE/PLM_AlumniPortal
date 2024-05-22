@@ -111,6 +111,7 @@ class WorkExperienceResource extends Resource
                 Tables\Columns\TextColumn::make('CompanyName')
                     ->label(' ')
                     ->weight(FontWeight::Bold)
+                    ->color('warning')
                     ->searchable(false),
                 Tables\Columns\TextColumn::make('JobTitle')
                     ->label(' ')
@@ -135,6 +136,7 @@ class WorkExperienceResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\ViewAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 //Tables\Actions\BulkActionGroup::make([

@@ -4,6 +4,7 @@ namespace App\Filament\Alumni\Clusters\Info\Resources\ContactInfoResource\Widget
 
 use App\Models\ContactInfo;
 use Filament\Widgets\TableWidget as BaseWidget;
+use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables;
@@ -23,8 +24,8 @@ class EmailAdd extends BaseWidget
             ->schema([
                 TextInput::make('email')
                     ->label('Email Address')
-                    ->required()
                     ->email()
+                    
                     ->maxLength(255),
             ]);
     }
@@ -35,10 +36,14 @@ class EmailAdd extends BaseWidget
             ->query(ContactInfo::query()->where('user_id', Auth::id()))
             ->columns([
                 Tables\Columns\TextColumn::make('email')
-                    ->label('Email Address'),
+                    ->label('Email Address')
+                    ->color('warning')
+            ->weight('bold'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                ->modalHeading('Edit Contact Information')
+                    ->form(fn (Forms\ComponentContainer $form) => $this->form($form)), // Ensure form is included in EditAction
             ])
             ->paginated(false);
     }

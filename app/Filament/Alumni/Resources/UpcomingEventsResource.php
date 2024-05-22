@@ -1,30 +1,31 @@
 <?php
-namespace App\Filament\Resources;
 
-use App\Filament\Resources\UpcomingEventsResource\Pages;
+namespace App\Filament\Alumni\Resources;
+
+use App\Filament\Alumni\Resources\UpcomingEventsResource\Pages;
 use App\Models\UpcomingEvents;
-use App\Models\Booking;
+use App\Models\Messages;
+use App\Models\Booking; // Add this line
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Notifications\Notification;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use Filament\Infolists\Infolist;
 use Filament\Infolists\Components;
 
 class UpcomingEventsResource extends Resource
 {
     protected static ?string $model = UpcomingEvents::class;
-    protected static ?string $label = 'Events';
-    protected static ?int $navigationSort = 7;
 
-    public static function getNavigationBadge(): ?string
-    {
-        return number_format(static::getModel()::count());
-    }
+    protected static ?string $label = 'Event Directory ';
+    protected static ?int $navigationSort = 4;
 
-    protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
+    protected static ?string $navigationIcon = 'heroicon-s-calendar-days';
 
     public static function infolist(Infolist $infolist): Infolist
     {
@@ -45,18 +46,6 @@ class UpcomingEventsResource extends Resource
                         Components\TextEntry::make('TimeEnd')
                             ->label('End Time'),
                     ]),
-                Components\Section::make()
-                    ->label('Bookings')
-                    ->schema([
-                        Components\TextEntry::make('bookings')
-                            ->label('List of Student Numbers who booked this event')
-                            ->formatStateUsing(function ($record) {
-                                $bookings = Booking::where('upcoming_event_id', $record->EventID)->with('user')->get();
-                                return $bookings->pluck('user.SNum')->join(', ');
-                            })
-                            ->weight('bold')
-                            ->visible(fn () => auth()->user()->email === 'admin@plm.edu.ph'), // Only visible to admin
-                    ]),
             ]);
     }
 
@@ -67,65 +56,50 @@ class UpcomingEventsResource extends Resource
                 Forms\Components\TextInput::make('EventName')
                     ->label('Event Name')
                     ->required()
-                    ->unique(ignoreRecord: true)
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('EDate')
                     ->label('Event Date')
-                    ->required()
-                    ->unique(ignoreRecord: true),
+                    ->required(),
                 Forms\Components\TextInput::make('ELoc')
                     ->label('Event Location')
                     ->required()
-                    ->unique(ignoreRecord: false)
                     ->maxLength(255),
                 Forms\Components\Textarea::make('EDesc')
                     ->label('Event Description')
-                    ->required()
-                    ->unique(ignoreRecord: false)
-                    ->maxLength(255),
+                    ->required(),
                 Forms\Components\TimePicker::make('TimeStart')
                     ->label('Start Time')
-                    ->required()
-                    ->unique(ignoreRecord: false),
+                    ->required(),
                 Forms\Components\TimePicker::make('TimeEnd')
                     ->label('End Time')
-                    ->required()
-                    ->unique(ignoreRecord: false),
+                    ->required(),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-            ->recordClasses(fn (UpcomingEvents $record) => match (true) {
-                $record->EDate <= now() => 'opacity-60',
-                $record->EDate > now() => '',
-                default => null,
-            })
             ->columns([
                 Tables\Columns\TextColumn::make('EventName')
+                    ->label('Event Name')
                     ->searchable()
                     ->wrap()
-                    ->weight('bold')
-                    ->label('Event Name'),
+                    ->weight('bold'),
                 Tables\Columns\TextColumn::make('EDate')
-                    ->searchable()
-                    ->sortable()
-                    ->label('Event Date'),
+                    ->label('Event Date')
+                    ->date()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('ELoc')
-                    ->searchable()
+                    ->label('Event Location')
                     ->wrap()
-                    ->label('Event Location'),
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('EDesc')
-                    ->searchable()
                     ->label('Event Description')
                     ->wrap()
                     ->limit(100),
                 Tables\Columns\TextColumn::make('TimeStart')
-                    ->searchable()
                     ->label('Start Time'),
                 Tables\Columns\TextColumn::make('TimeEnd')
-                    ->searchable()
                     ->label('End Time'),
             ])
             ->filters([
@@ -133,31 +107,68 @@ class UpcomingEventsResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\Action::make('toggleAccepted')
-                    ->label(fn (UpcomingEvents $record): string => $record->Accepted ? 'Reject' : 'Accept')
-                    ->color(fn (UpcomingEvents $record): string => $record->Accepted ? 'danger' : 'success')
-                    ->icon(fn (UpcomingEvents $record): string => $record->Accepted ? 'heroicon-s-x-circle' : 'heroicon-s-check-circle')
+                Tables\Actions\Action::make('bookEvent')
+                    ->label(fn (UpcomingEvents $record): string => Booking::where('user_id', Auth::id())->where('upcoming_event_id', $record->EventID)->exists() ? 'Booked' : 'Book This Event')
+                    ->color('warning')
                     ->action(function (UpcomingEvents $record) {
-                        $record->Accepted = !$record->Accepted;
-                        $record->save();
+                        $user = Auth::user();
 
-                        $status = $record->Accepted ? 'accepted' : 'rejected';
+                        if (!Booking::where('user_id', $user->id)->where('upcoming_event_id', $record->EventID)->exists()) {
+                            Booking::create([
+                                'user_id' => $user->id,
+                                'upcoming_event_id' => $record->EventID,
+                            ]);
 
-                        Notification::make()
-                            ->title('Event Status Updated')
-                            ->body("The event: {$record->EventName} has been $status.")
-                            ->info()
-                            ->send();
+                            Messages::create([
+                                'SNum' => $user->SNum,
+                                'name' => $user->name,
+                                'email' => "admin@plm.edu.ph",
+                                'RDate' => now(),
+                                'Description' => "You have booked the event: {$record->EventName} on {$record->EDate} at {$record->ELoc}.",
+                                'Status' => 'Unread',
+                            ]);
+
+                            Notification::make()
+                                ->title('Event Booked')
+                                ->body("You have successfully booked the event: {$record->EventName}")
+                                ->success()
+                                ->send();
+                        }
                     })
+                    ->disabled(fn (UpcomingEvents $record): bool => Booking::where('user_id', Auth::id())->where('upcoming_event_id', $record->EventID)->exists()),
             ]);
+            // ->bulkActions([
+            //     Tables\Actions\BulkActionGroup::make([
+            //         Tables\Actions\DeleteBulkAction::make(),
+            //     ]),
+            //]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
     }
 
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListUpcomingEvents::route('/'),
-            // 'create' => Pages\CreateUpcomingEvents::route('/create'),
-            // 'edit' => Pages\EditUpcomingEvents::route('/{record}/edit'),
+            //'create' => Pages\CreateUpcomingEvents::route('/create'),
+            //'edit' => Pages\EditUpcomingEvents::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+
+        if (!Auth::user()->is_admin) {
+            return $query->where('Accepted', true)
+                        ->whereDate('EDate', '>=', Carbon::today());
+        }
+
+        return $query;
     }
 }

@@ -35,6 +35,19 @@ class UserSeeder extends Seeder
             'PostalCode' => '1000',
             'Linkedin' => 'https://linkedin.com/in/admin',
             'is_admin' => true,
+            'Gender' => 'Male',
+            'LName' => 'Admin',
+            'MName' => 'Admin',
+            'NameExt' => null,
+            'MaidenName' => null,
+            'Dept' => 'Administration',
+            'Course' => 'Information Systems',
+            'BDay' => '1980-01-01',
+            'Graduated' => true,
+            'POB' => 'Manila',
+            'Nationality' => 'Filipino',
+            'CivilStat' => 'Single',
+            'Skills' => 'Administration, Management',
         ]);
 
         // Create educational background record for admin
@@ -80,7 +93,9 @@ class UserSeeder extends Seeder
         // Create other users, their contact info, educational background, and work experience
         User::factory()
             ->count(20)
-            ->create()
+            ->create([
+                'password' => Hash::make('admin'), // Set the password for all users
+            ])
             ->each(function ($user) use ($faker) {
                 // Create contact info for user
                 ContactInfo::create([
@@ -124,7 +139,7 @@ class UserSeeder extends Seeder
                 // Create work experience for user
                 $startOfEmployment = $faker->dateTimeBetween('-10 years', '-5 years');
                 $endOfEmployment = $faker->optional()->dateTimeBetween($startOfEmployment, 'now');
-                
+
                 WorkExperience::create([
                     'user_id' => $user->id,
                     'EmploymentStatus' => $faker->randomElement(['Full', 'Part', 'Intern']),
