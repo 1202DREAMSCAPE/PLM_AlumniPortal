@@ -16,38 +16,6 @@
   </style>
 </head>
 
-<<<<<<< HEAD
-<body class="bg-white-10 flex flex-col flex-nowrap">
-
-    <!--HEADER-->
-    <div class="flex flex-row">
-
-        <!--PLM HEADER-->
-        <img class="h-[5.5rem] w-[5.5rem] ml-8 my-2" src="/images/Logo only.png">
-        <div class = " py-3 w-4/5 ml-5 flex flex-col">
-            <h1 class="text-[35px] font-katibeh mt-0 -mb-2 text-gold">
-                PAMANTASAN NG LUNGSOD NG MAYNILA
-            </h1>
-            <h2 class="-mt-0 text-[15px] font-inter text-black-200">
-                UNIVERSITY OF THE CITY OF MANILA
-            </h2>
-        </div>
-    </div>
-
-    <!--NAVBAR-->
-    <div class="bg-blue  h-1/5 w-screen">
-        <navbar
-            class="text-bold text-white-30 text-paragraph3 py-[0.5rem] place-content-evenly font-inter w-screen flex flex-row">
-            <div>
-                <a href="{{ url('applypartnership') }}" onclick="" class ="hover:text-gold">
-                    APPLY PARTNERSHIP
-                </a>
-            </div>
-
-            <div>
-                <a href="#" onclick="window.location.href='{{ url('news1') }}'" class ="hover:text-gold">
-                    NEWS AND UPDATES
-=======
 <body class="bg-white-10 h-screen flex flex-col flex-nowrap">
 
 <!--HEADER-->
@@ -228,7 +196,6 @@
             </a>
         </div>
 
-</body>
 </body>
 
 </html>
