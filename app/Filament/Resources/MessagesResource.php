@@ -133,7 +133,7 @@ class MessagesResource extends Resource
                         ,
                     })->visible(),
             ])
-            ->defaultSort('Status', 'date')
+            ->defaultSort('RDate')
             ->filters([
                 //
             ])
@@ -242,6 +242,7 @@ class MessagesResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         $query = parent::getEloquentQuery();
+        $query->orderByRaw("CASE WHEN Status = 'Unread' THEN 0 ELSE 1 END");
         if (Auth::user()->is_admin) {
             return $query;
         }
