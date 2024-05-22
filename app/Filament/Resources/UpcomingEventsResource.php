@@ -137,6 +137,7 @@ class UpcomingEventsResource extends Resource
                     ->label(fn (UpcomingEvents $record): string => $record->Accepted ? 'Reject' : 'Accept')
                     ->color(fn (UpcomingEvents $record): string => $record->Accepted ? 'danger' : 'success')
                     ->icon(fn (UpcomingEvents $record): string => $record->Accepted ? 'heroicon-s-x-circle' : 'heroicon-s-check-circle')
+                    ->requiresConfirmation()
                     ->action(function (UpcomingEvents $record) {
                         $record->Accepted = !$record->Accepted;
                         $record->save();

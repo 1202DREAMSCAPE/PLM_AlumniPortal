@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
 
 class AlumniConnect extends BaseWidget
 {
+    protected static ?int $sort = 1;
+
     protected int | string | array $columnSpan = 'full';
 
     protected function getTableHeaderActions(): array

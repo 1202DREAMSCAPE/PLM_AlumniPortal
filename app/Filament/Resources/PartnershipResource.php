@@ -19,10 +19,12 @@ class PartnershipResource extends Resource
 {
     protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
     protected static ?int $navigationSort = 4;
+    
     public static function getNavigationBadge(): ?string
     {
         return number_format(static::getModel()::count());
     }
+    
     public static function form(Form $form): Form
     {
         return $form
@@ -45,20 +47,18 @@ class PartnershipResource extends Resource
                     'General Partnership' => 'General Partnership',
                     'Limited Partnership' => 'Limited Partnership',
                     'Limited Liability Partnership' => 'Limited Liability Partnership',
-                
                 ])
                 ->label('Type of Partnership')
                 ->required(),
             
             Forms\Components\DatePicker::make('StartDate')
-                ->LABEL('Start Date')
+                ->label('Start Date')
                 ->required()
                 ->unique(ignoreRecord: true),
 
             Forms\Components\DatePicker::make('EndDate')
                 ->label('End Date')
                 ->unique(ignoreRecord: true),
-
         ]);
     }
 
@@ -80,13 +80,12 @@ class PartnershipResource extends Resource
                             ->label('End Date'),
                     ])->columns(2),
             ])
-            ]);
+        ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-
         ->columns([
             Tables\Columns\TextColumn::make('ComName')
                 ->searchable()
@@ -117,33 +116,51 @@ class PartnershipResource extends Resource
                 ->boolean()
                 ->alignCenter(),
         ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\ViewAction::make(),
-                
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\BulkAction::make("Mark as Accepted")
-                        ->label('Mark as Accepted')
-                        ->action(function (): void {
+        ->filters([
+            //
+        ])
+        ->actions([
+            Tables\Actions\ViewAction::make(),
+            Tables\Actions\Action::make('accept')
+                ->label('Accept')
+                ->icon('heroicon-s-check')
+                ->action(function ($record) {
+                    $record->Accepted = true;
+                    $record->save();
+                })
+                ->requiresConfirmation()
+                ->color('success')
+                ->visible(fn ($record) => !$record->Accepted),
+            Tables\Actions\Action::make('unaccept')
+                ->label('Unaccept')
+                ->icon('heroicon-s-x-circle')
+                ->action(function ($record) {
+                    $record->Accepted = false;
+                    $record->save();
+                })
+                ->requiresConfirmation()
+                ->color('danger')
+                ->visible(fn ($record) => $record->Accepted),
+        ])
+        ->bulkActions([
+            Tables\Actions\BulkActionGroup::make([
+                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\BulkAction::make("Mark as Accepted")
+                    ->label('Mark as Accepted')
+                    ->action(function (): void {
                         Partnership::where('Accepted', false)->update(['Accepted' => true]);
-                        })
-                        ->icon('heroicon-s-check-circle') 
-                        ->color('success'),
-
-                    Tables\Actions\BulkAction::make("Mark as Unaccepted")
-                        ->label('Mark as Unaccepted')
-                        ->action(function (): void {
+                    })
+                    ->icon('heroicon-s-check-circle') 
+                    ->color('success'),
+                Tables\Actions\BulkAction::make("Mark as Unaccepted")
+                    ->label('Mark as Unaccepted')
+                    ->action(function (): void {
                         Partnership::where('Accepted', true)->update(['Accepted' => false]);
-                        })
-                        ->icon('heroicon-s-x-circle') 
-                        ->color('gray'),
-                        ]),
-            ]);
+                    })
+                    ->icon('heroicon-s-x-circle') 
+                    ->color('gray'),
+            ]),
+        ]);
     }
 
     public static function getRelations(): array
@@ -152,7 +169,6 @@ class PartnershipResource extends Resource
             //
         ];
     }
-
 
     public static function getPages(): array
     {

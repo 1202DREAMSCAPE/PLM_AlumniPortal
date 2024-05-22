@@ -23,7 +23,7 @@ class PostResource extends Resource
      */
     protected static ?string $recordTitleAttribute = 'title';
 
-    protected static ?string $label = 'News & Updates';
+    protected static ?string $label = 'Alumni Gallery ';
 
     /**
      * The resource model.
@@ -167,7 +167,8 @@ class PostResource extends Resource
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Author')
                     ->badge()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 
                 Tables\Columns\TextColumn::make('slug')
                     ->sortable(),
@@ -175,7 +176,8 @@ class PostResource extends Resource
                 Tables\Columns\IconColumn::make('is_published')
                     ->label('Published')
                     ->boolean()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 Tables\Columns\TextColumn::make('published_at')
                     ->dateTime()
