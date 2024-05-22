@@ -48,8 +48,8 @@
                     </a>
                 </div>
 
-
-                <div class="relative flex flex-row" x-data="{ open: false }" @click.away="open = false">
+              
+                <!-- <div class="relative flex flex-row" x-data="{ open: false }" @click.away="open = false">
                     <div>
                         <a href="#" onclick="window.location.href='/resources/views/careers.html'"
                             class ="hover:text-gold">
@@ -69,13 +69,15 @@
                             class="dropdown-menu-item hover:text-gold duration-150">Job Posting</div>
                     </div>
                 </div>
+             -->
+
                 <div class="relative flex flex-row" x-data="{ open: false }" @click.away="open = false">
                     <div>
-                        <a href="#" onclick="window.location.href='{{ url('') }}'" class ="hover:text-gold">
-                            ALUMNI EVENTS
+                        <a href="#" onclick="window.location.href='{{ url('/gallery1') }}'" class ="hover:text-gold">
+                            ALUMNI EVENT GALLERY
                         </a>
                     </div>
-                    <svg class="dropdown flex flex-col" width="18" height="18" viewBox="0 0 18 18" fill="none"
+                    <!-- <svg class="dropdown flex flex-col" width="18" height="18" viewBox="0 0 18 18" fill="none"
                         xmlns="http://www.w3.org/2000/svg" @click="open = !open">
                         <path :d="open ? 'M13.5 11.25L9 6.75L4.5 11.25' : 'M13.5 6.75L9 11.25L4.5 6.75'" stroke="white"
                             class="hover:fill-current hover:text-gold" />
@@ -86,7 +88,7 @@
                             class="dropdown-menu-item hover:text-gold duration-150">Gallery</div>
                         <div onclick="window.location.href='{{ url('event1') }}'"
                             class="dropdown-menu-item hover:text-gold duration-150">Upcoming Events</div>
-                    </div>
+                    </div> -->
                 </div>
             </navbar>
         </div>
@@ -101,7 +103,7 @@
                 window.location.href = url;
             }
         </script>
-
+        
         <!--MAIN PAGE-->
         <img class="h-70 w-screen" src="/images/image bg.png">
         <span class="absolute pt-[10rem] pl-[28rem] text-center font-inter font-bold text-[50px] text-blue">

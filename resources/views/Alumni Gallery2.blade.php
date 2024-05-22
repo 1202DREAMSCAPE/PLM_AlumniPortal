@@ -31,76 +31,78 @@
             </div>
         </div>
 
-        <!--NAVBAR-->
-        <div class="bg-blue  h-1/5 w-screen">
-            <navbar
-                class="text-bold text-white-30 text-paragraph3 py-[0.5rem] place-content-evenly font-inter w-screen flex flex-row">
+       <!--NAVBAR-->
+       <div class="bg-blue  h-1/5 w-screen">
+        <navbar
+            class="text-bold text-white-30 text-paragraph3 py-[0.5rem] place-content-evenly font-inter w-screen flex flex-row">
+            <div>
+                <a href="{{ url('applypartnership') }}" onclick="" class ="hover:text-gold">
+                    APPLY PARTNERSHIP
+                </a>
+            </div>
+
+            <div>
+                <a href="#" onclick="window.location.href='{{ url('news1') }}'" class ="hover:text-gold">
+                    NEWS AND UPDATES
+                </a>
+            </div>
+
+          
+            <!-- <div class="relative flex flex-row" x-data="{ open: false }" @click.away="open = false">
                 <div>
-                    <a href="{{ url('applypartnership') }}" onclick="" class ="hover:text-gold">
-                        APPLY PARTNERSHIP
+                    <a href="#" onclick="window.location.href='/resources/views/careers.html'"
+                        class ="hover:text-gold">
+                        CAREERS
                     </a>
                 </div>
+                <svg class="dropdown flex flex-col" width="18" height="18" viewBox="0 0 18 18" fill="none"
+                    xmlns="http://www.w3.org/2000/svg" @click="open = !open">
+                    <path :d="open ? 'M13.5 11.25L9 6.75L4.5 11.25' : 'M13.5 6.75L9 11.25L4.5 6.75'" stroke="white"
+                        class="hover:fill-current hover:text-gold" />
+                </svg>
+                <div class="bg-blue dropdown-menu absolute top-full mt-2 z-10 text-left px-[1.15rem] whitespace-nowrap"
+                    :class="{ 'scale-100': open, 'scale-0': !open }" x-show="open" id="dropdownMenu">
+                    <div onclick="window.location.href='{{ url('jobsearching1') }}'"
+                        class="dropdown-menu-item hover:text-gold duration-150">Job Searching</div>
+                    <div onclick="window.location.href='{{ url('jobposting') }}'"
+                        class="dropdown-menu-item hover:text-gold duration-150">Job Posting</div>
+                </div>
+            </div>
+         -->
 
+            <div class="relative flex flex-row" x-data="{ open: false }" @click.away="open = false">
                 <div>
-                    <a href="#" onclick="window.location.href='{{ url('news1') }}'" class ="hover:text-gold">
-                        NEWS AND UPDATES
+                    <a href="#" onclick="window.location.href='{{ url('/gallery1') }}'" class ="hover:text-gold">
+                        ALUMNI EVENT GALLERY
                     </a>
                 </div>
+                <!-- <svg class="dropdown flex flex-col" width="18" height="18" viewBox="0 0 18 18" fill="none"
+                    xmlns="http://www.w3.org/2000/svg" @click="open = !open">
+                    <path :d="open ? 'M13.5 11.25L9 6.75L4.5 11.25' : 'M13.5 6.75L9 11.25L4.5 6.75'" stroke="white"
+                        class="hover:fill-current hover:text-gold" />
+                </svg>
+                <div class="bg-blue dropdown-menu absolute top-full mt-2 z-10 text-left pl-[1rem] pr-[2.25rem] whitespace-nowrap"
+                    :class="{ 'scale-100': open, 'scale-0': !open }" x-show="open" id="dropdownMenu">
+                    <div onclick="window.location.href='{{ url('gallery1') }}'"
+                        class="dropdown-menu-item hover:text-gold duration-150">Gallery</div>
+                    <div onclick="window.location.href='{{ url('event1') }}'"
+                        class="dropdown-menu-item hover:text-gold duration-150">Upcoming Events</div>
+                </div> -->
+            </div>
+        </navbar>
+    </div>
 
+    <script>
+        function toggleDropdown() {
+            var dropdownMenu = document.getElementById("dropdownMenu");
+            dropdownMenu.style.display = dropdownMenu.style.display === "none" ? "block" : "none";
+        }
 
-                <div class="relative flex flex-row" x-data="{ open: false }" @click.away="open = false">
-                    <div>
-                        <a href="#" onclick="window.location.href='/resources/views/careers.html'"
-                            class ="hover:text-gold">
-                            CAREERS
-                        </a>
-                    </div>
-                    <svg class="dropdown flex flex-col" width="18" height="18" viewBox="0 0 18 18" fill="none"
-                        xmlns="http://www.w3.org/2000/svg" @click="open = !open">
-                        <path :d="open ? 'M13.5 11.25L9 6.75L4.5 11.25' : 'M13.5 6.75L9 11.25L4.5 6.75'" stroke="white"
-                            class="hover:fill-current hover:text-gold" />
-                    </svg>
-                    <div class="bg-blue dropdown-menu absolute top-full mt-2 z-10 text-left px-[1.15rem] whitespace-nowrap"
-                        :class="{ 'scale-100': open, 'scale-0': !open }" x-show="open" id="dropdownMenu">
-                        <div onclick="window.location.href='{{ url('jobsearching1') }}'"
-                            class="dropdown-menu-item hover:text-gold duration-150">Job Searching</div>
-                        <div onclick="window.location.href='{{ url('jobposting') }}'"
-                            class="dropdown-menu-item hover:text-gold duration-150">Job Posting</div>
-                    </div>
-                </div>
-                <div class="relative flex flex-row" x-data="{ open: false }" @click.away="open = false">
-                    <div>
-                        <a href="#" onclick="window.location.href='{{ url('event1') }}'" class ="hover:text-gold">
-                            ALUMNI EVENTS
-                        </a>
-                    </div>
-                    <svg class="dropdown flex flex-col" width="18" height="18" viewBox="0 0 18 18" fill="none"
-                        xmlns="http://www.w3.org/2000/svg" @click="open = !open">
-                        <path :d="open ? 'M13.5 11.25L9 6.75L4.5 11.25' : 'M13.5 6.75L9 11.25L4.5 6.75'" stroke="white"
-                            class="hover:fill-current hover:text-gold" />
-                    </svg>
-                    <div class="bg-blue dropdown-menu absolute top-full mt-2 z-10 text-left pl-[1rem] pr-[2.25rem] whitespace-nowrap"
-                        :class="{ 'scale-100': open, 'scale-0': !open }" x-show="open" id="dropdownMenu">
-                        <div onclick="window.location.href='{{ url('gallery1') }}'"
-                            class="dropdown-menu-item hover:text-gold duration-150">Gallery</div>
-                        <div onclick="window.location.href='{{ url('event1') }}'"
-                            class="dropdown-menu-item hover:text-gold duration-150">Upcoming Events</div>
-                    </div>
-                </div>
-            </navbar>
-        </div>
-
-        <script>
-            function toggleDropdown() {
-                var dropdownMenu = document.getElementById("dropdownMenu");
-                dropdownMenu.style.display = dropdownMenu.style.display === "none" ? "block" : "none";
-            }
-
-            function navigate(url) {
-                window.location.href = url;
-            }
-        </script>
-
+        function navigate(url) {
+            window.location.href = url;
+        }
+    </script>
+    
         <!--MAIN PAGE-->
         <div class="h-screen w-screen flex flex-col">
             <img class= "w-screen h-[65rem] inset-0" src="/images/Background.jpg">
