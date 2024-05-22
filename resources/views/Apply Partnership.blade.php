@@ -102,24 +102,35 @@
                 </div>
 
                 <!-- Type of Partnership -->
-                <div class="mx-[8.2rem] mt-[1.5rem] h-[3rem] bg-white rounded-[14px] py-2 border border-blue">
-                    <input class="font-inter text-center px-[2rem] focus:outline-none" type="text" name="PartType" placeholder="Type of Partnership *" required>
-                </div>
+                <div class="relative mx-[8.2rem] mt-[1.5rem] h-[3rem] bg-white rounded-[14px] py-2 border border-blue">
+    <select class="font-inter text-center appearance-none  h-full bg-transparent text-black px-4" name="PartType" required>
+        <option value="" disabled selected class="text-gray-500">Type of Partnership</option>
+        <option value="General Partnership">General Partnership</option>
+        <option value="Limited Partnership">Limited Partnership</option>
+        <option value="Limited Liability Partnership">Limited Liability Partnership</option>
+    </select>
+    <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </div>
+</div>
+
 
                 <!-- Start & End Date -->
                 <div class="mx-[8.2rem] mt-[1.5rem] flex flex-row justify-self-center">
-                    <div class="mr-[2rem] h-[3rem] bg-white rounded-[14px] py-2 border border-blue">
+                    <div class="mr-[2rem] h-[3rem] w-1/2 bg-white rounded-[14px] py-2 border border-blue">
                         <input class="font-inter text-center px-[4rem] focus:outline-none" type="date" name="StartDate" placeholder="Start Date *" required>
                     </div>
-                    <div class="h-[3rem] bg-white rounded-[14px] py-2 border border-blue">
+                    <div class="h-[3rem] w-1/2 bg-white rounded-[14px] py-2 border border-blue">
                         <input class="font-inter text-center px-[4rem] focus:outline-none" type="date" name="EndDate" placeholder="End Date *" required>
                     </div>
                 </div>
 
                 <!-- SUBMIT BUTTON -->
                 <div class="w-full py-35 mt-4 flex justify-center">
-                    <button class="font-inter text-center text-10 whitespace-nowrap text-white-10 py-4 my-5 px-14 bg-blue rounded-[1rem] border-[1px] border-blue">
-                        <span class="hover:text-gold hover:underline">SUBMIT</span>
+                    <button class="hover:bg-blue-hover duration-150 hover:border-blue-hover font-inter text-center text-16 whitespace-nowrap text-white-10 my-6 px-14 py-3 bg-blue rounded border-[1px] border-blue">
+                        SUBMIT
                     </button>
                 </div>
             </form>
