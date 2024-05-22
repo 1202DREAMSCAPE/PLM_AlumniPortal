@@ -18,7 +18,7 @@ class Login extends BaseAuth
     {
         return $form
             ->schema([
-                $this->getEmailFormComponent(),
+                $this->getStudentNumberFormComponent(),
                 $this->getPasswordFormComponent(),
                 $this->getRememberFormComponent(),
             ])
@@ -28,28 +28,26 @@ class Login extends BaseAuth
     /**
      * Get the email form component.
      */
-    protected function getEmailFormComponent(): Component
+    protected function getStudentNumberFormComponent(): Component
     {
-        return TextInput::make('email')
-            ->label('Email')
+        return TextInput::make('SNum')
+            ->label('Student Number')
             ->required()
-            ->autocomplete('email')
             ->autofocus()
             ->extraInputAttributes(['tabindex' => 1]);
     }
-
+    
     /**
      * Get the credentials from the form data.
      */
     protected function getCredentialsFromFormData(array $data): array
     {
-        // Since we're now using an email address, we don't need to check if it's an email.
-        // We can directly use 'email' as the key.
         return [
-            'email' => $data['email'],
+            'SNum' => $data['SNum'],
             'password' => $data['password'],
         ];
     }
+    
 
     /**
      * Authenticate the user.
