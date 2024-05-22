@@ -131,7 +131,7 @@
                 $posts = DB::table('posts')
                     ->leftJoin('media', 'posts.image_id', '=', 'media.id')
                     ->select('posts.*', 'media.path as media_path')
-                    ->inRandomOrder()
+                    //->inRandomOrder()
                     ->limit(8)
                     ->get();
 
@@ -141,28 +141,29 @@
             @endphp
 
             <a href="{{ url('gallery2') }}" onclick="">
-                <div class="flex flex-nowrap md:-m-2">
-                    @foreach ($postsSet1 as $post)
-                        @php
-                            $contentData = json_decode($post->content, true);
-                            $contentText = isset($contentData[0]['data']['content'])
-                                ? $contentData[0]['data']['content']
-                                : '';
-                        @endphp
-                            <div class="flex w-1/3 flex-wrap">
-                                <div class="w-full p-1 md:p-2">
-                                    <img class="w-[315px] h-[313px] object-cover object-center"
-                                        src="{{ asset('storage/' . $post->media_path) }}" alt="Main Image"/>
-                                    <span class="text-blue text-[20px] font-semibold font-['Inter'] absolute top-[254px] pl-4">
-                                        {{ $post->title }}
-                                    </span>
-                                    <span class="text-white text-[16px] font-normal font-['Inter'] absolute top-[285px] pl-4">
-                                        {{ \Carbon\Carbon::parse($post->published_at)->format('F j, Y') }}
-                                    </span>
-
-                                </div>
-                            </div>
-                    @endforeach
+            <div class="flex flex-nowrap md:-m-2">
+    @foreach ($postsSet1 as $post)
+        @php
+            $contentData = json_decode($post->content, true);
+            $contentText = isset($contentData[0]['data']['content'])
+                ? $contentData[0]['data']['content']
+                : '';
+        @endphp
+        <div class="flex w-1/3 flex-wrap bg-white-10">
+            <div class="relative w-full p-1 md:p-2">
+                <img class="w-[315px] h-[313px] object-cover object-center"
+                    src="{{ asset('storage/' . $post->media_path) }}" alt="Main Image"/>
+                <span class="text-blue bg-white-10 text-[20px] font-semibold font-['Inter'] absolute top-[254px] pl-4">
+                    {{ $post->title}}
+                </span>
+                <span class="text-white text-[16px] font-normal font-['Inter'] absolute top-[285px] pl-4">
+                    {{ \Carbon\Carbon::parse($post->published_at)->format('F j, Y') }}
+                </span>
+                
+            </div>
+        </div>
+    @endforeach
+</div>
                 </div>
             </a>
         </div>

@@ -168,6 +168,9 @@ class PostResource extends Resource
                     ->label('Author')
                     ->badge()
                     ->sortable(),
+                
+                Tables\Columns\TextColumn::make('slug')
+                    ->sortable(),
 
                 Tables\Columns\IconColumn::make('is_published')
                     ->label('Published')
