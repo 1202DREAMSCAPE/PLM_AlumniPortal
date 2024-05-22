@@ -124,14 +124,16 @@ class MessagesResource extends Resource
                     ->label('Message')
                     ->wrap(),
                 Tables\Columns\TextColumn::make('Status')
+                    ->label('Status')
                     ->searchable()
                     ->badge()
                     ->color(fn(string $state): string => match($state) {
                         'Unread' => 'danger',
-                        'Replied' => 'success',
-                    })->visible($isAdmin),
+                        'Replied' => 'success'
+                        ,
+                    })->visible(),
             ])
-            ->defaultSort('Status', 'desc')
+            ->defaultSort('Status', 'date')
             ->filters([
                 //
             ])
@@ -200,7 +202,7 @@ class MessagesResource extends Resource
                             ->success()
                             ->send();
                     })
-                    ->visible($isAdmin), 
+                    ->visible(), 
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
