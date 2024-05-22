@@ -23,4 +23,9 @@ class Messages extends Model
         'Description',
         'Status',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'SNum', 'SNum');
+    }
 }

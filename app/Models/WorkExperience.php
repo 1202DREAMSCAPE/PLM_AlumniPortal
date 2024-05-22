@@ -20,4 +20,14 @@ class WorkExperience extends Model
         'StartOfEmployment',
         'EndOfEmployment',
     ];
+
+        /**
+     * Get the user that owns the work experience.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
