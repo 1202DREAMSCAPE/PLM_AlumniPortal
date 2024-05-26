@@ -163,8 +163,7 @@ class UpcomingEventsResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         $query = parent::getEloquentQuery();
-
-        if (!Auth::user()->is_admin) {
+         if (!Auth::user()->is_admin) {
             return $query->where('Accepted', true)
                         ->whereDate('EDate', '>=', Carbon::today());
         }
