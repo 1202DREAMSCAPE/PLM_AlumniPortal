@@ -23,7 +23,7 @@ class Bday extends BaseWidget
     public function table(Table $table): Table
     {
         return $table
-            ->query(User::query()->where('id', Auth::id()))
+            ->query(User::query()->where('student_no', Auth::user()->student_no))
             ->columns([
                 TextColumn::make('BDay')
                     ->label('Date of Birth')
@@ -33,5 +33,4 @@ class Bday extends BaseWidget
             ])
             ->paginated(false);
     }
-
 }

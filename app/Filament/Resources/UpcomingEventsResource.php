@@ -12,6 +12,8 @@ use Filament\Tables\Table;
 use Filament\Notifications\Notification;
 use Filament\Infolists\Infolist;
 use Filament\Infolists\Components;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class UpcomingEventsResource extends Resource
 {
@@ -30,32 +32,33 @@ class UpcomingEventsResource extends Resource
     {
         return $infolist
             ->schema([
-                Components\Section::make()
-                    ->schema([
-                        Components\TextEntry::make('EventName')
+                Components\TextEntry::make('TimeStart')
+                            ->label('Start Time'),
+                        Components\TextEntry::make('TimeEnd')
+                            ->label('End Time'),
+                            Components\TextEntry::make('EventName')
                             ->label('Event Name'),
                         Components\TextEntry::make('EDate')
                             ->label('Event Date'),
+                Components\Section::make()
+                    ->schema([   
                         Components\TextEntry::make('ELoc')
                             ->label('Event Location'),
                         Components\TextEntry::make('EDesc')
                             ->label('Event Description'),
-                        Components\TextEntry::make('TimeStart')
-                            ->label('Start Time'),
-                        Components\TextEntry::make('TimeEnd')
-                            ->label('End Time'),
                     ]),
                 Components\Section::make()
                     ->label('Bookings')
                     ->schema([
                         Components\TextEntry::make('bookings')
-                            ->label('List of Student Numbers who booked this event')
+                            ->label('List of student numbers who booked this event')
                             ->formatStateUsing(function ($record) {
                                 $bookings = Booking::where('upcoming_event_id', $record->EventID)->with('user')->get();
-                                return $bookings->pluck('user.SNum')->join(', ');
+                                return $bookings->pluck('user.student_no')->join(', ');
                             })
                             ->weight('bold')
-                            ->visible(fn () => auth()->user()->email === 'admin@plm.edu.ph'), // Only visible to admin
+                            ->color('indigo')
+                            ->visible(fn () => auth()->user()->email === 'admin@plm.edu.ph'), 
                     ]),
             ]);
     }
@@ -131,6 +134,7 @@ class UpcomingEventsResource extends Resource
             ->filters([
                 //
             ])
+            
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\Action::make('toggleAccepted')

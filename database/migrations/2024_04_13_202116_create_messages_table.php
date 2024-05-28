@@ -11,23 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Messages', function (Blueprint $table) {
+        Schema::create('messages', function (Blueprint $table) {
             $table->id('HelpID');
-            $table->unsignedBigInteger('SNum') 
-            ->nullable();
+            $table->string('student_no')->nullable();
             $table->string('name');
             $table->string('email');
-            $table->year('Graduated') 
-            ->nullable();
-            $table->string('Course') 
-            ->nullable();
-            $table->date('RDate') 
-            ->nullable();
-            $table->longText('Description') 
-            ->nullable();
-            $table->string('Status') 
-            ->default('Unread');
+            $table->year('Graduated')->nullable();
+            $table->string('Course')->nullable();
+            $table->date('RDate')->nullable();
+            $table->longText('Description')->nullable();
+            $table->string('Status')->default('Unread');
             $table->timestamps();
+            $table->foreign('student_no')->references('student_no')->on('users')->onDelete('cascade');
         });
     }
 
@@ -36,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Messages');
+        Schema::dropIfExists('messages');
     }
 };

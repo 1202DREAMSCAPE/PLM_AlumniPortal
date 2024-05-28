@@ -20,10 +20,9 @@ class MessagesSeeder extends Seeder
         $users = User::all();
 
         foreach ($users as $user) {
-            // Create 5 sample messages for each user
-            for ($i = 0; $i < 5; $i++) {
+            for ($i = 0; $i < 10; $i++) {
                 $user->messages()->create([
-                    'SNum' => $user->SNum,
+                    'student_no' => $user->SNum,
                     'name' => $user->name,
                     'email' => $user->email,
                     'RDate' => now(),

@@ -17,7 +17,7 @@ class AlumniRecord extends BaseWidget
         return $table
             ->query(\App\Models\User::query())
             ->columns([
-                Tables\Columns\TextColumn::make('SNum')
+                Tables\Columns\TextColumn::make('student_no')
                 ->searchable()
                 ->label('Student Number')
                 ->sortable(),

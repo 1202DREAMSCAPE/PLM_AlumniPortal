@@ -73,8 +73,7 @@ class WorkExperienceResource extends Resource
                 Forms\Components\DatePicker::make('EndOfEmployment')
                     ->label('End Of Employment')
                     ->required(false),
-                    // Hidden field to store the authenticated user's ID
-                Forms\Components\Hidden::make('user_id')
+                Forms\Components\Hidden::make('student_no')
                 ->default(fn () => Auth::id())
                 ->required(),
             ]);

@@ -19,10 +19,9 @@ class MessageStats extends BaseWidget
             $unreadMessages = Messages::where('Status', 'Unread')->count();
             $readMessages = Messages::where('Status', 'Replied')->count();
         } else {
-            // Non-admin users only see their own messages
-            $totalMessages = Messages::where('SNum', $user->SNum)->count();
-            $unreadMessages = Messages::where('SNum', $user->SNum)->where('Status', 'Unread')->count();
-            $readMessages = Messages::where('SNum', $user->SNum)->where('Status', 'Replied')->count();
+            $totalMessages = Messages::where('student_no', $user->student_no)->count();
+            $unreadMessages = Messages::where('student_no', $user->student_no)->where('Status', 'Unread')->count();
+            $readMessages = Messages::where('student_no', $user->student_no)->where('Status', 'Replied')->count();
         }
 
         return [
@@ -34,8 +33,8 @@ class MessageStats extends BaseWidget
                 ->description('The total number of unread messages')
                 ->icon('heroicon-o-envelope'),
 
-            Stat::make('Read Messages', $readMessages)
-                ->description('The total number of read messages')
+            Stat::make('Replied Messages', $readMessages)
+                ->description('The total number of replied messages')
                 ->icon('heroicon-o-envelope-open'),
         ];
     }

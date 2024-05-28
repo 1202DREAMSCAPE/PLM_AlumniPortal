@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@plm.edu.ph',
             'password' => Hash::make('admin'),
-            'SNum' => '201900001',
+            'student_no' => '201900001', // Updated from 'SNum' to 'student_no'
             'ContactNum' => '09123456789',
             'TelNum' => '1234567',
             'Address' => '123 Admin St.',
@@ -52,7 +52,7 @@ class UserSeeder extends Seeder
 
         // Create educational background record for admin
         EducationalBackground::factory()->create([
-            'user_id' => $admin->id,
+            'user_id' => $admin->student_no, // Updated to use 'student_no'
             'school' => 'University of Admin',
             'educattain' => 'Bachelor\'s Degree',
             'degree' => 'Bachelor of Science in Information Systems',
@@ -64,7 +64,7 @@ class UserSeeder extends Seeder
 
         // Create contact info for admin
         ContactInfo::create([
-            'user_id' => $admin->id,
+            'user_id' => $admin->student_no, // Updated to use 'student_no'
             'email' => $admin->email,
             'telephone_number' => $admin->TelNum,
             'cellphone_number' => $admin->ContactNum,
@@ -79,7 +79,7 @@ class UserSeeder extends Seeder
 
         // Create work experience for admin
         WorkExperience::create([
-            'user_id' => $admin->id,
+            'user_id' => $admin->student_no, // Updated to use 'student_no'
             'EmploymentStatus' => 'Full',
             'JobTitle' => 'Administrator',
             'CompanyName' => 'PLM',
@@ -99,7 +99,7 @@ class UserSeeder extends Seeder
             ->each(function ($user) use ($faker) {
                 // Create contact info for user
                 ContactInfo::create([
-                    'user_id' => $user->id,
+                    'user_id' => $user->student_no, // Updated to use 'student_no'
                     'email' => $user->email,
                     'telephone_number' => $user->TelNum,
                     'cellphone_number' => $user->ContactNum,
@@ -114,7 +114,7 @@ class UserSeeder extends Seeder
 
                 // Create educational background for user
                 EducationalBackground::factory()->create([
-                    'user_id' => $user->id,
+                    'user_id' => $user->student_no, // Updated to use 'student_no'
                     'school' => 'University of ' . $user->name,
                     'educattain' => 'Bachelor\'s Degree',
                     'degree' => $faker->randomElement([
@@ -141,7 +141,7 @@ class UserSeeder extends Seeder
                 $endOfEmployment = $faker->optional()->dateTimeBetween($startOfEmployment, 'now');
 
                 WorkExperience::create([
-                    'user_id' => $user->id,
+                    'user_id' => $user->student_no, // Updated to use 'student_no'
                     'EmploymentStatus' => $faker->randomElement(['Full', 'Part', 'Intern']),
                     'JobTitle' => $faker->jobTitle,
                     'CompanyName' => $faker->company,

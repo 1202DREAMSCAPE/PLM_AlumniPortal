@@ -23,8 +23,8 @@ class BPlace extends BaseWidget
     public function table(Table $table): Table
     {
         return $table
-            ->query(User::query()->where('id', Auth::id()))
-            ->columns([
+        ->query(User::query()->where('student_no', Auth::user()->student_no))
+        ->columns([
                 TextColumn::make('City')
                     ->label('Birthplace')
                     ->alignCenter()

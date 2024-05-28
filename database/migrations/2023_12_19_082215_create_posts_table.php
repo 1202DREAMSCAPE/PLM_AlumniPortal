@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique()->index();
             $table->json('content')->nullable();
-            $table->foreignId('user_id')->constrained('users');
-            $table->boolean('is_published')->default(false);
+            $table->string('user_id'); 
+            $table->foreign('user_id')->references('student_no')->on('users')->onDelete('cascade'); 
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });

@@ -36,21 +36,24 @@ class ContactInfoResource extends Resource
         return $form
             ->schema([
                 Components\TextInput::make('linkedin_account_link')
-                    ->label('LinkedIn Account')
+                    ->label('LinkedIn Account'),
+                // Hidden field to store the authenticated user's student_no
+                Forms\Components\Hidden::make('user_id')
+                    ->default(fn () => Auth::user()->student_no)
+                    ->required(),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-        ->columns([
+            ->columns([
                 Tables\Columns\TextColumn::make('linkedin_account_link')
-                ->wrap()
-                ->color('warning')
-                ->weight('bold')
-                ->label('LinkedIn Account'),
-    
-                ])
+                    ->wrap()
+                    ->color('warning')
+                    ->weight('bold')
+                    ->label('LinkedIn Account'),
+            ])
             ->filters([
                 //
             ])
@@ -76,8 +79,8 @@ class ContactInfoResource extends Resource
         ];
     }
 
-        public static function getEloquentQuery(): Builder
+    public static function getEloquentQuery(): Builder
     {
-    return parent::getEloquentQuery()->where('user_id',auth()->id());
+        return parent::getEloquentQuery()->where('user_id', Auth::user()->student_no);
     }
 }

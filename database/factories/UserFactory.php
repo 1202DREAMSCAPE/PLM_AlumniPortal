@@ -64,10 +64,10 @@ class UserFactory extends Factory
 
         $graduatedYear = $this->faker->numberBetween(2000, 2024);
         $snumYear = $graduatedYear - $this->faker->numberBetween(4, 6);
-        $snum = $snumYear . $this->faker->unique()->numerify('#####');
+        $student_no = $snumYear . $this->faker->unique()->numerify('#####');
 
         return [
-            'SNum' => $snum,
+            'student_no' => $student_no, // Updated from 'SNum' to 'student_no'
             'name' => $this->faker->firstName,
             'email' => $this->faker->unique()->userName . '@plm.edu.ph',
             'password' => static::$password ??= Hash::make('password'),

@@ -33,8 +33,8 @@ class EmailAdd extends BaseWidget
     public function table(Table $table): Table
     {
         return $table
-            ->query(ContactInfo::query()->where('user_id', Auth::id()))
-            ->columns([
+        ->query(ContactInfo::query()->where('user_id', Auth::user()->student_no))
+        ->columns([
                 Tables\Columns\TextColumn::make('email')
                     ->label('Email Address')
                     ->color('warning')

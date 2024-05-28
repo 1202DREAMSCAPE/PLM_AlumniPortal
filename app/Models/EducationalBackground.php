@@ -11,7 +11,7 @@ class EducationalBackground extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', // Add this line
+        'user_id', 
         'school',
         'educattain',
         'degree',

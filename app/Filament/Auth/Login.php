@@ -30,7 +30,7 @@ class Login extends BaseAuth
      */
     protected function getStudentNumberFormComponent(): Component
     {
-        return TextInput::make('SNum')
+        return TextInput::make('student_no')
             ->label('Student Number')
             ->required()
             ->autofocus()
@@ -43,7 +43,7 @@ class Login extends BaseAuth
     protected function getCredentialsFromFormData(array $data): array
     {
         return [
-            'SNum' => $data['SNum'],
+            'student_no' => $data['student_no'],
             'password' => $data['password'],
         ];
     }

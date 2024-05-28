@@ -21,8 +21,8 @@ class TelNum extends BaseWidget
     public function table(Table $table): Table
     {
         return $table
-            ->query(ContactInfo::query()->where('user_id', Auth::id()))
-            ->columns([
+        ->query(ContactInfo::query()->where('user_id', Auth::user()->student_no))
+        ->columns([
                 Tables\Columns\TextColumn::make('telephone_number')
                     ->label('Telephone Number')
                     ->color('warning')

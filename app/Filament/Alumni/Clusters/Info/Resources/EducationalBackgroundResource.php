@@ -81,8 +81,8 @@ class EducationalBackgroundResource extends Resource
                     ->required(false),
                 // Hidden field to store the authenticated user's ID
                 Forms\Components\Hidden::make('user_id')
-                ->default(fn () => Auth::id())
-                ->required(),
+                    ->default(fn () => Auth::user()->student_no)
+                    ->required(),
             ]);
     }
 
@@ -117,7 +117,7 @@ class EducationalBackgroundResource extends Resource
                     ->weight('bold')
                     ->sortable(false)
                     ->color('warning'),
-                    Tables\Columns\TextColumn::make('degree')
+                Tables\Columns\TextColumn::make('degree')
                     ->label(' ')
                     ->sortable(false),
                 Tables\Columns\TextColumn::make(' ')
@@ -126,7 +126,6 @@ class EducationalBackgroundResource extends Resource
                 Tables\Columns\TextColumn::make('1 ')
                     ->label(' ')
                     ->sortable(false),
-
             ])
             ->filters([
                 //
@@ -155,13 +154,13 @@ class EducationalBackgroundResource extends Resource
     {
         return [
             'index' => Pages\ListEducationalBackgrounds::route('/'),
-           // 'create' => Pages\CreateEducationalBackground::route('/create'),
+            // 'create' => Pages\CreateEducationalBackground::route('/create'),
             //'edit' => Pages\EditEducationalBackground::route('/{record}/edit'),
         ];
     }
 
     public static function getEloquentQuery(): Builder
     {
-    return parent::getEloquentQuery()->where('user_id',auth()->id());
+        return parent::getEloquentQuery()->where('user_id', Auth::user()->student_no);
     }
 }

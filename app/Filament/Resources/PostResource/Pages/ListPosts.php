@@ -20,7 +20,8 @@ class ListPosts extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+            ->label('Add Photos'),
         ];
     }
 
@@ -30,7 +31,7 @@ class ListPosts extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            Widgets\PostOverview::class,
+           // Widgets\PostOverview::class,
         ];
     }
 }

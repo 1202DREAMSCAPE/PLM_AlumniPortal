@@ -93,7 +93,7 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('SNum')
+                Forms\Components\TextInput::make('student_no')
                     ->label('Student Number')
                     ->required()
                     ->unique(ignoreRecord: true)
@@ -217,12 +217,10 @@ class UserResource extends Resource
             ->query(User::query())
             ->columns([
 
-                Tables\Columns\TextColumn::make('SNum')
+                Tables\Columns\TextColumn::make('student_no')
                     ->searchable()
                     ->label('Student Number')
-                    ->sortable()
-                    ->badge()
-                    ->color('indigo'),
+                    ->sortable(),
 
                 Tables\Columns\TextColumn::make('LName')
                     ->searchable()
@@ -245,10 +243,14 @@ class UserResource extends Resource
                 ->copyable()
                     ->copyMessage('Contact Number Copied')
                     ->copyMessageDuration(1500),
+                // ->badge()
+                // ->color('indigo'),
 
                 Tables\Columns\TextColumn::make('email')
                     ->searchable()
                     ->alignCenter()
+                    // ->badge()
+                    // ->color('indigo')
                     ->copyable()
                         ->copyMessage('Email Address Copied')
                         ->copyMessageDuration(1500),

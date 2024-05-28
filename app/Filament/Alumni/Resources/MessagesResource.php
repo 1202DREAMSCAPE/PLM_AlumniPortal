@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class MessagesResource extends Resource
 {
@@ -66,6 +67,6 @@ class MessagesResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-    return parent::getEloquentQuery()->where('user_id',auth()->id());
+        return parent::getEloquentQuery()->where('user_id', Auth::user()->student_no);
     }
 }

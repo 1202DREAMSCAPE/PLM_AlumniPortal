@@ -14,7 +14,7 @@ class Messages extends Model
     protected $primaryKey = 'HelpID';
 
     protected $fillable = [
-        'SNum',
+        'student_no',
         'name',
         'email',
         'Graduated',

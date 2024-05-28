@@ -14,12 +14,14 @@ use Illuminate\Support\Facades\Auth;
 use Filament\Infolists\Infolist;
 use Filament\Infolists\Components;
 use Filament\Notifications\Notification;
+use Illuminate\Support\Facades\Notification as LaravelNotification;
+
 
 class MessagesResource extends Resource
 {
     protected static ?string $model = Messages::class;
 
-    protected static ?string $label = 'Messages';
+    protected static ?string $label = 'Messages ';
     protected static ?string $navigationIcon = 'heroicon-o-envelope';
 
     protected static ?int $navigationSort = 1;
@@ -36,11 +38,10 @@ class MessagesResource extends Resource
 
         return $form
             ->schema([
-                Forms\Components\TextInput::make('SNum')
+                Forms\Components\TextInput::make('student_no')
                     ->label('Student Number')
-                    ->required()
                     ->readOnly()
-                    ->default(fn() => Auth::user()->SNum),
+                     ->default(fn() => Auth::user()->student_no),
                 Forms\Components\TextInput::make('name')
                     ->label('Name')
                     ->readOnly()
@@ -56,18 +57,22 @@ class MessagesResource extends Resource
                 Forms\Components\Textarea::make('Description')
                     ->label('Message')
                     ->required()
-                    ->rows(5),
+                    ->rows(5)
+                    ->columnSpan('full'),
                 Forms\Components\ToggleButtons::make('Status')
                     ->options([
                         'Unread' => 'Unread',
+                        'Read' => 'Read',
                         'Replied' => 'Replied',
                     ])
                     ->icons([
                         'Unread' => 'heroicon-s-minus-circle',
+                        'Read' => 'heroicon-s-check-circle',
                         'Replied' => 'heroicon-s-check-circle',
                     ])
                     ->colors([
                         'Unread' => 'warning',
+                        'Read' => 'success',
                         'Replied' => 'success',
                     ])
                     ->inline()
@@ -78,174 +83,191 @@ class MessagesResource extends Resource
 
     public static function infolist(Infolist $infolist): Infolist
     {
+        $user = Auth::user();
+        $isAdmin = $user->is_admin ?? false;
+
         return $infolist
             ->schema([
-                Components\Section::make()->schema([
-                    Components\TextEntry::make('SNum')
-                        ->label('Student Number'),
-                    Components\TextEntry::make('name')
-                        ->label('Name'),
-                    Components\TextEntry::make('email')
-                        ->label('Email'),
-                    Components\TextEntry::make('RDate')
-                        ->label('Date'),
+                Components\TextEntry::make('student_no')
+                    ->label('Student Number')
+                    ->visible($isAdmin),
+                Components\TextEntry::make('name')
+                    ->label('Name')
+                    ->visible($isAdmin),
+                Components\TextEntry::make('email')
+                    ->label('Email')
+                    ->visible($isAdmin),
+                Components\TextEntry::make('RDate')
+                    ->label('Date')
+                    ->visible($isAdmin),
+                 Components\Section::make()->schema([
                     Components\TextEntry::make('Description')
                         ->label('Message'),
-                ])
+                 ]),
             ]);
     }
 
     public static function table(Table $table): Table
-    {
-        $user = Auth::user();
+{
+    $user = Auth::user();
         $isAdmin = $user->is_admin ?? false;
-
-        return $table
-        
-
+    return $table
         ->recordClasses(fn(Messages $record) => match($record->Status) {
-            'Replied' => 'opacity-80',
             'Unread' => 'font-bold',
-            default => null,
-        }) 
-        
-            ->columns([
-                Tables\Columns\TextColumn::make('SNum')
-                    ->label('Student Number')
-                    ->color('secondary')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('name')
-                    ->label('Name'),
-                Tables\Columns\TextColumn::make('email')
-                    ->label('Email'),
-                Tables\Columns\TextColumn::make('RDate')
-                    ->label('Date'),
-                Tables\Columns\TextColumn::make('Description')
-                    ->label('Message')
-                    ->wrap(),
-                Tables\Columns\TextColumn::make('Status')
-                    ->label('Status')
-                    ->searchable()
-                    ->badge()
-                    ->color(fn(string $state): string => match($state) {
-                        'Unread' => 'danger',
-                        'Replied' => 'success'
-                        ,
-                    })->visible(),
-            ])
-            ->defaultSort('RDate')
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\Action::make('Reply')
+            'Replied' => 'font-bold', 
+            'Read' => 'opacity-60',
+        })
+        ->columns([
+            Tables\Columns\TextColumn::make('student_no')
+                ->label('Student Number')
+                ->color('secondary')
+                ->searchable(),
+            Tables\Columns\TextColumn::make('name')
+                ->label('Name'),
+            Tables\Columns\TextColumn::make('email')
+                ->label('Email'),
+            Tables\Columns\TextColumn::make('RDate')
+                ->label('Date'),
+            Tables\Columns\TextColumn::make('Description')
+                ->label('Message')
+                ->wrap()
+                ->limit(100),
+            Tables\Columns\TextColumn::make('Status')
+                ->label('Status')
+                ->searchable()
+                ->badge()
+                ->color(fn(string $state): string => match($state) {
+                    'Unread' => 'danger',
+                    'Read' => 'success',
+                    'Replied' => 'warning',
+                    default => 'secondary',
+                }),
+        ])
+        ->defaultSort('RDate')
+        ->filters([
+            Tables\Filters\SelectFilter::make('Status')
+                ->options([
+                    'Unread' => 'Unread',
+                    'Read' => 'Read',
+                    'Replied' => 'Replied',
+                ]),
+        ])
+        ->actions([
+            Tables\Actions\ViewAction::make()
+                ->action(function (Messages $record) {
+                    if ($record->Status === 'Unread' && !Auth::user()->is_admin) {
+                        $record->Status = 'Read';
+                        $record->save();
+                    }
+                }),
+            Tables\Actions\Action::make('Reply')
                 ->color('warning')
                 ->icon('heroicon-o-chat-bubble-bottom-center-text')
                 ->label('Reply')
+                ->visible(fn() => Auth::user()->is_admin)
                 ->form([
-                Forms\Components\TextInput::make('SNum')
-                ->label('Student Number')
-                ->default(fn(Messages $record) => $record->SNum)
-                ->required()
-                ->readOnly(),
-                Forms\Components\TextInput::make('name')
-                ->label('Name')
-                ->default(fn(Messages $record) => $record->name)
-                ->required()
-                ->readOnly(),
-                Forms\Components\TextInput::make('email')
-                ->label('Email')
-                ->default(fn(Messages $record) => $record->email)
-                ->required()
-                ->readOnly(),
-                Forms\Components\Textarea::make('new_message')
-                ->label('New Message')
-                ->required(),
+                    Forms\Components\TextInput::make('student_no')
+                        ->label('Student Number')
+                        ->default(fn(Messages $record) => $record->student_no)
+                        ->required()
+                        ->readOnly(),
+                    Forms\Components\TextInput::make('name')
+                        ->label('Name')
+                        ->default(fn(Messages $record) => $record->name)
+                        ->required()
+                        ->readOnly(),
+                    Forms\Components\TextInput::make('email')
+                        ->label('Email')
+                        ->default(fn(Messages $record) => $record->email)
+                        ->required()
+                        ->readOnly(),
+                    Forms\Components\Textarea::make('new_message')
+                        ->label('New Message')
+                        ->required(),
                 ])
                 ->action(function (Messages $record, array $data): void {
-                $originalMessageSnippet = substr($record->Description, 0, 50);
+                    $originalMessageSnippet = substr($record->Description, 0, 50);
 
-                Messages::create([
-                'SNum' => $record->SNum, // Use the SNum from the original message
-                'name' => Auth::user()->name, // Admin's name
-                'email' => $record->email, // Original sender's email
-                'RDate' => now(),
-                'Description' => 'RE: ' . $originalMessageSnippet . ' - \n\n' . $data['new_message'],
-                'Status' => 'Unread',
-                ]);
+                    Messages::create([
+                        'student_no' => $record->student_no,
+                        'name' => Auth::user()->name,
+                        'email' => Auth::user()->email,
+                        'RDate' => now(),
+                        'Description' => 'RE: ' . $originalMessageSnippet . ' --- ' . $data['new_message'],
+                        'Status' => 'Unread',
+                    ]);
 
-                // Mark the original message as replied
-                $record->Status = 'Replied';
-                $record->save();
+                    LaravelNotification::route('mail', $record->email)
+                        ->notify(new \App\Notifications\MessageReplied($data['new_message']));
 
-                // Send notification to the admin
-                Notification::make()
-                ->title('Message Replied')
-                ->body('Your reply has been sent successfully.')
-                ->success()
-                ->send();
-                })
-                ->visible($isAdmin),
+                    $record->Status = 'Replied';
+                    $record->save();
 
-                    
+                    Notification::make()
+                        ->title('Message Replied')
+                        ->body('Your reply has been sent successfully.')
+                        ->success()
+                        ->send();
+                }),
+                
                 Tables\Actions\Action::make('toggleReadStatus')
-                    ->icon(fn(Messages $record): string => $record->Status === 'Unread' ? 'heroicon-o-eye' : 'heroicon-o-eye-slash')
-                    ->label(fn(Messages $record): string => $record->Status === 'Unread' ? 'Read' : 'Unread')
-                    ->action(function(Messages $record): void {
-                        $record->Status = $record->Status === 'Unread' ? 'Replied' : 'Unread';
-                        $record->save();
+                ->icon(fn(Messages $record): string => ($record->Status === 'Unread' || $record->Status === 'Replied') ? 'heroicon-o-eye' : 'heroicon-o-eye-slash')
+                ->label(fn(Messages $record): string => ($record->Status === 'Unread' || $record->Status === 'Replied') ? 'Mark as Read' : 'Mark as Unread')
+                ->action(function(Messages $record): void {
+                    $record->Status = $record->Status === 'Unread' || $record->Status === 'Replied' ? (Auth::user()->is_admin ? 'Replied' : 'Read') : 'Unread';
+                    $record->save();
+            
+                    Notification::make()
+                        ->title('Message Status Updated')
+                        ->body('The message status has been updated.')
+                        ->success()
+                        ->send();
+                })
+                ->visible(),
+        ])            
+        ->bulkActions([
+            Tables\Actions\BulkActionGroup::make([
+                Tables\Actions\DeleteBulkAction::make()
+                    ->label('Delete Messages')
+                    ->visible($isAdmin),
+                Tables\Actions\BulkAction::make('Mark as Replied')
+                    ->label('Mark as Replied')
+                    ->action(fn() => Messages::where('Status', 'Unread')->update(['Status' => 'Replied']))
+                    ->icon('heroicon-o-eye')
+                    ->color('success')
+                    ->visible($isAdmin),
+                Tables\Actions\BulkAction::make('Mark as Read')
+                    ->label('Mark as Read')
+                    ->action(fn() => Messages::where('Status', 'Unread')->update(['Status' => 'Read']))
+                    ->icon('heroicon-o-eye')
+                    ->color('success')
+                    ->visible($isAdmin),
+                Tables\Actions\BulkAction::make('Mark as Unread')
+                    ->label('Mark as Unread')
+                    ->action(fn() => Messages::where('Status', 'Replied')->orWhere('Status', 'Read')->update(['Status' => 'Unread']))
+                    ->icon('heroicon-s-eye')
+                    ->color('gray')
+                    ->visible($isAdmin),
+            ]),
+        ]);
+}
 
-                        Notification::make()
-                            ->title('Message Status Updated')
-                            ->body('The message status has been updated.')
-                            ->success()
-                            ->send();
-                    })
-                    ->visible(), 
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make()
-                        ->label('Delete Messages')
-                        ->visible($isAdmin),
-                    Tables\Actions\BulkAction::make('Mark as Replied')
-                        ->label('Mark as Replied')
-                        ->action(fn() => Messages::where('Status', 'Unread')->update(['Status' => 'Replied']))
-                        ->icon('heroicon-o-eye')
-                        ->color('success')
-                        ->visible($isAdmin),
-                    Tables\Actions\BulkAction::make('Mark as Unread')
-                        ->label('Mark as Unread')
-                        ->action(fn() => Messages::where('Status', 'Replied')->update(['Status' => 'Unread']))
-                        ->icon('heroicon-s-eye')
-                        ->color('gray')
-                        ->visible($isAdmin),
-                ]),
-            ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListMessages::route('/'),
-        ];
-    }
-
+    
     public static function getEloquentQuery(): Builder
-    {
-        $query = parent::getEloquentQuery();
-        $query->orderByRaw("CASE WHEN Status = 'Unread' THEN 0 ELSE 1 END");
-        if (Auth::user()->is_admin) {
-            return $query;
-        }
-        return $query->where('SNum', Auth::user()->SNum);
+{
+    $user = Auth::user();
+    $query = parent::getEloquentQuery();
+    $query->orderByRaw("CASE WHEN Status = 'Unread' THEN 0 ELSE 1 END");
+
+    if ($user->is_admin) {
+        return $query;
     }
+
+    return $query->where(function ($query) use ($user) {
+        $query->where('student_no', $user->student_no)
+              ->orWhere('email', $user->email);
+    });
+
+}
+    
 }

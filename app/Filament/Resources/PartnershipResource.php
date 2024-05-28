@@ -112,9 +112,9 @@ class PartnershipResource extends Resource
                 ->label('End Date')
                 ->sortable(),
 
-            Tables\Columns\IconColumn::make('Accepted')
-                ->boolean()
-                ->alignCenter(),
+            // Tables\Columns\IconColumn::make('Accepted')
+            //     ->boolean()
+            //     ->alignCenter(),
         ])
         ->filters([
             //
@@ -123,7 +123,7 @@ class PartnershipResource extends Resource
             Tables\Actions\ViewAction::make(),
             Tables\Actions\Action::make('accept')
                 ->label('Accept')
-                ->icon('heroicon-s-check')
+                ->icon('heroicon-s-check-circle')
                 ->action(function ($record) {
                     $record->Accepted = true;
                     $record->save();

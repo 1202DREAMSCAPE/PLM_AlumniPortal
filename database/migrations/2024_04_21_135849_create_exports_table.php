@@ -20,7 +20,8 @@ return new class() extends Migration
             $table->unsignedInteger('processed_rows')->default(0);
             $table->unsignedInteger('total_rows');
             $table->unsignedInteger('successful_rows')->default(0);
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('user_id');
+            $table->foreign('user_id')->references('student_no')->on('users')->onDelete('cascade'); 
             $table->timestamps();
         });
     }

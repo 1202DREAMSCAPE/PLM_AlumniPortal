@@ -5,7 +5,7 @@ namespace App\Filament\Alumni\Resources;
 use App\Filament\Alumni\Resources\UpcomingEventsResource\Pages;
 use App\Models\UpcomingEvents;
 use App\Models\Messages;
-use App\Models\Booking; // Add this line
+use App\Models\Booking;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
@@ -31,21 +31,33 @@ class UpcomingEventsResource extends Resource
     {
         return $infolist
             ->schema([
-                Components\Section::make()
-                    ->schema([
-                        Components\TextEntry::make('EventName')
+                Components\TextEntry::make('TimeStart')
+                            ->label('Start Time'),
+                        Components\TextEntry::make('TimeEnd')
+                            ->label('End Time'),
+                            Components\TextEntry::make('EventName')
                             ->label('Event Name'),
                         Components\TextEntry::make('EDate')
                             ->label('Event Date'),
+                Components\Section::make()
+                    ->schema([   
                         Components\TextEntry::make('ELoc')
                             ->label('Event Location'),
                         Components\TextEntry::make('EDesc')
                             ->label('Event Description'),
-                        Components\TextEntry::make('TimeStart')
-                            ->label('Start Time'),
-                        Components\TextEntry::make('TimeEnd')
-                            ->label('End Time'),
                     ]),
+                // Components\Section::make()
+                //     ->label('Bookings')
+                //     ->schema([
+                //         Components\TextEntry::make('bookings')
+                //             ->label('List of Student Numbers who booked this event')
+                //             ->formatStateUsing(function ($record) {
+                //                 $bookings = Booking::where('upcoming_event_id', $record->EventID)->with('user')->get();
+                //                 return $bookings->pluck('user.student_no')->join(', ');
+                //             })
+                //             ->weight('bold')
+                //             ->visible(fn () => auth()->user()->email === 'admin@plm.edu.ph'),
+                //     ]),
             ]);
     }
 
@@ -108,23 +120,23 @@ class UpcomingEventsResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\Action::make('bookEvent')
-                    ->label(fn (UpcomingEvents $record): string => Booking::where('user_id', Auth::id())->where('upcoming_event_id', $record->EventID)->exists() ? 'Booked' : 'Book This Event')
+                    ->label(fn (UpcomingEvents $record): string => Booking::where('user_id', Auth::user()->student_no)->where('upcoming_event_id', $record->EventID)->exists() ? 'Booked' : 'Book This Event')
                     ->color('warning')
                     ->action(function (UpcomingEvents $record) {
                         $user = Auth::user();
 
-                        if (!Booking::where('user_id', $user->id)->where('upcoming_event_id', $record->EventID)->exists()) {
+                        if (!Booking::where('user_id', $user->student_no)->where('upcoming_event_id', $record->EventID)->exists()) {
                             Booking::create([
-                                'user_id' => $user->id,
+                                'user_id' => $user->student_no,
                                 'upcoming_event_id' => $record->EventID,
                             ]);
 
                             Messages::create([
-                                'SNum' => $user->SNum,
+                                'student_no' => $user->student_no,
                                 'name' => $user->name,
-                                'email' => "admin@plm.edu.ph",
+                                'email' => $user->email,
                                 'RDate' => now(),
-                                'Description' => "You have booked the event: {$record->EventName} on {$record->EDate} at {$record->ELoc}.",
+                                'Description' => "You have booked the event: {$record->EventName} on {$record->EDate} at {$record->ELoc}. \n\n Event Description: {$record->EDesc} \n\nEvent Time: {$record->TimeStart} - {$record->TimeEnd}",
                                 'Status' => 'Unread',
                             ]);
 
@@ -135,7 +147,7 @@ class UpcomingEventsResource extends Resource
                                 ->send();
                         }
                     })
-                    ->disabled(fn (UpcomingEvents $record): bool => Booking::where('user_id', Auth::id())->where('upcoming_event_id', $record->EventID)->exists()),
+                    ->disabled(fn (UpcomingEvents $record): bool => Booking::where('user_id', Auth::user()->student_no)->where('upcoming_event_id', $record->EventID)->exists()),
             ]);
             // ->bulkActions([
             //     Tables\Actions\BulkActionGroup::make([

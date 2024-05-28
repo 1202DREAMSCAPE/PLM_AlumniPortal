@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('educational_backgrounds', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('user_id'); 
+            $table->foreign('user_id')->references('student_no')->on('users')->onDelete('cascade');
             $table->string('school')->nullable();
             $table->string('educattain')->nullable();
             $table->string('degree')->nullable();

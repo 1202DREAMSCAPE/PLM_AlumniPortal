@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('user_id'); 
+            $table->foreign('user_id')->references('student_no')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('upcoming_event_id');
             $table->foreign('upcoming_event_id')->references('EventID')->on('UpcomingEvents')->onDelete('cascade');            $table->timestamps();
         });

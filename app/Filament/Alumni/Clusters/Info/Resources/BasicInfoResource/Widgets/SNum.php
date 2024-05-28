@@ -23,9 +23,9 @@ class SNum extends BaseWidget
     public function table(Table $table): Table
     {
         return $table
-            ->query(User::query()->where('id', Auth::id()))
-            ->columns([
-                TextColumn::make('SNum')
+        ->query(User::query()->where('student_no', Auth::user()->student_no))
+        ->columns([
+                TextColumn::make('student_no')
                     ->label('Student Number')
                     ->alignCenter()
                     ->weight(FontWeight::Bold)

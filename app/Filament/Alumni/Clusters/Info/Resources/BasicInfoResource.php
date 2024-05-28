@@ -13,6 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class BasicInfoResource extends Resource
 {
@@ -89,7 +90,6 @@ class BasicInfoResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-    return parent::getEloquentQuery()->where('id',auth()->id());
+        return parent::getEloquentQuery()->where('student_no', Auth::user()->student_no);
     }
 }
-
