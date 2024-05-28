@@ -43,9 +43,13 @@ class AlumniConnect extends BaseWidget
     public function table(Table $table): Table
     {
         return $table
-        ->heading('Connect with Other Alumni')
+            ->heading('Connect with Other Alumni')
             ->defaultPaginationPageOption(5)
-            ->query(\App\Models\User::query()->where('is_visible', true))
+            ->query(\App\Models\User::query()
+                ->where('is_visible', true)
+                ->orderByRaw('student_no = ? DESC', [auth()->user()->student_no])
+                )
+            ->recordClasses(fn($record) => $record->student_no === auth()->user()->student_no ? 'bg-blue-100' : '')
             ->columns([
                 Split::make([
                     ImageColumn::make('profile_photo_path')
