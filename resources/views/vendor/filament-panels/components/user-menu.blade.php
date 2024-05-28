@@ -85,6 +85,15 @@
         @endforeach
 
         <x-filament::dropdown.list.item
+            :color="'success'" 
+            :icon="'heroicon-o-academic-cap'"
+            :href="url('/')"
+            :tag="'a'"
+        >
+            Access Student Portal
+        </x-filament::dropdown.list.item>
+
+        <x-filament::dropdown.list.item
             :action="$logoutItem?->getUrl() ?? filament()->getLogoutUrl()"
             :color="$logoutItem?->getColor()"
             :icon="$logoutItem?->getIcon() ?? \Filament\Support\Facades\FilamentIcon::resolve('panels::user-menu.logout-button') ?? 'heroicon-m-arrow-left-on-rectangle'"
