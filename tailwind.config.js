@@ -13,6 +13,13 @@ export default {
 }
 
 module.exports = {
+  theme: {
+    extend: {
+      backgroundImage: {
+        'custom-image': "url('/images/your-image.jpg')",
+      },
+    },
+  },
   content: [
     './app/**/*.php',
     './config/**/*.php',

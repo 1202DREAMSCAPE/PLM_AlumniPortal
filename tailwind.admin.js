@@ -4,6 +4,13 @@ const filamentConfig = require('./vendor/filament/filament/tailwind.config.prese
 const defaultConfig = require('./tailwind.config')
 
 module.exports = {
+  theme: {
+    extend: {
+      backgroundImage: {
+        'custom-image': "url('/images/your-image.jpg')",
+      },
+    },
+  },
   presets: [defaultConfig, filamentConfig],
   content: [
     './app/Filament/**/*.php',

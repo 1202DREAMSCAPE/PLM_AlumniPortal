@@ -46,6 +46,7 @@ class AlumniRecord extends BaseWidget
 
             Tables\Columns\TextColumn::make('Course')
             ->alignCenter()
+            ->searchable()
             ->wrap(),            
         ]);
     }
