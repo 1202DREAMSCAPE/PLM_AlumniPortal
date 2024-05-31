@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
+use Illuminate\Notifications\Notifiable;
 
 
 class Messages extends Model
 {
-    use HasFactory, HasFilamentComments;
+    use HasFactory, Notifiable;
 
     protected $primaryKey = 'HelpID';
 
@@ -27,5 +27,10 @@ class Messages extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'SNum', 'SNum');
+    }
+
+    public function routeNotificationForMail()
+    {
+        return $this->email;
     }
 }

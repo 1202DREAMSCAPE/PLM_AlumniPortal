@@ -65,10 +65,10 @@ class AlumniPanelProvider extends PanelProvider
             ->favicon(asset('/favicon-32x32.png'))
             ->brandLogo(fn () => view('components.logo'))
             ->brandLogoHeight('50px')
-            // ->renderHook(
-            //     'panels::body.end',
-            //     fn (): View => view('components.footer'),  
-            // )
+            ->renderHook(
+                'panels::body.end',
+                fn (): View => view('components.footer'),  
+            )
             ->viteTheme('resources/css/filament/alumni/theme.css')
             ->colors([
                 'primary' => Color::Blue,
