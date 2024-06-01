@@ -125,12 +125,12 @@ class MessagesResource extends Resource
             'Read' => 'opacity-60',
         })
         ->columns([
-            Tables\Columns\TextColumn::make('student_no')
-                ->label('Student Number')
-                ->color('secondary')
-                ->searchable(),
-            Tables\Columns\TextColumn::make('name')
-                ->label('Name'),
+            // Tables\Columns\TextColumn::make('student_no')
+            //     ->label('Student Number')
+            //     ->color('secondary')
+            //     ->searchable(),
+            // Tables\Columns\TextColumn::make('name')
+            //     ->label('Name'),
             Tables\Columns\TextColumn::make('email')
                 ->label('Email'),
             Tables\Columns\TextColumn::make('RDate')
@@ -138,6 +138,7 @@ class MessagesResource extends Resource
             Tables\Columns\TextColumn::make('Description')
                 ->label('Message')
                 ->wrap()
+                ->searchable()
                 ->limit(100),
             Tables\Columns\TextColumn::make('Status')
                 ->label('Status')
@@ -147,7 +148,6 @@ class MessagesResource extends Resource
                     'Unread' => 'danger',
                     'Read' => 'success',
                     'Replied' => 'warning',
-                    default => 'secondary',
                 }),
         ])
         ->defaultSort('RDate')
@@ -167,56 +167,7 @@ class MessagesResource extends Resource
                         $record->save();
                     }
                 }),
-            Tables\Actions\Action::make('Reply')
-                ->color('warning')
-                ->icon('heroicon-o-chat-bubble-bottom-center-text')
-                ->label('Reply')
-                ->visible(fn() => Auth::user()->is_admin)
-                ->form([
-                    Forms\Components\TextInput::make('student_no')
-                        ->label('Student Number')
-                        ->default(fn(Messages $record) => $record->student_no)
-                        ->required()
-                        ->readOnly(),
-                    Forms\Components\TextInput::make('name')
-                        ->label('Name')
-                        ->default(fn(Messages $record) => $record->name)
-                        ->required()
-                        ->readOnly(),
-                    Forms\Components\TextInput::make('email')
-                        ->label('Email')
-                        ->default(fn(Messages $record) => $record->email)
-                        ->required()
-                        ->readOnly(),
-                    Forms\Components\Textarea::make('new_message')
-                        ->label('New Message')
-                        ->required(),
-                ])
-                ->action(function (Messages $record, array $data): void {
-                    $originalMessageSnippet = substr($record->Description, 0, 50);
-
-                    Messages::create([
-                        'student_no' => $record->student_no,
-                        'name' => Auth::user()->name,
-                        'email' => Auth::user()->email,
-                        'RDate' => now(),
-                        'Description' => 'RE: ' . $originalMessageSnippet . ' --- ' . $data['new_message'],
-                        'Status' => 'Unread',
-                    ]);
-
-                    LaravelNotification::route('mail', $record->email)
-                        ->notify(new \App\Notifications\MessageReplied($data['new_message']));
-
-                    $record->Status = 'Replied';
-                    $record->save();
-
-                    Notification::make()
-                        ->title('Message Replied')
-                        ->body('Your reply has been sent successfully.')
-                        ->success()
-                        ->send();
-                }),
-                
+            
                 Tables\Actions\Action::make('toggleReadStatus')
                 ->icon(fn(Messages $record): string => ($record->Status === 'Unread' || $record->Status === 'Replied') ? 'heroicon-o-eye' : 'heroicon-o-eye-slash')
                 ->label(fn(Messages $record): string => ($record->Status === 'Unread' || $record->Status === 'Replied') ? 'Mark as Read' : 'Mark as Unread')
