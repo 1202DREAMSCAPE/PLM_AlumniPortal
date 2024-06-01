@@ -27,4 +27,8 @@
   @apply text-primary-500 uppercase tracking-wider before:content-['Page_'] before:text-white;
 }
 
+.ambers-header {
+  background-color: #F59E0B; /* Amber color */
+  color: white; /* Text color */
+}
 

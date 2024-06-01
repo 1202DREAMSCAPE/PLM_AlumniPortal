@@ -18,7 +18,7 @@ class AlumniConnect extends BaseWidget
 {
     protected static ?int $sort = 1;
 
-    protected int | string | array $columnSpan = '1/2';
+    protected int | string | array $columnSpan = 'full';
 
     protected function getTableHeaderActions(): array
     {
@@ -44,21 +44,25 @@ class AlumniConnect extends BaseWidget
     {
         return $table
             ->heading('Connect with Other Alumni')
+            ->description('Get a copy of their email address or contact number to reach out.')
             ->defaultPaginationPageOption(5)
             ->query(\App\Models\User::query()
                 ->where('is_visible', true)
                 ->orderByRaw('student_no = ? DESC', [auth()->user()->student_no])
                 )
-            ->recordClasses(fn($record) => $record->student_no === auth()->user()->student_no ? 'bg-blue-100' : '')
+            // ->recordClasses(
+            // fn($record) => $record->student_no === auth()->user()->student_no ? 
+            //    'bg-primary-400' : ''
+            //         )
             ->columns([
                 Split::make([
-                    // ImageColumn::make('profile_photo_path')
+                    Stack::make([
+                        // ImageColumn::make('profile_photo_path')
                     //     ->label(' ')
                     //     ->disk('public')
                     //     ->defaultImageUrl(url('/default-avatar.png'))
                     //     ->width(50)
                     //     ->height(50),
-                    Stack::make([
                         TextColumn::make('LName')
                             ->label('Last Name')
                             ->weight(FontWeight::Bold)
@@ -86,7 +90,6 @@ class AlumniConnect extends BaseWidget
                             ->copyable()
                             ->copyMessage('Email Address Copied')
                             ->copyMessageDuration(1500),
-                        // Uncomment if needed
                         // TextColumn::make('Course')
                         //     ->label('Course')
                         //     ->alignCenter()
@@ -100,5 +103,5 @@ class AlumniConnect extends BaseWidget
                 'md' => 2,
                 'xl' => 2,
             ]);
-    }
+        }
 }
