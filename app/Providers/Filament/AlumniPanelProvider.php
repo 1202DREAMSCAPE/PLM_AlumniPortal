@@ -44,6 +44,7 @@ class AlumniPanelProvider extends PanelProvider
             ->login(Login::class)
             //->registration()    
             ->databaseNotifications(true)
+            //->font('Inter')
             ->plugins([
                 BreezyCore::make()
                     ->myProfile(
@@ -85,6 +86,8 @@ class AlumniPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                // \App\Filament\Alumni\Widgets\AboutMe::class,
                 \App\Filament\Alumni\Widgets\AlumniConnect::class,
+                \App\Filament\Alumni\Widgets\FaqWidget::class,
+                \App\Filament\Alumni\Widgets\PhotoSlideshowWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

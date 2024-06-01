@@ -13,7 +13,9 @@ class ListMessages extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+            ->label('Send a Message to OPA')
+            ->color('warning'),
         ];
     }
 }
