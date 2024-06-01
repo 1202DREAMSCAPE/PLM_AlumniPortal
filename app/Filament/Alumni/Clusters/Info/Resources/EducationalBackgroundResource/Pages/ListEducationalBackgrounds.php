@@ -13,7 +13,9 @@ class ListEducationalBackgrounds extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+            ->label('Add Educational Background')
+            ->color('warning'),
         ];
     }
 }

@@ -18,7 +18,7 @@ class AlumniConnect extends BaseWidget
 {
     protected static ?int $sort = 1;
 
-    protected int | string | array $columnSpan = 'full';
+    protected int | string | array $columnSpan = '1/2';
 
     protected function getTableHeaderActions(): array
     {
@@ -52,12 +52,12 @@ class AlumniConnect extends BaseWidget
             ->recordClasses(fn($record) => $record->student_no === auth()->user()->student_no ? 'bg-blue-100' : '')
             ->columns([
                 Split::make([
-                    ImageColumn::make('profile_photo_path')
-                        ->label(' ')
-                        ->disk('public')
-                        ->defaultImageUrl(url('/default-avatar.png'))
-                        ->width(50)
-                        ->height(50),
+                    // ImageColumn::make('profile_photo_path')
+                    //     ->label(' ')
+                    //     ->disk('public')
+                    //     ->defaultImageUrl(url('/default-avatar.png'))
+                    //     ->width(50)
+                    //     ->height(50),
                     Stack::make([
                         TextColumn::make('LName')
                             ->label('Last Name')
@@ -98,7 +98,7 @@ class AlumniConnect extends BaseWidget
             ->contentGrid([
                 'sm' => 1,
                 'md' => 2,
-                'xl' => 3,
+                'xl' => 2,
             ]);
     }
 }

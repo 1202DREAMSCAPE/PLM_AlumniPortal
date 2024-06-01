@@ -14,7 +14,8 @@ class ListUpcomingEvents extends ListRecords
     {
         return [
            Actions\CreateAction::make()
-           ->label('Add Event'),
+           ->label('Request for an Event')
+           ->color('warning'),
         ];
     }
 }

@@ -17,21 +17,26 @@ use Filament\Infolists\Components;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Notification as LaravelNotification;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Support\Htmlable;
+ 
 
 
 class MessagesResource extends Resource
 {
     protected static ?string $model = Messages::class;
-
     protected static ?string $label = 'Messages ';
-    protected static ?string $navigationIcon = 'heroicon-o-envelope';
+    protected static ?string $navigationIcon = 'heroicon-s-envelope';
 
     protected static ?int $navigationSort = 3;
 
-    // public static function getNavigationBadge(): ?string
-    // {
-    //     return number_format(static::getModel()::count());
-    // }
+    public static function getNavigationBadge(): ?string
+    {
+        return number_format(static::getModel()::count());
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'warning';
+    }
 
     public static function form(Form $form): Form
     {

@@ -13,7 +13,9 @@ class ListWorkExperiences extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+            ->label('Add Work Experience')
+            ->color('warning'),
         ];
     }
 }

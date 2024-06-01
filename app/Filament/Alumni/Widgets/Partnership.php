@@ -2,13 +2,16 @@
 
 namespace App\Filament\Alumni\Widgets;
 
+use App\Filament\Alumni\Clusters\Opportunities;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
-
+ 
 class Partnership extends BaseWidget
 {
     protected static ?string $heading = 'Partnerships Available ';
+
+    protected static ?string $cluster = Opportunities::class;
 
     protected static ?int $sort = 2;
 

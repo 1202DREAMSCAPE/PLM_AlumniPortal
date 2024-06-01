@@ -44,6 +44,7 @@ class AlumniPanelProvider extends PanelProvider
             ->login(Login::class)
             //->registration()    
             ->databaseNotifications(true)
+            //->font('Inter')
             ->plugins([
                 BreezyCore::make()
                     ->myProfile(
