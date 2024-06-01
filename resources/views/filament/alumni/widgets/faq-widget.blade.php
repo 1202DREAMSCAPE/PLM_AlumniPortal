@@ -2,7 +2,7 @@
 
 <x-filament-widgets::widget>
     <x-filament::section>
-        <h2 class="text-xl font-bold mb-4 text-amber-600">Welcome to the Alumni Portal!</h2>
+        <h2 class="text-xl font-bold mb-4 text-amber-600 text-center">Welcome to the Alumni Portal!</h2>
         <div x-data="{ open: null }">
             @foreach ($faqs as $index => $faq)
                 <div class="mb-4">

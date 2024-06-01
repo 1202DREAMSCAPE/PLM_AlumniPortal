@@ -7,7 +7,7 @@ use Filament\Widgets\Widget;
 class FaqWidget extends Widget
 {
     protected static string $view = 'filament.alumni.widgets.faq-widget';
-    protected int | string | array $columnSpan = 'full';
+    protected int | string | array $columnSpan = '1/2';
 
     public array $faqs = [];
 

@@ -2,7 +2,3 @@
 
 @config 'tailwind.config.js';
 
-.ambers-header {
-    background-color: #F59E0B; /* Amber color */
-    color: white; /* Text color */
-  }

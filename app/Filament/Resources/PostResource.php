@@ -126,12 +126,12 @@ class PostResource extends Resource
                                     ->unique(ignoreRecord: true)
                                     ->maxLength(255),
 
-                                Forms\Components\Select::make('user_id')
-                                    ->label('Author')
-                                    ->relationship('user', 'name')
-                                    ->default(fn () => auth()->id())
-                                    ->searchable()
-                                    ->required(),
+                                // Forms\Components\Select::make('user_id')
+                                //     ->label('Author')
+                                //     ->relationship('user', 'name')
+                                //     ->default(fn () => auth()->id())
+                                //     ->searchable()
+                                //     ->required(),
 
                                 CuratorPicker::make('image_id')
                                     ->label('Featured Image'),

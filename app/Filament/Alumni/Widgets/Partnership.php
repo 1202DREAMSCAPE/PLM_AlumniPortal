@@ -10,12 +10,9 @@ use Filament\Widgets\TableWidget as BaseWidget;
 class Partnership extends BaseWidget
 {
     protected static ?string $heading = 'Partnerships Available ';
-
-    protected static ?string $cluster = Opportunities::class;
-
     protected static ?int $sort = 2;
 
-    protected int | string | array $columnSpan = 'full';
+    protected int | string | array $columnSpan = '1/2';
 
     public function table(Table $table): Table
     {
