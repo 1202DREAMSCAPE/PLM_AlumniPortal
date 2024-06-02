@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('user_id')->nullable(); 
             $table->foreign('user_id')->references('student_no')->on('users')->onDelete('cascade');
             $table->string('email')->nullable();
-            $table->string('telephone_number')->nullable();
-            $table->string('cellphone_number')->nullable();
+            $table->string('TelNum')->nullable();
+            $table->string('ContactNum')->nullable();
             $table->string('home_address', 255)->nullable();
             $table->string('country')->nullable();
             $table->string('city')->nullable();

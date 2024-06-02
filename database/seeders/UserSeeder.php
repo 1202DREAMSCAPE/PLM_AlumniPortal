@@ -66,8 +66,8 @@ class UserSeeder extends Seeder
         ContactInfo::create([
             'user_id' => $admin->student_no, // Updated to use 'student_no'
             'email' => $admin->email,
-            'telephone_number' => $admin->TelNum,
-            'cellphone_number' => $admin->ContactNum,
+            'TelNum' => $admin->TelNum,
+            'ContactNum' => $admin->ContactNum,
             'home_address' => $admin->Address,
             'country' => $admin->Country,
             'city' => $admin->City,
@@ -101,8 +101,8 @@ class UserSeeder extends Seeder
                 ContactInfo::create([
                     'user_id' => $user->student_no, // Updated to use 'student_no'
                     'email' => $user->email,
-                    'telephone_number' => $user->TelNum,
-                    'cellphone_number' => $user->ContactNum,
+                    'TelNum' => $user->TelNum,
+                    'ContactNum' => $user->ContactNum,
                     'home_address' => $user->Address,
                     'country' => $user->Country,
                     'city' => $user->City,

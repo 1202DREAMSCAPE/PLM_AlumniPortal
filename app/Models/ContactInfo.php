@@ -13,8 +13,8 @@ class ContactInfo extends Model
     
     protected $fillable = [
         'email',
-        'telephone_number',
-        'cellphone_number',
+        'TelNum',
+        'ContactNum',
         'home_address',
         'country',
         'city',

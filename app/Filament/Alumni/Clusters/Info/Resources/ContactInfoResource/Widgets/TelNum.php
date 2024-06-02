@@ -23,12 +23,12 @@ class TelNum extends BaseWidget
         return $table
         ->query(ContactInfo::query()->where('user_id', Auth::user()->student_no))
         ->columns([
-                Tables\Columns\TextColumn::make('telephone_number')
+                Tables\Columns\TextColumn::make('TelNum')
                     ->label('Telephone Number')
                     ->color('warning')
             ->weight('bold'),
                 
-                Tables\Columns\TextColumn::make('cellphone_number')
+                Tables\Columns\TextColumn::make('ContactNum')
                     ->label('Cellphone Number')
                     ->color('warning')
             ->weight('bold'),
@@ -46,11 +46,11 @@ class TelNum extends BaseWidget
     {
         return $form
             ->schema([
-                TextInput::make('telephone_number')
+                TextInput::make('TelNum')
                     ->label('Telephone Number')
                     ->required()
                     ->maxLength(15),
-                TextInput::make('cellphone_number')
+                TextInput::make('ContactNum')
                     ->label('Cellphone Number')
                     ->required()
                     ->maxLength(15),
