@@ -26,7 +26,7 @@ class Messages extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'SNum', 'SNum');
+        return $this->belongsTo(User::class, 'student_no', 'student_no');
     }
 
     public function routeNotificationForMail()
