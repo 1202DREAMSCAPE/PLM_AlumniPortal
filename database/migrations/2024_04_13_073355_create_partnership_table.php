@@ -27,6 +27,8 @@ return new class extends Migration
             ->nullable(); // Start Date of Partnership
             $table->date('EndDate')
             ->nullable(); // End Date of Partnership
+            $table->string('Link')
+            ->nullable(); // Link to the Company's Website
             $table->timestamps();
             $table->boolean('Accepted')->default(false);
         });

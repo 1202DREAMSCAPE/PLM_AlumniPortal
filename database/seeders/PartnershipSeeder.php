@@ -30,6 +30,7 @@ class PartnershipSeeder extends Seeder
                 'PartType' => $faker->randomElement(['General Partnership', 'Limited Partnership', 'Limited Liability Partnership']),
                 'StartDate' => $startDate->format('Y-m-d'),
                 'EndDate' => $endDate ? $endDate->format('Y-m-d') : null,
+                'Link' => $faker->url,
                 'Accepted' => $faker->boolean,
                 'created_at' => now(),
                 'updated_at' => now(),

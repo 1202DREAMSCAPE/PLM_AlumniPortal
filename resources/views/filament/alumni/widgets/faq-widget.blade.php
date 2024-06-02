@@ -8,13 +8,16 @@
                 <div class="mb-4">
                     <button 
                         @click="open === {{ $index }} ? open = null : open = {{ $index }}"
-                        class="w-full text-left flex justify-between items-center p-4 border  hover:bg-primary-600 hover:bg-opacity-10 focus:outline-none text-black font-medium rounded-lg"
+                        class="w-full text-left flex justify-between items-center p-4 border hover:bg-primary-600 hover:bg-opacity-10 focus:outline-none font-medium rounded-lg"
+                        :class="{ 'text-black': !document.documentElement.classList.contains('dark'), 'text-white': document.documentElement.classList.contains('dark') }"
                     >
                         <span>{{ $faq['question'] }}</span>
                         <span x-show="open !== {{ $index }}">&#9654;</span>
                         <span x-show="open === {{ $index }}">&#9660;</span>
                     </button>
-                    <div x-show="open === {{ $index }}" x-collapse class="p-4 bg-opacity-80 border-l-4 border-primary-400 text-black rounded-lg mt-2">
+                    <div x-show="open === {{ $index }}" x-collapse class="p-4 bg-opacity-80 border-l-4 border-primary-400 rounded-lg mt-2"
+                         :class="{ 'text-black': !document.documentElement.classList.contains('dark'), 'text-white': document.documentElement.classList.contains('dark') }"
+                    >
                         {!! $faq['answer'] !!}
                     </div>
                 </div>

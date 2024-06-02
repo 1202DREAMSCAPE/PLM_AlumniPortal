@@ -19,5 +19,6 @@ class Partnership extends Model
         'PartType',
         'StartDate',
         'EndDate',
+        'Link',
     ];
 }

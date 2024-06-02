@@ -44,7 +44,7 @@ class AlumniConnect extends BaseWidget
     {
         return $table
             ->heading('Connect with Other Alumni')
-            ->description('Get a copy of their email address or contact number to reach out.')
+            ->description(' ')
             ->defaultPaginationPageOption(5)
             ->query(\App\Models\User::query()
                 ->where('is_visible', true)
@@ -87,9 +87,10 @@ class AlumniConnect extends BaseWidget
                             ->searchable()
                             ->alignCenter()
                             ->icon('heroicon-m-envelope')
-                            ->copyable()
-                            ->copyMessage('Email Address Copied')
-                            ->copyMessageDuration(1500),
+                            ->url(fn ($record) => 'mailto:' . $record->email),
+                            // ->copyable()
+                            // ->copyMessage('Email Address Copied')
+                            // ->copyMessageDuration(1500),
                         // TextColumn::make('Course')
                         //     ->label('Course')
                         //     ->alignCenter()
@@ -104,4 +105,6 @@ class AlumniConnect extends BaseWidget
                 'xl' => 2,
             ]);
         }
+
+        
 }
