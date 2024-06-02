@@ -52,6 +52,7 @@ class AlumniPanelProvider extends PanelProvider
             ->databaseNotifications(true)
             //->font('Inter')
             ->plugins([
+                GravatarPlugin::make(), 
                 BreezyCore::make()
                     ->myProfile(
                         shouldRegisterUserMenu: true,

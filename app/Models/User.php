@@ -12,6 +12,7 @@ use Jeffgreco13\FilamentBreezy\Traits\TwoFactorAuthenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Awcodes\FilamentGravatar\GravatarProvider;
 
 class User extends Authenticatable implements FilamentUser, HasAvatar
 {
@@ -21,11 +22,20 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
      * Determine if the user can access the Filament admin panel.
      */
 
+     protected function getGravatarUrl(): string
+    {
+        $email = $this->email;
+        $default = 'mp'; 
+        $size = 200; 
+        
+        return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?d=" . $default . "&s=" . $size;
+    }
+
     public function getFilamentAvatarUrl(): ?string
     {
         return $this->avatar_url 
             ? asset('storage/' . $this->avatar_url) 
-            : asset('images/default-avatar.png');
+            : $this->getGravatarUrl();
     }
 
     public function canAccessPanel(Panel $panel): bool
