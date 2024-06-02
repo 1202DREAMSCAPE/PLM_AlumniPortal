@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "alpinejs": "^3.13.10",
-    "axios": "^1.7.1",
+    "axios": "^1.7.2",
     "tippy.js": "^6.3.7"
   }
 }
