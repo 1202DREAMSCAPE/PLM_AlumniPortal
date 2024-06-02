@@ -26,7 +26,8 @@ class ContactInfo extends Model
     ];
 
     public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
+{
+    return $this->belongsTo(User::class, 'user_id', 'student_no');
+}
+
 }

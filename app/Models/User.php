@@ -119,9 +119,10 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function contactInfo(): HasOne
-    {
-        return $this->hasOne(ContactInfo::class);
-    }
+{
+    return $this->hasOne(ContactInfo::class, 'user_id', 'student_no');
+}
+
 
     /**
      * Get the messages for the user.

@@ -30,10 +30,16 @@ use Illuminate\Contracts\View\View;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Filament\Support\Enums\MaxWidth;
+use App\Models\ContactInfo;
+use App\Observers\ContactInfoObserver;
 
 
 class AlumniPanelProvider extends PanelProvider
 {
+    public function boot()
+    {
+        ContactInfo::observe(ContactInfoObserver::class);
+    }
     public function panel(Panel $panel): Panel
     {
         return $panel
