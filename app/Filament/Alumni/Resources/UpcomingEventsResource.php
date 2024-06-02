@@ -12,9 +12,7 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 use Filament\Infolists\Infolist;
 use Filament\Infolists\Components;
 
@@ -32,32 +30,20 @@ class UpcomingEventsResource extends Resource
         return $infolist
             ->schema([
                 Components\TextEntry::make('TimeStart')
-                            ->label('Start Time'),
-                        Components\TextEntry::make('TimeEnd')
-                            ->label('End Time'),
-                            Components\TextEntry::make('EventName')
-                            ->label('Event Name'),
-                        Components\TextEntry::make('EDate')
-                            ->label('Event Date'),
+                    ->label('Start Time'),
+                Components\TextEntry::make('TimeEnd')
+                    ->label('End Time'),
+                Components\TextEntry::make('EventName')
+                    ->label('Event Name'),
+                Components\TextEntry::make('EDate')
+                    ->label('Event Date'),
                 Components\Section::make()
-                    ->schema([   
+                    ->schema([
                         Components\TextEntry::make('ELoc')
                             ->label('Event Location'),
                         Components\TextEntry::make('EDesc')
                             ->label('Event Description'),
                     ]),
-                // Components\Section::make()
-                //     ->label('Bookings')
-                //     ->schema([
-                //         Components\TextEntry::make('bookings')
-                //             ->label('List of Student Numbers who booked this event')
-                //             ->formatStateUsing(function ($record) {
-                //                 $bookings = Booking::where('upcoming_event_id', $record->EventID)->with('user')->get();
-                //                 return $bookings->pluck('user.student_no')->join(', ');
-                //             })
-                //             ->weight('bold')
-                //             ->visible(fn () => auth()->user()->email === 'admin@plm.edu.ph'),
-                //     ]),
             ]);
     }
 
@@ -170,16 +156,5 @@ class UpcomingEventsResource extends Resource
             //'create' => Pages\CreateUpcomingEvents::route('/create'),
             //'edit' => Pages\EditUpcomingEvents::route('/{record}/edit'),
         ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        $query = parent::getEloquentQuery();
-         if (!Auth::user()->is_admin) {
-            return $query->where('Accepted', true)
-                        ->whereDate('EDate', '>=', Carbon::today());
-        }
-
-        return $query;
     }
 }

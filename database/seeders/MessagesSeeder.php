@@ -27,7 +27,7 @@ class MessagesSeeder extends Seeder
                     'email' => $user->email,
                     'RDate' => now(),
                     'Description' => $faker->sentence,
-                    'Status' => $faker->randomElement(['Unread', 'Replied']),
+                    'Status' => $faker->randomElement(['Unread', 'Read']),
                 ]);
             }
         }

@@ -44,8 +44,8 @@ class AlumniConnect extends BaseWidget
     {
         return $table
             ->heading('Connect with Other Alumni')
-            ->description(' ')
-            ->defaultPaginationPageOption(5)
+            ->description('Easily click on the email address to send an email or Copy the contact number to your clipboard.')
+            ->paginationPageOptions([4, 12, 24])
             ->query(\App\Models\User::query()
                 ->where('is_visible', true)
                 ->orderByRaw('student_no = ? DESC', [auth()->user()->student_no])

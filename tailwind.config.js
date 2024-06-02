@@ -31,6 +31,7 @@ module.exports = {
       colors: {
         primary: colors.blue,
         transparent: 'transparent',
+        gold: '#d5a106',
       },
     },
   },

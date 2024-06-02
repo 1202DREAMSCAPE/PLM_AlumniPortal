@@ -25,7 +25,7 @@ class Partnership extends BaseWidget
         return $table
         ->heading('Partnerships Available')
         ->description('Check out the partnerships available for you.')
-        ->defaultPaginationPageOption(5)
+        ->paginationPageOptions([3, 9, 15])
         ->query(\App\Models\Partnership::query()->where('Accepted', true))
         ->columns([
             Split::make([

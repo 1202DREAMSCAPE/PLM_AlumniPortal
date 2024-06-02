@@ -15,6 +15,9 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
+use Filament\Tables\Actions\Action;
+use Filament\Notifications\Notification;
+
 
 class PostResource extends Resource
 {
@@ -39,97 +42,61 @@ class PostResource extends Resource
      * Get the form for the resource.
      */
     public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                Forms\Components\Grid::make()
-                    ->columns(3)
-                    ->schema([
-                        Forms\Components\Section::make()
-                            ->columnSpan(2)
-                            ->schema([
-                                Forms\Components\TextInput::make('title')
-                                    ->placeholder('Enter a title')
-                                    ->live()
-                                    ->afterStateUpdated(function (Get $get, Set $set, string $operation, ?string $old, ?string $state) {
-                                        if (($get('slug') ?? '') !== Str::slug($old) || $operation !== 'create') {
-                                            return;
-                                        }
+{
+    return $form
+        ->schema([
+            Forms\Components\Grid::make()
+                ->columns(3)
+                ->schema([
+                    Forms\Components\Section::make()
+                        ->columnSpan(2)
+                        ->schema([
+                            Forms\Components\TextInput::make('title')
+                                ->placeholder('Enter a title')
+                                ->live()
+                                ->afterStateUpdated(function (Get $get, Set $set, string $operation, ?string $old, ?string $state) {
+                                    if (($get('slug') ?? '') !== Str::slug($old) || $operation !== 'create') {
+                                        return;
+                                    }
 
-                                        $set('slug', Str::slug($state));
-                                    })
-                                    ->required()
-                                    ->maxLength(255)
-                                    ->autofocus(),
+                                    $set('slug', Str::slug($state));
+                                })
+                                ->required()
+                                ->maxLength(255)
+                                ->autofocus(),
 
-                                Forms\Components\Builder::make('content')
-                                    ->required()
-                                    ->columnSpanFull()
-                                    ->default([
-                                        ['type' => 'markdown'],
-                                    ])
-                                    ->blocks([
-                                        Builder\Block::make('markdown')
-                                            ->schema([
-                                                Forms\Components\MarkdownEditor::make('content')
-                                                    ->required(),
-                                            ]),
+                            Forms\Components\Textarea::make('content')
+                                ->required()
+                                ->columnSpanFull()
+                                ->rows(10),
+                        ]),
 
-                                        Builder\Block::make('figure')
-                                            ->schema([
-                                                CuratorPicker::make('image')
-                                                    ->required(),
+                    Forms\Components\Section::make()
+                        ->columnSpan(1)
+                        ->schema([
+                            Forms\Components\TextInput::make('slug')
+                                ->placeholder('Enter a slug')
+                                ->alphaDash()
+                                ->required()
+                                ->unique(ignoreRecord: true)
+                                ->maxLength(255),
 
-                                                Forms\Components\Fieldset::make()
-                                                    ->label('Details')
-                                                    ->schema([
-                                                        Forms\Components\TextInput::make('alt')
-                                                            ->label('Alt Text')
-                                                            ->placeholder('Enter alt text')
-                                                            ->required()
-                                                            ->maxLength(255),
+                            CuratorPicker::make('image_id')
+                                ->label('Featured Image'),
 
-                                                        Forms\Components\TextInput::make('caption')
-                                                            ->placeholder('Enter a caption')
-                                                            ->maxLength(255),
-                                                    ]),
+                            Forms\Components\DatePicker::make('published_at')
+                                ->label('Publish Date')
+                                ->default(now())
+                                ->required(),
 
-                                            ]),
-                                    ]),
-                            ]),
+                            Forms\Components\Toggle::make('is_published')
+                                ->label('Published')
+                                ->required(),
+                        ]),
+                ]),
+        ]);
+}
 
-                        Forms\Components\Section::make()
-                            ->columnSpan(1)
-                            ->schema([
-                                Forms\Components\TextInput::make('slug')
-                                    ->placeholder('Enter a slug')
-                                    ->alphaDash()
-                                    ->required()
-                                    ->unique(ignoreRecord: true)
-                                    ->maxLength(255),
-
-                                // Forms\Components\Select::make('user_id')
-                                //     ->label('Author')
-                                //     ->relationship('user', 'name')
-                                //     ->default(fn () => auth()->id())
-                                //     ->searchable()
-                                //     ->required(),
-
-                                CuratorPicker::make('image_id')
-                                    ->label('Featured Image'),
-
-                                Forms\Components\DatePicker::make('published_at')
-                                    ->label('Publish Date')
-                                    ->default(now())
-                                    ->required(),
-
-                                Forms\Components\Toggle::make('is_published')
-                                    ->label('Published')
-                                    ->required(),
-                            ]),
-                    ]),
-            ]);
-    }
 
     /**
      * Get the table for the resource.
@@ -144,13 +111,7 @@ class PostResource extends Resource
 
                 CuratorColumn::make('image')
                     ->circular()
-                    ->size(32),
-
-                Tables\Columns\TextColumn::make('user.name')
-                    ->label('Author')
-                    ->badge()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->size(64),
                 
                 Tables\Columns\TextColumn::make('slug')
                     ->sortable(),
@@ -164,7 +125,7 @@ class PostResource extends Resource
                 Tables\Columns\TextColumn::make('published_at')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: false),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -174,7 +135,7 @@ class PostResource extends Resource
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: false),
             ])
             ->filters([
                 //
@@ -182,6 +143,21 @@ class PostResource extends Resource
             ->actions([
                 //Tables\Actions\EditAction::make(),
                 Tables\Actions\ViewAction::make(),
+                Action::make('togglePublish')
+                    ->label(fn (Post $record) => $record->is_published ? 'Unpublish' : 'Publish')
+                    ->icon(fn (Post $record) => $record->is_published ? 'heroicon-s-x-circle' : 'heroicon-s-check-circle')
+                    ->color(fn (Post $record) => $record->is_published ? 'danger' : 'success')
+                    ->action(function (Post $record) {
+                        $record->is_published = !$record->is_published;
+                        $record->save();
+
+                    Notification::make()
+                        ->title($record->is_published ? 'Post Published' : 'Post Unpublished')
+                        ->body($record->is_published ? 'The post has been published successfully.' : 'The post has been unpublished successfully.')
+                        ->success()
+                        ->send();
+                    })
+                    ->requiresConfirmation(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -207,8 +183,8 @@ class PostResource extends Resource
     {
         return [
             'index' => Pages\ListPosts::route('/'),
-            'create' => Pages\CreatePost::route('/create'),
-            'edit' => Pages\EditPost::route('/{record}/edit'),
+            //'create' => Pages\CreatePost::route('/create'),
+            //'edit' => Pages\EditPost::route('/{record}/edit'),
         ];
     }
 }

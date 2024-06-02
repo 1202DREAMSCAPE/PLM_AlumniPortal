@@ -34,7 +34,7 @@ class Post extends Model
      * @var array
      */
     protected $casts = [
-        'content' => 'array',
+        'content' => 'string',
         'is_published' => 'boolean',
         'published_at' => 'datetime',
     ];
@@ -59,15 +59,7 @@ class Post extends Model
         return $this->belongsTo(Media::class);
     }
 
-    /**
-     * Retrieve the post URL.
-     *
-     * @return string
-     */
-    public function getUrlAttribute()
-    {
-        // return route('post.show', $this);
-    }
+
 
     /**
      * Retrieve the post edit URL.

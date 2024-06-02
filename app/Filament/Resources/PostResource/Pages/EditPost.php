@@ -21,15 +21,15 @@ class EditPost extends EditRecord
     /**
      * The preview modal URL.
      */
-    protected function getPreviewModalUrl(): ?string
-    {
-        $this->generatePreviewSession();
+    // protected function getPreviewModalUrl(): ?string
+    // {
+    //     $this->generatePreviewSession();
 
-        return route('post.show', [
-            'post' => $this->record->slug,
-            'previewToken' => $this->previewToken,
-        ]);
-    }
+    //     return route('post.show', [
+    //         'post' => $this->record->slug,
+    //         'previewToken' => $this->previewToken,
+    //     ]);
+    // }
 
     /**
      * The header actions.
@@ -37,12 +37,12 @@ class EditPost extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            PreviewAction::make(),
+           // PreviewAction::make(),
 
-            Actions\Action::make('view')
-                ->label('View post')
-                ->url(fn ($record) => $record->url)
-                ->extraAttributes(['target' => '_blank']),
+            // Actions\Action::make('view')
+            //     ->label('View post')
+            //     ->url(fn ($record) => $record->url)
+            //     ->extraAttributes(['target' => '_blank']),
 
             Actions\DeleteAction::make(),
         ];
