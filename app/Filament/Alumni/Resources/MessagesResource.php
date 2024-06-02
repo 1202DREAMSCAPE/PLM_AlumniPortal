@@ -16,9 +16,7 @@ use Filament\Infolists\Infolist;
 use Filament\Infolists\Components;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Notification as LaravelNotification;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Contracts\Support\Htmlable;
- 
+use Illuminate\Support\Facades\Auth; 
 
 
 class MessagesResource extends Resource
@@ -30,9 +28,17 @@ class MessagesResource extends Resource
     protected static ?int $navigationSort = 3;
 
     public static function getNavigationBadge(): ?string
-    {
-        return number_format(static::getModel()::count());
-    }
+{
+    // Get the logged-in user ID
+    $student_no = auth()->id();
+
+    // Count the models associated with the logged-in user
+    $count = static::getModel()::where('student_no', $student_no)->count();
+
+    // Return the count as a formatted string
+    return number_format($count);
+}
+
     public static function getNavigationBadgeColor(): ?string
     {
         return 'warning';

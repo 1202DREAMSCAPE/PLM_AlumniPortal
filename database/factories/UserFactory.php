@@ -66,14 +66,21 @@ class UserFactory extends Factory
         $snumYear = $graduatedYear - $this->faker->numberBetween(4, 6);
         $student_no = $snumYear . $this->faker->unique()->numerify('#####');
 
+        $firstName = $this->faker->firstName;
+        $lastName = $this->faker->lastName;
+        $middleName = $this->faker->lastName;
+        $yearEntered = $snumYear;
+
+        $email = strtolower(substr($firstName, 0, 1) . substr($middleName, 0, 1) . substr($lastName, 0, 1) . $yearEntered . '@plm.edu.ph');
+
         return [
-            'student_no' => $student_no, // Updated from 'SNum' to 'student_no'
-            'name' => $this->faker->firstName,
-            'email' => $this->faker->unique()->userName . '@plm.edu.ph',
+            'student_no' => $student_no,
+            'name' => $firstName,
+            'email' => $email,
             'password' => static::$password ??= Hash::make('password'),
             'Gender' => $this->faker->randomElement(['Male', 'Female']),
-            'LName' => $this->faker->lastName,
-            'MName' => $this->faker->lastName,
+            'LName' => $lastName,
+            'MName' => $middleName,
             'NameExt' => $this->faker->optional()->suffix,
             'MaidenName' => $this->faker->lastName,
             'Dept' => $department,
@@ -87,7 +94,7 @@ class UserFactory extends Factory
             'Nationality' => $this->faker->country,
             'CivilStat' => $this->faker->randomElement(['Single', 'Married']),
             'Address' => $this->faker->address,
-            'Country' => 'Philippines', // Set to Philippines
+            'Country' => 'Philippines',
             'Province' => $this->faker->state,
             'Region' => $this->faker->state,
             'City' => $this->faker->city,
