@@ -23,31 +23,13 @@ class PostResource extends Resource
      */
     protected static ?string $recordTitleAttribute = 'title';
 
-    protected static ?string $label = 'Alumni Gallery ';
-
-    /**
-     * The resource model.
-     */
+    protected static ?string $label = 'News and Updates ';
     protected static ?string $model = Post::class;
 
-    /**
-     * The resource icon.
-     */
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
-    /**
-     * The resource navigation group.
-     */
-    //protected static ?string $navigationGroup = 'Collections';
-
-    /**
-     * The resource navigation sort order.
-     */
     protected static ?int $navigationSort = 5;
 
-    /**
-     * Get the navigation badge for the resource.
-     */
     public static function getNavigationBadge(): ?string
     {
         return number_format(static::getModel()::count());

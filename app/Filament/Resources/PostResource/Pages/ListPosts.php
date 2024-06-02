@@ -21,7 +21,7 @@ class ListPosts extends ListRecords
     {
         return [
             Actions\CreateAction::make()
-            ->label('Add Photos'),
+            ->label('Add News and Updates'),
         ];
     }
 
