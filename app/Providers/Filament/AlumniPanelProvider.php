@@ -44,7 +44,7 @@ class AlumniPanelProvider extends PanelProvider
     {
         return $panel
             ->id('alumni')
-            ->path('alumni')
+            ->path('/')
             ->topNavigation()
             ->spa()
             ->login(Login::class)
