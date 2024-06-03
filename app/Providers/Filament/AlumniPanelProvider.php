@@ -32,6 +32,8 @@ use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Filament\Support\Enums\MaxWidth;
 use App\Models\ContactInfo;
 use App\Observers\ContactInfoObserver;
+use App\Http\Middleware\AutoLoginFilament; // Add this line
+
 
 
 class AlumniPanelProvider extends PanelProvider
@@ -105,6 +107,7 @@ class AlumniPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                AutoLoginFilament::class, // Add this line
             ])
             ->authMiddleware([
                 Authenticate::class,
