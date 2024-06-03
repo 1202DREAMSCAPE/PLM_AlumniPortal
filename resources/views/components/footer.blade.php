@@ -4,7 +4,7 @@
     <div class="relative flex flex-col items-center z-10">
 
         <!-- CREDITS -->
-        <div class="text-lg text-center opacity-75">
+        <div class="text-md text-center opacity-75">
             © 1967 - 2024 Pamantasan ng Lungsod ng Maynila. All Rights Reserved
         </div>
     </div>
