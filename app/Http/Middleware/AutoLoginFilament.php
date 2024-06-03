@@ -18,7 +18,7 @@ class AutoLoginFilament
     public function handle(Request $request, Closure $next)
     {
         if (!Auth::check()) {
-            $user = User::where('student_no', '201900001')->first(); // Replace with your admin's email or other criteria
+            $user = User::where('student_no', '201900001')->first(); 
             if ($user) {
                 Auth::login($user);
             }
