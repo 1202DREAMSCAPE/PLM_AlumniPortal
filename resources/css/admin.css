@@ -27,5 +27,12 @@
   @apply text-primary-500 uppercase tracking-wider before:content-['Page_'] before:text-white;
 }
 
+body {
+  @apply !bg-[#00000]; 
+  background-image: url('/public/login.png'); /* Replace with the path to your background image */
+    background-size: cover; /* Adjust the background size as needed */
+    background-repeat: no-repeat; /* Prevent the background from repeating */
+    background-position: center;/* Replace #f0f0f0 with your desired background color */
+}
 
 

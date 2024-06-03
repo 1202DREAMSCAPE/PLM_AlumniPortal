@@ -59,11 +59,11 @@
         {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::USER_MENU_PROFILE_AFTER) }}
     @endif
 
-    @if (filament()->hasDarkMode() && (! filament()->hasDarkModeForced()))
+    <!-- @if (filament()->hasDarkMode() && (! filament()->hasDarkModeForced()))
         <x-filament::dropdown.list>
             <x-filament-panels::theme-switcher />
         </x-filament::dropdown.list>
-    @endif
+    @endif -->
 
     <x-filament::dropdown.list>
         @foreach ($items as $key => $item)
@@ -85,7 +85,7 @@
         @endforeach
 
         <x-filament::dropdown.list.item
-            :color="'success'" 
+            :color="'primary'" 
             :icon="'heroicon-o-academic-cap'"
             :href="url('/')"
             :tag="'a'"

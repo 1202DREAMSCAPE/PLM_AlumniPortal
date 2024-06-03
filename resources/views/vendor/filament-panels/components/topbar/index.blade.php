@@ -164,9 +164,9 @@
             {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::GLOBAL_SEARCH_AFTER) }}
 
             @if (filament()->auth()->check())
-                @if (filament()->hasDatabaseNotifications())
+                <!-- @if (filament()->hasDatabaseNotifications())
                     @livewire(Filament\Livewire\DatabaseNotifications::class, ['lazy' => true])
-                @endif
+                @endif -->
 
                 <x-filament-panels::user-menu />
             @endif
