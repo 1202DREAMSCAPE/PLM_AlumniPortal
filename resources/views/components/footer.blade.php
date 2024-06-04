@@ -6,7 +6,7 @@
 
         <div class="bg-blue-hover w-full py-40 text-center" style="padding: 1in;">
             <h1 class="font-bold text-3xl md:text-3xl lg:text-3xl">FOLLOW US ON SOCIAL MEDIA</h1>
-            <p class="mt-8 text-xl md:text-2xl lg:text-3xl opacity-60 mx-auto max-w-screen-md" style="margin-top: 0.5cm;">
+            <p class="mt-8 text-xl md:text-2xl lg:text-2xl opacity-60 mx-auto max-w-screen-md" style="margin-top: 0.8cm;">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                 dolore magna aliqua.</p>
         </div>
