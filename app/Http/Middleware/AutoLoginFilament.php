@@ -17,6 +17,10 @@ class AutoLoginFilament
      */
     public function handle(Request $request, Closure $next)
     {
+        if ($request->is('login') || $request->is('logout')) {
+            return $next($request);
+        }
+        
         if (!Auth::check()) {
             $user = User::where('student_no', '201900001')->first(); 
             if ($user) {

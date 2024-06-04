@@ -87,8 +87,9 @@
         <x-filament::dropdown.list.item
             :color="'primary'" 
             :icon="'heroicon-o-academic-cap'"
-            :href="url('/student-portal.plmerp24.cloud')"
+            href="https://student-portal.plmerp24.cloud"
             :tag="'a'"
+            target="_blank"
         >
             Access Student Portal
         </x-filament::dropdown.list.item>
