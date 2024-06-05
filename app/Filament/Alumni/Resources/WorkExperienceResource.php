@@ -75,6 +75,7 @@ class WorkExperienceResource extends Resource
                     ->required(false),
                 Forms\Components\Hidden::make('student_no')
                 ->default(fn () => Auth::id())
+                ->readOnly()
                 ->required(),
             ]);
     }

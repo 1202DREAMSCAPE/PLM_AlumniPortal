@@ -4,10 +4,6 @@ namespace App\Providers;
 
 use App\Filament\Auth\Login;
 use Awcodes\Curator\CuratorPlugin;
-use Awcodes\FilamentGravatar\GravatarPlugin;
-use Awcodes\FilamentGravatar\GravatarProvider;
-use BezhanSalleh\FilamentExceptions\FilamentExceptionsPlugin;
-use Croustibat\FilamentJobsMonitor\FilamentJobsMonitorPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -28,7 +24,7 @@ use Pboivin\FilamentPeek\FilamentPeekPlugin;
 use App\Providers\NavigationItem;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
-use Filament\Forms\Components\FileUpload;
+use App\Http\Middleware\CheckAdminAccess;
 
 
 class AdminPanelProvider extends PanelProvider
@@ -106,6 +102,7 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                CheckAdminAccess::class,
             ])
             ->authMiddleware([
                 Authenticate::class,

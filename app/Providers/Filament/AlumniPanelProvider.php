@@ -33,6 +33,7 @@ use Filament\Support\Enums\MaxWidth;
 use App\Models\ContactInfo;
 use App\Observers\ContactInfoObserver;
 use App\Http\Middleware\AutoLoginFilament; 
+use App\Http\Middleware\CheckAlumniAccess;
 
 
 
@@ -107,7 +108,8 @@ class AlumniPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                AutoLoginFilament::class, 
+               // AutoLoginFilament::class, 
+               CheckAlumniAccess::class,
             ])
             ->authMiddleware([
                 Authenticate::class,
